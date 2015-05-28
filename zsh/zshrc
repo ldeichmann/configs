@@ -79,10 +79,8 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias vibrance="~/Sync/documents/Scripts/vibrancetoggle.sh"
+alias vibrance="~/Code/configs/csgo/vibrancetoggle.sh"
 alias clean_packages='sudo pacman -Rns $(pacman -Qqtd)'
-alias superhacking='dmesg --color=always | pv -qL 64'
-
 
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
