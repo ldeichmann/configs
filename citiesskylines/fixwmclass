@@ -1,0 +1,22 @@
+#!/bin/bash
+#  logging-wrapper.sh
+#  Generic shell wrapper that performs an operation
+#+ and logs it.
+
+#!/bin/bash
+# Requires 2 arguments. First the profile to apply then the game executable.
+PROFILEDIR="/etc/antimicro/profiles"
+
+($@; wait;) &
+sleep 5
+xprop -name "Cities: Skylines" -f WM_CLASS 8s -set WM_CLASS "citiesskylines"
+
+
+# Set the following two variables.
+OPERATION=Cities.x64.bin
+#         Can be a complex chain of commands,
+#+        for example an awk script or a pipe . . .
+
+# It's necessary to do the logging before the operation.
+# Why?
+
