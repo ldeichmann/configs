@@ -149,3 +149,19 @@ exec --no-startup-id ~/.config/i3/dbusregister.sh
 exec pulseaudio-equalizer enable 
 exec feh --bg-scale ~/Sync/Wallpapers/Abstract/genuine_abstract-2560x1440.jpg
 exec --no-startup-id nm-applet
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        strip_workspace_numbers yes
+        position top
+        status_command py3status -i ~/.config/i3/modules --config ~/.config/i3/i3status.conf
+        font pango:Droid Sans, Icons 11
+        colors {
+           statusline  #ECF0F1
+           background  #222222
+           focused_workspace  $or     $or      #ffffff
+           active_workspace   $or     #222222  #BDC3C7
+           inactive_workspace $dor    #222222  #BDC3C7
+           urgent_workspace   #f92672 #222222  #BDC3C7        }
+}
