@@ -26,12 +26,19 @@ order += "volume master"
 #order += "run_watch VPN"
 order += "ethernet tunAirNL"
 order += "ethernet enp3s0"
-#order += "battery 0"
+order += "wireless wlp2s0"
+order += "battery 0"
 order += "load"
 order += "tztime local"
 
 nuvola {
     
+}
+
+wireless wlp2s0 {
+    format_up = "🌈:%essid %ip"
+    format_down = "🌈:down"
+
 }
 
 ethernet tunAirNL {
@@ -42,11 +49,14 @@ ethernet tunAirNL {
 ethernet enp3s0 {
         # if you use %speed, i3status requires root privileges
         format_up = "🔃:%ip"
-        format_down = "❗:down"
+        format_down = "🔃:down"
 }
 
 battery 0 {
         format = "%status %percentage %remaining"
+        status_bat = "🔋"
+        status_full = "🔌"
+        status_chr = "🗲"
         last_full_capacity = true
         low_threshold = 10
 }
