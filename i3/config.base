@@ -51,7 +51,7 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-bindsym Control+mod1+l exec sh ~/.i3/i3lock.sh
+bindsym Control+mod1+l exec sh ~/.config/i3/lock.sh
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -107,7 +107,6 @@ for_window [class="Steam"] floating enable
 for_window [title="Steam"] floating disable
 for_window [class="Steam" title="Steam - Update News$"] floating enable
 
-bindsym Control+$mod+l exec sh ~/.i3/i3lock.sh
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/Pictures/screenshots/'
 
 # reload the configuration file
