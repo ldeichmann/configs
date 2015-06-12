@@ -1,0 +1,40 @@
+*color0: #20011e
+*color1: #a00f94
+*color2: #8221a0
+*color3: #a01480
+*color4: #7528a0
+*color5: #a0145e
+*color6: #8217a0
+*color7: #a00a63
+*color8: #7d1280
+*color9: #c80d72
+*color10: #c80d49
+*color11: #c210c8
+*color12: #da0f50
+*color13: #e03e3d
+*color14: #e02f9f
+*color15: #e0835f
+
+export COLOR0="#20011e"
+export COLOR1="#a00f94"
+export COLOR2="#8221a0"
+export COLOR3="#a01480"
+export COLOR4="#7528a0"
+export COLOR5="#a0145e"
+export COLOR6="#8217a0"
+export COLOR7="#a00a63"
+export COLOR8="#7d1280"
+export COLOR9="#c80d72"
+export COLOR10="#c80d49"
+export COLOR11="#c210c8"
+export COLOR12="#da0f50"
+export COLOR13="#e03e3d"
+export COLOR14="#e02f9f"
+export COLOR15="#e0835f"
+
+*background: #222222
+*foreground: #777777
+
+URxvt*scrollBar:        false
+URxvt*scrollBar_right:        true
+URxvt*scrollColor:        #000000
