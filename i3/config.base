@@ -148,3 +148,4 @@ bindsym $mod+r mode "resize"
 exec --no-startup-id ~/.config/i3/dbusregister.sh
 exec pulseaudio-equalizer enable 
 exec feh --bg-scale ~/Sync/Wallpapers/Abstract/genuine_abstract-2560x1440.jpg
+exec --no-startup-id nm-applet
