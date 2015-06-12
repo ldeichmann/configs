@@ -97,7 +97,7 @@ volume master {
     device = "default"
     mixer = "Master"
     mixer_idx = 0
-    on_click 1 = "exec pactl set-sink-mute 1 toggle"
-    on_click 4 = "exec pactl set-sink-volume 1 +1%"
-    on_click 5 = "exec pactl set-sink-volume 1 -1%"
+    on_click 1 = "exec pactl set-sink-mute 0 toggle"
+    on_click 4 = "exec pactl set-sink-volume 0 +1%"
+    on_click 5 = "exec pactl set-sink-volume 0 -1%"
 }
