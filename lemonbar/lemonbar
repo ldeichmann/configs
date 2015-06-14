@@ -1,80 +1,61 @@
 #!/bin/bash
 
+display=$1
+
 clock() {
-        DATE=$(date "+%a %d %b, %T")
-        echo -n "$DATE"
+    DATE=$(~/.config/lemonbar/modules/date.sh)
+    echo -n "$DATE"
 }
 
 battery() {
-        BAT=$(acpi -b | cut -d, -f2 | sed 's/ //g')
-        echo -n "Battery: $BAT"
+    BAT=$(~/.config/lemonbar/modules/battery.sh)
+    echo -n "$BAT"
 }
 
 volume() {
-	OPENPAVU="%{A3:pavucontrol:}"
-	VOLUP="%{A4:pamixer --increase 5:}"
-	VOLDOWN="%{A5:pamixer --decrease 5:}"
-	MUTE="%{A1:pamixer --toggle-mute:}"
-	ISMUTE=$(pamixer --get-mute)
-	VOL=$(pamixer --get-volume)
-	if [ $ISMUTE = true ]; then
-		echo -n "$MUTE""%{F#ffff6961}""  $VOL%""%{F#ffffffff}""%{A}"
-	else
-		echo -n "$MUTE""$OPENPAVU""$VOLDOWN""$VOLUP""$VOL%""%{A}%{A}%{A}%{A}"
-	fi
+	VOL=$(~/.config/lemonbar/modules/volume.sh)
+	echo -n "$VOL"
 }
 
 brightness() {
-	BRIGHT=$(xbacklight | awk '{printf("%1.f\n", $1)}')
-	echo -n "Brightness: $BRIGHT%"
+	BRIGHT=$(~/.config/lemonbar/modules/brightness.sh)
+	echo -n "$BRIGHT"
 }
 
 music() {
-
-	nowplaying=$(~/.config/i3/modules/lemonnuvola.py)
+	nowplaying=$(~/.config/lemonbar/modules/lemonnuvola.py)
 	echo -n "${nowplaying}"
-
 }
 
 ws(){
-	ws=$(i3-msg -t get_outputs | sed 's/.*"current_workspace":"\([^"]*\)".*/\1/')
-	ws2=$(~/.config/lemonbar/ws.py HDMI-0)
-	echo "${ws2}"
+	dasd="~/.config/lemonbar/ws.py $display"
+	eval $dasd
+#	echo "$dasd"
 }
 
 ssid() {
-	SSID=$(netctl-auto list | grep \* | sed 's/.*s0-//')
-	echo -n "SSID: $SSID"
+	SSID=$(~/.config/lemonbar/modules/ssid.sh)
+	echo -n "$SSID"
 }
 
 vpn() {
-	ps -aux | grep openvpn | grep -v 'grep' | grep -v 'sed' > /dev/null
-	if [ $? -eq 1 ]; then
-		echo -n "%{F#ffff6961}""""%{F#ffffffff}"
-	else
-		VPN=$(ps -aux | grep openvpn | grep -v 'grep openvpn' | egrep -o '\-\-remote [a-z\.]+' | sed 's/--remote //g')
-		echo -n " $VPN"
-	fi
+	VPN=$(~/.config/lemonbar/modules/vpn.sh)
+	echo -n "$VPN"
 }
 
 colortemp() {
-	TEMP=$(redshift -p -l 0:0 | grep K | sed 's/.*: //')
-	echo -n " $TEMP"
+	TEMP=$(~/.config/lemonbar/modules/colortemp.sh)
+	echo -n "$TEMP"
 }
 
-
-cpu(){
-	cpuusage=$(mpstat | awk '/all/ {print $4 + $6}')
-	echo "CPU: $cpuusage%"
-}
-
-memory(){
-	# Show free memory
-	printf 'Mem: %.*f' 0 $(free | grep Mem | awk '{print $3/$2 * 100.0}')
-	echo "%"
-}
-
-while true; do
-	echo "%{l} $(ws) | $(music) %{c}$(clock) %{r}$(volume) | $(colortemp) | $(vpn) "
-	sleep 0.1;
-done
+if [ "$display" != "LVDS1" ]; then
+	while true; do
+		echo "%{l} $(ws) | $(music) %{c}$(clock) %{r}$(volume) | $(colortemp) | $(vpn) "
+		sleep 0.1;
+	done
+else
+	while true; do
+		echo "%{l} $(ws) | $(music) %{c}$(clock) %{r}$(ssid) | $(volume) | $(colortemp) | $(vpn) "
+		sleep 0.1;
+	done
+fi

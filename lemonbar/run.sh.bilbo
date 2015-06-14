@@ -1,0 +1,4 @@
+#!/bin/bash
+killall lemonbar
+~/.config/lemonbar/lemonbar_new LVDS1 | lemonbar -f "Droid Sans-9" -f "FontAwesome" -B "#00000000" -F "#FFFFFFFF" -g 1920x16+0+0 | bash &
+
