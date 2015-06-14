@@ -32,9 +32,11 @@ export COLOR13="#e03e3d"
 export COLOR14="#e02f9f"
 export COLOR15="#e0835f"
 
-*background: #222222
 *foreground: #777777
 
 URxvt*scrollBar:        false
 URxvt*scrollBar_right:        true
 URxvt*scrollColor:        #000000
+URxvt.depth: 32
+URxvt.background: [80]#222222
+
