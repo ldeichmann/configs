@@ -81,6 +81,8 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 alias vibrance="~/Code/configs/csgo/vibrancetoggle.sh"
 alias clean_packages='sudo pacman -Rns $(pacman -Qqtd)'
+export EDITOR="nano"
+export VISUAL="nano"
 
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
