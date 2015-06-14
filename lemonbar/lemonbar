@@ -1,0 +1,80 @@
+#!/bin/bash
+
+clock() {
+        DATE=$(date "+%a %d %b, %T")
+        echo -n "$DATE"
+}
+
+battery() {
+        BAT=$(acpi -b | cut -d, -f2 | sed 's/ //g')
+        echo -n "Battery: $BAT"
+}
+
+volume() {
+	OPENPAVU="%{A3:pavucontrol:}"
+	VOLUP="%{A4:pamixer --increase 5:}"
+	VOLDOWN="%{A5:pamixer --decrease 5:}"
+	MUTE="%{A1:pamixer --toggle-mute:}"
+	ISMUTE=$(pamixer --get-mute)
+	VOL=$(pamixer --get-volume)
+	if [ $ISMUTE = true ]; then
+		echo -n "$MUTE""%{F#ffff6961}""  $VOL%""%{F#ffffffff}""%{A}"
+	else
+		echo -n "$MUTE""$OPENPAVU""$VOLDOWN""$VOLUP""$VOL%""%{A}%{A}%{A}%{A}"
+	fi
+}
+
+brightness() {
+	BRIGHT=$(xbacklight | awk '{printf("%1.f\n", $1)}')
+	echo -n "Brightness: $BRIGHT%"
+}
+
+music() {
+
+	nowplaying=$(~/.config/i3/modules/lemonnuvola.py)
+	echo -n "${nowplaying}"
+
+}
+
+ws(){
+	ws=$(i3-msg -t get_outputs | sed 's/.*"current_workspace":"\([^"]*\)".*/\1/')
+	ws2=$(~/.config/lemonbar/ws.py HDMI-0)
+	echo "${ws2}"
+}
+
+ssid() {
+	SSID=$(netctl-auto list | grep \* | sed 's/.*s0-//')
+	echo -n "SSID: $SSID"
+}
+
+vpn() {
+	ps -aux | grep openvpn | grep -v 'grep' | grep -v 'sed' > /dev/null
+	if [ $? -eq 1 ]; then
+		echo -n "%{F#ffff6961}""""%{F#ffffffff}"
+	else
+		VPN=$(ps -aux | grep openvpn | grep -v 'grep openvpn' | egrep -o '\-\-remote [a-z\.]+' | sed 's/--remote //g')
+		echo -n " $VPN"
+	fi
+}
+
+colortemp() {
+	TEMP=$(redshift -p -l 0:0 | grep K | sed 's/.*: //')
+	echo -n " $TEMP"
+}
+
+
+cpu(){
+	cpuusage=$(mpstat | awk '/all/ {print $4 + $6}')
+	echo "CPU: $cpuusage%"
+}
+
+memory(){
+	# Show free memory
+	printf 'Mem: %.*f' 0 $(free | grep Mem | awk '{print $3/$2 * 100.0}')
+	echo "%"
+}
+
+while true; do
+	echo "%{l} $(ws) | $(music) %{c}$(clock) %{r}$(volume) | $(colortemp) | $(vpn) "
+	sleep 0.1;
+done
