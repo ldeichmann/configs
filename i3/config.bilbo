@@ -40,12 +40,9 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-#!/bin/bash
-echo "changing keyboard layout"
-# sleep 5
-exec --no-startup-id setxkbmap -layout us -option caps:escape
-exec --no-startup-id setxkbmap -layout de -option caps:escape
-exec --no-startup-id setxkbmap -option grp:switch,grp:ctrl_alt_toggle us,de
+#exec --no-startup-id setxkbmap -layout us -option caps:escape
+#exec --no-startup-id setxkbmap -layout de -option caps:escape
+#exec --no-startup-id setxkbmap -option grp:switch,grp:ctrl_alt_toggle us,de
 
 assign [class="Steam"] 3:game
 assign [class="csgo_linux"] 3:game
