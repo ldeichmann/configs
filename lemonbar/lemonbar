@@ -48,6 +48,11 @@ colortemp() {
 	echo -n "$TEMP"
 }
 
+pidgin() {
+	UNSEEN=$(~/.config/lemonbar/modules/pidgin.py)
+	echo -n "$UNSEEN"
+}
+
 if [ "$display" != "LVDS1" ]; then
 	while true; do
 		echo "%{l} $(ws) | $(music) %{c}$(clock) %{r}$(volume) | $(colortemp) | $(vpn) "
