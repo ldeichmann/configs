@@ -6,59 +6,42 @@ Display the current "artist - title" playing in nuvola.
 @license GNU GPL http://www.gnu.org/licenses/gpl.html
 """
 
-from time import time
-from subprocess import check_output, call
-
+from gi.repository import Playerctl
 
 def buildString():
+    playername = 'NuvolaPlayer3GooglePlayMusic'
+    cmd = 'playerctl --player=' + playername + ' '
+    playercmdprev = "%{A2:"+cmd+"previous:}"
+    playercmdnext = "%{A3:"+cmd+"next:}"
+    playercmdpause = "%{A1:"+cmd+"play-pause:}"
     try:
-        metadatas = check_output("qdbus-qt4 org.mpris.MediaPlayer2.NuvolaPlayer3GooglePlayMusic /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get org.mpris.MediaPlayer2.Player Metadata", shell=True)
-        playbackstatus = check_output("qdbus-qt4 org.mpris.MediaPlayer2.NuvolaPlayer3GooglePlayMusic /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get org.mpris.MediaPlayer2.Player PlaybackStatus", shell=True)
-        cmd = "qdbus-qt4 org.mpris.MediaPlayer2.NuvolaPlayer3GooglePlayMusic /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player."
-        lines = metadatas.decode('utf-8').split('\n')
-        lines = filter(None, lines)
-        isplaying = playbackstatus.decode('utf-8').split('\n')
+	    player = Playerctl.Player(player_name=playername)
+	    playerstatus = player.props.status
 
-        now_playing = ''
-        playbackicon = ''
-        
-        if "Playing" in isplaying:
-            playbackicon = ''
-        elif "Paused" in isplaying:
-            playbackicon = ''
-        elif "Stopped" in isplaying:
-            playbackicon = ''
+	    if playerstatus is None:
+	        return ''
 
+	    playbackicon = ''
+	    
+	    if "Playing" == playerstatus:
+	        playbackicon = ' '
+	    elif "Paused" == playerstatus:
+	        playbackicon = ' '
+	    elif "Stopped" == playerstatus:
+	        playbackicon = ' '
 
-        if lines:
-            artist = ''
-            title = ''
+	    artist = player.get_artist()
+	    title = player.get_title()
 
-            for item in lines:
-                if item.find('xesam:artist:') != -1:
-                    artist = item[14:]
-                if item.find('xesam:title:') != -1:
-                    title = item[13:]
+	    if artist and title:
+	        return playbackicon + playercmdpause \
+	            +  playercmdprev + playercmdnext \
+	            + "%{F#ffffffff}" + artist \
+	            + ' - ' + title + "%{A}%{A}%{A}"
 
-            if artist and title:
-                now_playing = '{} - {}'.format(artist, title)
-            elif artist:
-                now_playing = '{}'.format(artist)
-            elif title:
-                now_playing = '{}'.format(title)
-            if artist or title:
-                now_playing = playbackicon + " %{A1:"+cmd+"PlayPause"+":}" \
-                + "%{A2:"+cmd+"Previous"+":}" \
-                + "%{A3:"+cmd+"Next"+":}" \
-                + "%{F#ffffffff}" + now_playing \
-                + "%{A}%{A}%{A}"
-        else:
-            now_playing = ''
-
-        return now_playing
 
     except:
-        return ''
+        return 'Except'
 
 
 
