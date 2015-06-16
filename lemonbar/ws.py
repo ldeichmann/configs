@@ -26,6 +26,7 @@ def getWorkspacesOnOutput(searchOutput):
 
 def buildString(searchOutput, active, workspaces):
 	returnstring = "%{A5:/usr/bin/i3-msg workspace next_on_output:}%{A4:i3-msg workspace prev_on_output:}"
+	index = 0
 	for i in workspaces:
 		if i['visible'] == True and i['focused'] == True:
 			returnstring += "%{F#ffff8547}" + "" + "%{F#ffffffff} "
@@ -33,6 +34,9 @@ def buildString(searchOutput, active, workspaces):
 			returnstring +=  "%{F#ff17fff0}"+ "" + "%{F#ffffffff} "
 		else:
 			returnstring +=  "%%{A:/usr/bin/i3-msg workspace %s:}" %i['name'] + "%{F#ffffffff}" + "" + "%{A} "
+		if index == len(workspaces)-1:
+			returnstring = returnstring[:-1]
+		index += 1
 	returnstring += "%{A}%{A}"
 
 	return returnstring
