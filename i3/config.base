@@ -149,6 +149,8 @@ exec  --no-startup-id feh --bg-scale ~/Sync/Wallpapers/Abstract/genuine_abstract
 exec --no-startup-id nm-applet
 exec --no-startup-id compton --config ~/.config/compton.conf
 exec --no-startup-id ~/.config/i3/managescreensaver.py
+exec --no-startup-id xset s 600 600
+exec --no-startup-id xset dpms 0 0 660
 exec --no-startup-id xautolock -time 5 -locker '~/.configs/i3/lock.py'
 exec --no-startup-id stalonetray
 exec --no-startup-id ~/.config/lemonbar/run.sh
