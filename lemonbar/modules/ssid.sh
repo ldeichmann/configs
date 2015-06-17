@@ -1,2 +1,2 @@
-SSID=$(netctl-auto list | grep \* | sed 's/.*s0-//')
+SSID=$(iwgetid -r)
 echo -n "SSID: $SSID"
