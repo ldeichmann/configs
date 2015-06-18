@@ -15,7 +15,7 @@ def get_layout():
     return tree
 
 def lock():
-    subprocess.call(['sh', os.getcwd() + '/lock.sh'])
+    subprocess.call(['sh', os.path.dirname(os.path.realpath(__file__)) + '/lock.sh'])
 
 def any_fullscreen_window(node):
     if node['window']:
