@@ -1,4 +1,4 @@
-OPENPAVU="%{A3:pavucontrol:}"
+OPENPAVU="%{A3:pavucontrol &:}"
 VOLUP="%{A4:pamixer --increase 5:}"
 VOLDOWN="%{A5:pamixer --decrease 5:}"
 MUTE="%{A1:pamixer --toggle-mute:}"
