@@ -9,11 +9,12 @@ Display the current "artist - title" playing in nuvola.
 from gi.repository import Playerctl
 
 def buildString():
-    playername = 'NuvolaPlayer3GooglePlayMusic'
+#    playername = 'NuvolaPlayer3GooglePlayMusic'
+    playername = 'gme'
     cmd = 'playerctl --player=' + playername + ' '
-    playercmdprev = "%{A2:"+cmd+"previous:}"
-    playercmdnext = "%{A3:"+cmd+"next:}"
-    playercmdpause = "%{A1:"+cmd+"play-pause:}"
+    playercmdprev = "%{A2:"+cmd+"previous &:}"
+    playercmdnext = "%{A3:"+cmd+"next &:}"
+    playercmdpause = "%{A1:"+cmd+"play-pause &:}"
     try:
 	    player = Playerctl.Player(player_name=playername)
 	    playerstatus = player.props.status

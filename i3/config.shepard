@@ -57,3 +57,4 @@ assign [class="Gnome-terminal"] 1 term
 #Nuvola Player
 assign [class="nuvolaplayer3-google-play-music"] 5 music
 assign [class="nuvolaplayer3"] 5 music
+assign [class="google-music-electron"] 5 music

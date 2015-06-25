@@ -145,8 +145,8 @@ bindsym $mod+r mode "resize"
 
 exec --no-startup-id ~/.config/i3/dbusregister.sh
 exec  --no-startup-id pulseaudio-equalizer enable 
-#exec  --no-startup-id feh --bg-scale ~/Sync/Wallpapers/Abstract/genuine_abstract-2560x1440.jpg
-exec --no-startup-id feh --bg-scale ~/Sync/Wallpapers/Nature/507381.jpg
+#exec  --no-startup-id feh --bg-fill ~/Sync/Wallpapers/Nature/dusk_mountains-2560x1440.jpg
+exec --no-startup-id feh --bg-fill ~/Sync/Wallpapers/Nature/dusk_mountains-2560x1440.jpg
 exec --no-startup-id nm-applet
 exec --no-startup-id compton --config ~/.config/compton.conf
 #exec --no-startup-id ~/.config/i3/managescreensaver.py
