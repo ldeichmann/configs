@@ -1,6 +1,6 @@
 transparent
 window_layer bottom
-geometry 5x1+0-366
+geometry 5x1+0-0
 window_type normal
 icon_gravity NW
 grow_gravity NW
