@@ -32,3 +32,5 @@ convert -scale 10% -scale 1000% $IMAGE $IMAGE
 #convert $IMAGE -blur $BLURTYPE $IMAGE
 i3lock -i $IMAGE
 rm $IMAGE
+sleep 10
+xset dpms force off
