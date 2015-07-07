@@ -1,2 +1,3 @@
 SSID=$(iwgetid -r)
-echo -n "SSID: $SSID"
+CLICK="%{A1:urxvt -e nmtui &:}"
+echo -n $CLICK"SSID: $SSID""%{A}"
