@@ -55,6 +55,8 @@ assign [class="stalonetray"] 1 term
 
 assign [class="Steam"] 3 game
 assign [class="csgo_linux"] 3 game
+for_window [class="csgo_linux"] fullscreen enable
+for_window [class="eu4"] fullscreen enable
 
 # Web Browsers
 assign [class="Google-chrome" window_role="browser"] 7 chrome
