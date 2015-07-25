@@ -10,7 +10,7 @@ from gi.repository import Playerctl
 
 def buildString():
 #    playername = 'NuvolaPlayer3GooglePlayMusic'
-    playername = 'gme'
+    playername = 'google-music-electron'
     cmd = 'playerctl --player=' + playername + ' '
     playercmdprev = "%{A2:"+cmd+"previous &:}"
     playercmdnext = "%{A3:"+cmd+"next &:}"
