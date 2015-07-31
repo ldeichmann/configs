@@ -1,6 +1,3 @@
 #!/bin/bash
 killall lemonbar
-#~/.config/lemonbar/lemonbar HDMI-0 | lemonbar -f "Droid Sans-9" -f "FontAwesome" -B "#00000000" -F "#FFFFFFFF" -g 1920x16+0+0 | bash &
 ~/.config/lemonbar/lemonbar DVI-I-1 | lemonbar -f "Droid Sans-11" -f "FontAwesome-13" -B "#00000000" -F "#FFFFFFFF" -g 2560x20+0+0 | bash &
-#~/.config/lemonbar/lemonbar | lemonbar -f "Droid Sans-9" -f "FontAwesome" -B "#00000000" -F "#FFFFFFFF" -g 1920x16+0+0 | bash &
-#~/.config/lemonbar/lemonbar2 | lemonbar -f "Droid Sans" -f "FontAwesome" -B "#00000000" -F "#FFFFFFFF" -g 2560x20+1920+0 | bash &
