@@ -1,0 +1,1 @@
+%{A5:/usr/bin/i3-msg workspace next_on_output:}%{A4:i3-msg workspace prev_on_output:}%{F#ffff8547}%{F#ffffffff} %{A:/usr/bin/i3-msg workspace 3 game:}%{F#ffffffff}%{A} %{A:/usr/bin/i3-msg workspace 5 music:}%{F#ffffffff}%{A} %{A:/usr/bin/i3-msg workspace 6 web:}%{F#ffffffff}%{A} %{A:/usr/bin/i3-msg workspace 7 chrome:}%{F#ffffffff}%{A}%{A}%{A}

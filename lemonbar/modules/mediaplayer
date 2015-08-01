@@ -1,0 +1,1 @@
+ %{A1:playerctl --player=google-music-electron play-pause &:}%{A2:playerctl --player=google-music-electron previous &:}%{A3:playerctl --player=google-music-electron next &:}%{F#ffffffff}Lil Dicky - Flames%{A}%{A}%{A}

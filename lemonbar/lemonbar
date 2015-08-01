@@ -8,59 +8,74 @@ clock() {
 }
 
 battery() {
-    BAT=$(~/.config/lemonbar/modules/battery.sh)
-    echo -n "$BAT"
+    ~/.config/lemonbar/modules/battery.sh &
 }
 
 volume() {
-	VOL=$(~/.config/lemonbar/modules/volume.sh)
-	echo -n "$VOL"
+	~/.config/lemonbar/modules/volume.sh &
 }
 
 brightness() {
-	BRIGHT=$(~/.config/lemonbar/modules/brightness.sh)
-	echo -n "$BRIGHT"
+	~/.config/lemonbar/modules/brightness.sh &
 }
 
 music() {
-	nowplaying=$(~/.config/lemonbar/modules/lemonnuvola.py)
-	echo -n "${nowplaying}"
+	~/.config/lemonbar/modules/mediaplayer.py &
 }
 
 ws(){
-	dasd="~/.config/lemonbar/ws.py $display"
-	eval $dasd
-#	echo "$dasd"
+	(~/.config/lemonbar/modules/ws.py $display) &
 }
 
 ssid() {
-	SSID=$(~/.config/lemonbar/modules/ssid.sh)
-	echo -n "$SSID"
+	~/.config/lemonbar/modules/ssid.sh &
 }
 
 vpn() {
-	VPN=$(~/.config/lemonbar/modules/vpn.sh)
-	echo -n "$VPN"
+	~/.config/lemonbar/modules/vpn.sh &
 }
 
 colortemp() {
-	TEMP=$(~/.config/lemonbar/modules/colortemp.sh)
-	echo -n "$TEMP"
+	~/.config/lemonbar/modules/colortemp.sh &
 }
 
-pidgin() {
-	UNSEEN=$(~/.config/lemonbar/modules/pidgin.py)
-	echo -n "$UNSEEN"
-}
+ws
+music
+volume
+colortemp
+vpn
 
 if [ "$display" != "LVDS1" ]; then
 	while true; do
-		echo "%{l} $(ws) | $(music) %{c}$(clock) %{r}$(volume) | $(colortemp) | $(vpn) "
+		WS=$(cat ~/.config/lemonbar/modules/ws.out)
+		MP=$(cat ~/.config/lemonbar/modules/mediaplayer.out)
+		VOL=$(cat ~/.config/lemonbar/modules/volume.out)
+		COL=$(cat ~/.config/lemonbar/modules/colortemp.out)
+		VPN=$(cat ~/.config/lemonbar/modules/vpn.out)
+
+		echo "%{l} $WS $MP %{c}$(clock) %{r}$VOL | $COL | $VPN "
+
 		sleep 0.1;
 	done
 else
+	battery
+	brightness
+	ssid
 	while true; do
-		echo "%{l} $(ws) | $(music) %{c}$(clock) %{r} $(brightness) | $(battery) | $(ssid) | $(volume) | $(colortemp) | $(vpn) "
-		sleep 1;
+		WS=$(cat ~/.config/lemonbar/modules/ws.out)
+		MP=$(cat ~/.config/lemonbar/modules/mediaplayer.out)
+		VOL=$(cat ~/.config/lemonbar/modules/volume.out)
+		COL=$(cat ~/.config/lemonbar/modules/colortemp.out)
+		VPN=$(cat ~/.config/lemonbar/modules/vpn.out)
+		BAT=$(cat ~/.config/lemonbar/modules/battery.out)
+		BRI=$(cat ~/.config/lemonbar/modules/brightness.out)
+		WIFI=$(cat ~/.config/lemonbar/modules/ssid.out)
+		
+		echo "%{l} $WS $MP %{c}$(clock) %{r}%BRI | %BAT | $SSID | $VOL | $COL | $VPN "
+
+		sleep 0.1;
+
+#		echo -n "%{l} $(ws) | $(music) %{c}$(clock) %{r} $(brightness) | $(battery) | $(ssid) | $(volume) | $(colortemp) | $(vpn) "
+#		sleep 1;
 	done
 fi
