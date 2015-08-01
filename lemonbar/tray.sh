@@ -1,1 +1,0 @@
-trayer --expand true --transparent true --alpha 255 --edge top --align left --expand true --SetDockType false --widthtype request --margin 300 --width 200 --widthtype pixel --height 20
