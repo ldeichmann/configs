@@ -47,7 +47,7 @@ def on_workspace(self, e):
 	listws = getWorkspacesOnOutput(sys.argv[1])
 	full = buildString(sys.argv[1], currws, listws)
 	#print(buildString(sys.argv[1], currws, listws))
-	f = open(expanduser("~")+'/.config/lemonbar/modules/ws.out', 'w')
+	f = open('/tmp/lemon/ws.out', 'w')
 	print(buildString(sys.argv[1], currws, listws), file=f, end="")
 	#(stdout, stderr) = Popen(['sed -i "1 c\%s" ~/.config/lemonbar/bar.out' %(full)], stdout=PIPE).communicate()
 	#print(stdout)
@@ -58,7 +58,7 @@ if __name__ == '__main__':
 		# currws = getActiveOutputs(sys.argv[1])
 		# listws = getWorkspacesOnOutput(sys.argv[1])
 		# print(buildString(sys.argv[1], currws, listws))
-		f = open(expanduser("~")+'/.config/lemonbar/modules/ws.out', 'w')
+		f = open('/tmp/lemon/ws.out', 'w')
 		print("", file=f, end="")
 		# Create the Connection object that can be used to send commands and subscribe
 		# to events.

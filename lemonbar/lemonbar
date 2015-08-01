@@ -39,6 +39,7 @@ colortemp() {
 	~/.config/lemonbar/modules/colortemp.sh &
 }
 
+mkdir /tmp/lemon
 ws
 music
 volume
@@ -47,11 +48,11 @@ vpn
 
 if [ "$display" != "LVDS1" ]; then
 	while true; do
-		WS=$(cat ~/.config/lemonbar/modules/ws.out)
-		MP=$(cat ~/.config/lemonbar/modules/mediaplayer.out)
-		VOL=$(cat ~/.config/lemonbar/modules/volume.out)
-		COL=$(cat ~/.config/lemonbar/modules/colortemp.out)
-		VPN=$(cat ~/.config/lemonbar/modules/vpn.out)
+		WS=$(cat /tmp/lemon/ws.out)
+		MP=$(cat /tmp/lemon/mediaplayer.out)
+		VOL=$(cat /tmp/lemon/volume.out)
+		COL=$(cat /tmp/lemon/colortemp.out)
+		VPN=$(cat /tmp/lemon/vpn.out)
 
 		echo "%{l} $WS $MP %{c}$(clock) %{r}$VOL | $COL | $VPN "
 
@@ -62,14 +63,14 @@ else
 	brightness
 	ssid
 	while true; do
-		WS=$(cat ~/.config/lemonbar/modules/ws.out)
-		MP=$(cat ~/.config/lemonbar/modules/mediaplayer.out)
-		VOL=$(cat ~/.config/lemonbar/modules/volume.out)
-		COL=$(cat ~/.config/lemonbar/modules/colortemp.out)
-		VPN=$(cat ~/.config/lemonbar/modules/vpn.out)
-		BAT=$(cat ~/.config/lemonbar/modules/battery.out)
-		BRI=$(cat ~/.config/lemonbar/modules/brightness.out)
-		WIFI=$(cat ~/.config/lemonbar/modules/ssid.out)
+		WS=$(cat /tmp/lemon/ws.out)
+		MP=$(cat /tmp/lemon/mediaplayer.out)
+		VOL=$(cat /tmp/lemon/volume.out)
+		COL=$(cat /tmp/lemon/colortemp.out)
+		VPN=$(cat /tmp/lemon/vpn.out)
+		BAT=$(cat /tmp/lemon/battery.out)
+		BRI=$(cat /tmp/lemon/brightness.out)
+		WIFI=$(cat /tmp/lemon/ssid.out)
 		
 		echo "%{l} $WS $MP %{c}$(clock) %{r}%BRI | %BAT | $SSID | $VOL | $COL | $VPN "
 

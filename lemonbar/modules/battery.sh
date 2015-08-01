@@ -1,4 +1,4 @@
-echo -n "" > ~/.config/lemonbar/modules/battery.out
+echo -n "" > /tmp/lemon/battery.out
 while true; do
 
 	BAT=$(acpi -b | cut -d, -f2 | sed 's/ //g')
@@ -6,12 +6,12 @@ while true; do
 	#echo -n "Battery: $BAT"
 	#sed -i "8 c\\$BAT/" ~/.config/lemonbar/bar.out
 	
-	CONTENT=$(cat ~/.config/lemonbar/modules/vpn.out)
+	CONTENT=$(cat /tmp/lemon/vpn.out)
 
 	if [ "$CONTENT" != "FULL" ]; then
-		echo -n "$FULL" > ~/.config/lemonbar/modules/battery.out
+		echo -n "$FULL" > /tmp/lemon/battery.out
 	fi
-	#echo -n "Battery: $BAT" > ~/.config/lemonbar/modules/battery.out
+	#echo -n "Battery: $BAT" > /tmp/lemon/battery.out
 	
 	sleep 10;
 

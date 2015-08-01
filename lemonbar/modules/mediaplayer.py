@@ -20,7 +20,7 @@ class GMENotifier(object):
         bus_loop = DBusGMainLoop(set_as_default=True)
         self.bus = dbus.SessionBus(mainloop=bus_loop)
         loop = GObject.MainLoop()
-        f = open(expanduser("~")+'/.config/lemonbar/modules/mediaplayer.out', 'w')
+        f = open('/tmp/lemon/mediaplayer.out', 'w')
         print("", file=f, end="")
         try: 
             self.props_changed_listener()
@@ -42,7 +42,7 @@ class GMENotifier(object):
                                            "/org/mpris/MediaPlayer2")
         self.googlemusicelectron.connect_to_signal("PropertiesChanged", 
                                         self.handle_properties_changed)
-        f = open(expanduser("~")+'/.config/lemonbar/modules/mediaplayer.out', 'w')
+        f = open('/tmp/lemon/mediaplayer.out', 'w')
         print(self.buildString(), file=f, end="")
 
     def handle_name_owner_changed(self, name, older_owner, new_owner):
@@ -53,13 +53,13 @@ class GMENotifier(object):
                 self.props_changed_listener()
             else:
                 self.googlemusicelectron = None
-                f = open(expanduser("~")+'/.config/lemonbar/modules/mediaplayer.out', 'w')
+                f = open('/tmp/lemon/mediaplayer.out', 'w')
                 print("", file=f, end="")
 
 
     def handle_properties_changed(self, interface, changed_props, invalidated_props):
         """Handle track changes."""
-        f = open(expanduser("~")+'/.config/lemonbar/modules/mediaplayer.out', 'w')
+        f = open('/tmp/lemon/mediaplayer.out', 'w')
         print(self.buildString(), file=f, end="")
 
     def buildString(self):

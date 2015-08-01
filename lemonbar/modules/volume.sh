@@ -1,4 +1,4 @@
-echo -n "" > ~/.config/lemonbar/modules/volume.out
+echo -n "" > /tmp/lemon/volume.out
 while true; do
 	OPENPAVU="%{A3:pavucontrol &:}"
 	VOLUP="%{A4:pamixer --increase 5:}"
@@ -13,11 +13,11 @@ while true; do
 	fi
 	#sed -i "10 c\\$FULL" ~/.config/lemonbar/bar.out
 
-	CONTENT=$(cat ~/.config/lemonbar/modules/volume.out)
+	CONTENT=$(cat /tmp/lemon/volume.out)
 
 	if [ "$CONTENT" != "FULL" ]; then
-		echo -n "$FULL" > ~/.config/lemonbar/modules/volume.out
+		echo -n "$FULL" > /tmp/lemon/volume.out
 	fi
-	#echo -n "$FULL" > ~/.config/lemonbar/modules/volume.out
+	#echo -n "$FULL" > /tmp/lemon/volume.out
 	sleep 0.5;
 done

@@ -1,4 +1,4 @@
-echo -n "" > ~/.config/lemonbar/modules/vpn.out
+echo -n "" > /tmp/lemon/vpn.out
 while true; do
 	CLICK="%{A1:urxvt -e nmtui &:}"
 	ps -aux | grep openvpn | grep -v 'grep' | grep -v 'sed' > /dev/null
@@ -10,10 +10,10 @@ while true; do
 	fi
 	#sed -i "12 c\\$FULL" ~/.config/lemonbar/bar.out
 	
-	CONTENT=$(cat ~/.config/lemonbar/modules/vpn.out)
+	CONTENT=$(cat /tmp/lemon/vpn.out)
 
 	if [ "$CONTENT" != "FULL" ]; then
-		echo -n "$FULL" > ~/.config/lemonbar/modules/vpn.out
+		echo -n "$FULL" > /tmp/lemon/vpn.out
 	fi
 
 	sleep 10;
