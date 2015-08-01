@@ -39,4 +39,4 @@ URxvt*scrollBar_right:        true
 URxvt*scrollColor:        #000000
 URxvt.depth: 32
 URxvt.background: [80]#222222
-
+URxvt.font: xft:Roboto Mono:size=8
