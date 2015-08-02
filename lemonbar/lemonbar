@@ -72,11 +72,8 @@ else
         BRI=$(cat /tmp/lemon/brightness.out)
         WIFI=$(cat /tmp/lemon/ssid.out)
         
-        echo "%{l} $WS $MP %{c}$(clock) %{r}$BRI | $BAT | $SSID | $VOL | $COL | $VPN "
+        echo "%{l} $WS $MP %{c}$(clock) %{r}$BRI | $BAT | $WIFI | $VOL | $COL | $VPN "
 
-        sleep 0.1;
-
-#       echo -n "%{l} $(ws) | $(music) %{c}$(clock) %{r} $(brightness) | $(battery) | $(ssid) | $(volume) | $(colortemp) | $(vpn) "
-#       sleep 1;
+        sleep 1;
     done
 fi

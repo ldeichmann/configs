@@ -9,6 +9,6 @@ while true; do
 	if [ "$CONTENT" != "FULL" ]; then
 		echo -n "$FULL" > /tmp/lemon/ssid.out
 	fi
-
+	sleep 10
 	#echo -n "$FULL" > /tmp/lemon/ssid.out
 done
