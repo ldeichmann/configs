@@ -93,6 +93,8 @@ class GMENotifier(object):
                     +  playercmdprev + playercmdnext \
                     + "%{F#ffffffff}" + artist \
                     + ' - ' + title + "%{A}%{A}%{A}"
+            else:
+            	return '| Not Playing'
 
 
         except:
