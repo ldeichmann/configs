@@ -51,8 +51,6 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-assign [class="stalonetray"] 1 term
-
 assign [class="Steam"] 3 game
 assign [class="csgo_linux"] 3 game
 for_window [class="csgo_linux"] fullscreen enable
@@ -65,7 +63,6 @@ assign [class="Chromium" window_role="browser"] 6 web
 #Pidgin
 assign [class="Pidgin"] 2 im
 for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 px or 30 ppt; move left
-
 
 #Thunderbird
 assign [class="Thunderbird"] 4 mail

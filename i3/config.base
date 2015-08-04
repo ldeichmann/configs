@@ -4,8 +4,8 @@
 
 set $mod Mod4
 
-set $or  #ff8547
-set $dor #a2a2a2
+set $or  #275792
+set $dor #222c55
 # class                 border  backgr. text    indicator
 client.focused          $or     $or     #000000 $or
 client.focused_inactive $dor    $dor    #888888 $dor
