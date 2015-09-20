@@ -146,7 +146,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id compton --config ~/.config/compton.conf
 exec --no-startup-id xset s 0 0
 exec --no-startup-id xset s off
-exec_always --no-startup-id xset dpms 0 630 660
+exec_always --no-startup-id xset dpms 0 640 660
 #exec --no-startup-id xset -dpms
 exec --no-startup-id xautolock -time 10 -locker '~/.config/i3/lock.py'
 exec_always --no-startup-id ~/.config/lemonbar/run.sh
