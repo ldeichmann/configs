@@ -4,14 +4,41 @@
 
 set $mod Mod4
 
-set $or  #275792
-set $dor #222c55
-# class                 border  backgr. text    indicator
-client.focused          $or     $or     #000000 $or
-client.focused_inactive $dor    $dor    #888888 $dor
-client.unfocused        $dor    $dor    #888888 $dor
-client.urgent           #323537 #323537 #ffffff #323537
-client.placeholder      #323537 #323537 #ffffff #323537
+set $ws1  "1:  "
+set $ws2  "2:  "
+set $ws3  "3:  "
+set $ws4  "4:  "
+set $ws5  "5:  "
+set $ws6  "6:  "
+set $ws7  "7:  "
+set $ws8  "8:  "
+set $ws9  "9:  "
+set $ws10 "10:  "
+
+set $black       #212121
+set $darkblack   #000000
+set $red         #C62828
+set $darkred     #B71C1C
+set $green       #2E7D32
+set $darkgreen   #1B5E20
+set $yellow      #F9A825
+set $darkyellow  #F57F17
+set $blue        #1E88E5
+set $darkblue    #1976D2
+set $magenta     #6A1B9A
+set $darkmagenta #4A148C
+set $cyan        #00ACC1
+set $darkcyan    #0097A7
+set $white       #FFFFFF
+set $darkwhite   #FAFAFA
+set $background  #000000
+set $trans       #00000044
+
+#                       BORDER      BACKGROUND  TEXT   INDICATOR
+client.focused          $darkyellow $darkyellow $black $darkyellow
+client.unfocused        $black      $black      $white $black
+client.focused_inactive $black      $black      $white $black
+client.urgent           $red        $red        $white $red
 
 set $default_gaps_inner 15
 set $default_gaps_outer 15
@@ -138,8 +165,32 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+bar {
+    output            DVI-I-1
+    status_command    i3blocks -c ~/.config/i3/i3blocks.conf
+    i3bar_command     i3bar -t
+    position          top
+    workspace_buttons yes
+    tray_output       none
+
+    font pango:Roboto, FontAwesome 9
+    
+    #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+
+    colors {
+        background #00000044
+        statusline #ffffffff
+
+        # color_class       border      backg.      text
+        focused_workspace   $trans      $trans      #ffffffff
+        active_workspace    $trans      $trans      #ffffff77
+        inactive_workspace  $trans      $trans      #ffffff77
+        urgent_workspace    $trans      $trans      #ff3333ff
+    }
+}
+
 exec_always --no-startup-id ~/.config/i3/disable-standby-fs.py
-exec --no-startup-id pulseaudio-equalizer enable 
+#exec --no-startup-id pulseaudio-equalizer enable 
 exec --no-startup-id feh --bg-fill ~/Sync/Wallpapers/Nature/reflections-2560x1440.jpg
 exec --no-startup-id nm-applet
 exec --no-startup-id compton --config ~/.config/compton.conf
@@ -147,21 +198,40 @@ exec --no-startup-id xset s 0 0
 exec --no-startup-id xset s off
 exec_always --no-startup-id xset dpms 0 640 660
 exec --no-startup-id xautolock -time 10 -locker '~/.config/i3/lock.py'
-exec_always --no-startup-id ~/.config/lemonbar/run.sh
+#exec_always --no-startup-id ~/.config/lemonbar/run.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id redshift
 
-# switch to workspace
-bindsym $mod+1 workspace number 1 term
-bindsym $mod+2 workspace number 2 im
-bindsym $mod+3 workspace number 3 game
-bindsym $mod+4 workspace number 4 mail
-bindsym $mod+5 workspace number 5 music
-bindsym $mod+Control+1 workspace number 6 web
-bindsym $mod+Control+2 workspace number 7 chrome
-bindsym $mod+Control+3 workspace number 8
-bindsym $mod+Control+4 workspace number 9
-bindsym $mod+Control+5 workspace number 10
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+Ctrl+1 workspace $ws6
+bindsym $mod+Ctrl+2 workspace $ws7
+bindsym $mod+Ctrl+3 workspace $ws8
+bindsym $mod+Ctrl+4 workspace $ws9
+bindsym $mod+Ctrl+5 workspace $ws10
+bindsym $mod+Tab workspace back_and_forth
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Shift+plus scratchpad show
+
+bindsym $mod+Shift+s sticky toggle
+# put YouTube into fullscreen and execute this for media mode
+bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable; move window to position 1515 20
+
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Ctrl+Shift+1 move container to workspace number $ws6
+bindsym $mod+Ctrl+Shift+2 move container to workspace number $ws7
+bindsym $mod+Ctrl+Shift+3 move container to workspace number $ws8
+bindsym $mod+Ctrl+Shift+4 move container to workspace number $ws9
+bindsym $mod+Ctrl+Shift+5 move container to workspace number $ws10
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec pamixer --increase 5: #increase sound volume
@@ -181,38 +251,27 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number 1 term
-bindsym $mod+Shift+2 move container to workspace number 2 im
-bindsym $mod+Shift+3 move container to workspace number 3 game
-bindsym $mod+Shift+4 move container to workspace number 4 mail
-bindsym $mod+Shift+5 move container to workspace number 5 music
-bindsym $mod+Shift+6 move container to workspace number 6 web
-bindsym $mod+Shift+7 move container to workspace number 7 chrome
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
+assign [class="Steam"]                                      $ws3
+assign [class="csgo_linux"]                                 $ws3
+for_window [class="csgo_linux"]                             fullscreen enable
+for_window [class="eu4"]                                    fullscreen enable
 
-assign [class="Steam"] 3 game
-assign [class="csgo_linux"] 3 game
-for_window [class="csgo_linux"] fullscreen enable
-for_window [class="eu4"] fullscreen enable
 
 # Web Browsers
-assign [class="Google-chrome" window_role="browser"] 7 chrome
-assign [class="Chromium" window_role="browser"] 6 web
+assign [class="google-chrome" window_role="browser"]        $ws7
+assign [class="chromium" window_role="browser"]             $ws6
 
 #Pidgin
-assign [class="Pidgin"] 2 im
-for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 px or 30 ppt; move left
+assign [class="Pidgin"]                                     $ws2
+for_window [class="^Pidgin$" window_role="^conversation$"]  resize grow width 0 px or 30 ppt; move left
 
 #Thunderbird
-assign [class="Thunderbird"] 4 mail
+assign [class="Thunderbird"]                                $ws4
 
 #terminals
-assign [class="Gnome-terminal"] 1 term
+assign [class="Gnome-terminal"]                             $ws1
 
 #Nuvola Player
-assign [class="nuvolaplayer3-google-play-music"] 5 music
-assign [class="nuvolaplayer3"] 5 music
-assign [class="google-music-electron"] 5 music
+assign [class="nuvolaplayer3-google-play-music"]            $ws5
+assign [class="nuvolaplayer3"]                              $ws5
+assign [class="google-music-electron"]                      $ws5

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+TEMP=$(redshift -p | grep K | sed 's/.*: //')
+
+case $BLOCK_BUTTON in
+    1) echo "$TEMP"; pkill -USR1 redshift & ;;
+    *) echo "$TEMP" ;;
+esac
