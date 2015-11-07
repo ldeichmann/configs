@@ -166,7 +166,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bar {
-    output            DVI-I-1
     status_command    i3blocks -c ~/.config/i3/i3blocks.conf
     i3bar_command     i3bar -t
     position          top
