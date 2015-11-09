@@ -35,13 +35,13 @@ set $background  #000000
 set $trans       #00000044
 
 #                       BORDER      BACKGROUND  TEXT   INDICATOR
-client.focused          $darkyellow $darkyellow $black $darkyellow
+client.focused          $darkblue   $darkblue   $black $darkblue
 client.unfocused        $black      $black      $white $black
 client.focused_inactive $black      $black      $white $black
 client.urgent           $red        $red        $white $red
 
 set $default_gaps_inner 15
-set $default_gaps_outer 15
+set $default_gaps_outer 30
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
 
@@ -49,7 +49,7 @@ gaps outer $default_gaps_outer
 # is used in the bar {} block below.
 font pango:Droid Sans Mono 8
 
-new_window pixel 2
+new_window pixel 2px
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 
@@ -191,7 +191,7 @@ bar {
 exec_always --no-startup-id ~/.config/i3/disable-standby-fs.py
 exec_always --no-startup-id xset dpms 0 640 660
 
-exec --no-startup-id feh --bg-fill ~/Sync/Wallpapers/Nature/reflections-2560x1440.jpg
+exec --no-startup-id feh --bg-fill ~/Sync/Wallpapers/Digital\ Universe/Millenium_Cluster.jpg
 exec --no-startup-id nm-applet
 exec --no-startup-id compton --config ~/.config/compton.conf
 exec --no-startup-id xset s 0 0
