@@ -15,6 +15,22 @@
                 "std": [
                     "c11"
                 ]
+            },
+            "javac": {
+                "@disable": false,
+                "args": [],
+                "excludes": [],
+                "lint": ""
+            },
+            "pylint": {
+                "@disable": false,
+                "args": [],
+                "disable": "",
+                "enable": "",
+                "excludes": [],
+                "paths": [],
+                "rcfile": "",
+                "show-codes": false
             }
         },
         "mark_style": "squiggly underline",

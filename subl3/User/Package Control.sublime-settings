@@ -1,13 +1,17 @@
 {
+	"bootstrapped": true,
 	"in_process_packages":
 	[
 	],
 	"installed_packages":
 	[
+		"Color Highlighter",
 		"Numix Theme",
 		"Package Control",
 		"Rust",
 		"SublimeLinter",
-		"SublimeLinter-cppcheck"
+		"SublimeLinter-cppcheck",
+		"SublimeLinter-javac",
+		"SublimeLinter-pylint"
 	]
 }
