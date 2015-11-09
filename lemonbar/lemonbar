@@ -24,7 +24,7 @@ music() {
 }
 
 ws(){
-    (~/.config/lemonbar/modules/ws.py $display) &
+    (~/.config/lemonbar/modules/ws.py $display  > ws.txt) &
 }
 
 ssid() {

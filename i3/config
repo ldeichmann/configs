@@ -189,29 +189,28 @@ bar {
 }
 
 exec_always --no-startup-id ~/.config/i3/disable-standby-fs.py
-#exec --no-startup-id pulseaudio-equalizer enable 
+exec_always --no-startup-id xset dpms 0 640 660
+
 exec --no-startup-id feh --bg-fill ~/Sync/Wallpapers/Nature/reflections-2560x1440.jpg
 exec --no-startup-id nm-applet
 exec --no-startup-id compton --config ~/.config/compton.conf
 exec --no-startup-id xset s 0 0
 exec --no-startup-id xset s off
-exec_always --no-startup-id xset dpms 0 640 660
 exec --no-startup-id xautolock -time 10 -locker '~/.config/i3/lock.py'
-#exec_always --no-startup-id ~/.config/lemonbar/run.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id redshift
 
 
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+Ctrl+1 workspace $ws6
-bindsym $mod+Ctrl+2 workspace $ws7
-bindsym $mod+Ctrl+3 workspace $ws8
-bindsym $mod+Ctrl+4 workspace $ws9
-bindsym $mod+Ctrl+5 workspace $ws10
+bindsym $mod+1 workspace        $ws1
+bindsym $mod+2 workspace        $ws2
+bindsym $mod+3 workspace        $ws3
+bindsym $mod+4 workspace        $ws4
+bindsym $mod+5 workspace        $ws5
+bindsym $mod+Ctrl+1 workspace   $ws6
+bindsym $mod+Ctrl+2 workspace   $ws7
+bindsym $mod+Ctrl+3 workspace   $ws8
+bindsym $mod+Ctrl+4 workspace   $ws9
+bindsym $mod+Ctrl+5 workspace   $ws10
 bindsym $mod+Tab workspace back_and_forth
 
 bindsym $mod+Shift+minus move scratchpad
@@ -221,16 +220,16 @@ bindsym $mod+Shift+s sticky toggle
 # put YouTube into fullscreen and execute this for media mode
 bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable; move window to position 1515 20
 
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Ctrl+Shift+1 move container to workspace number $ws6
-bindsym $mod+Ctrl+Shift+2 move container to workspace number $ws7
-bindsym $mod+Ctrl+Shift+3 move container to workspace number $ws8
-bindsym $mod+Ctrl+Shift+4 move container to workspace number $ws9
-bindsym $mod+Ctrl+Shift+5 move container to workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace number         $ws1
+bindsym $mod+Shift+2 move container to workspace number         $ws2
+bindsym $mod+Shift+3 move container to workspace number         $ws3
+bindsym $mod+Shift+4 move container to workspace number         $ws4
+bindsym $mod+Shift+5 move container to workspace number         $ws5
+bindsym $mod+Ctrl+Shift+1 move container to workspace number    $ws6
+bindsym $mod+Ctrl+Shift+2 move container to workspace number    $ws7
+bindsym $mod+Ctrl+Shift+3 move container to workspace number    $ws8
+bindsym $mod+Ctrl+Shift+4 move container to workspace number    $ws9
+bindsym $mod+Ctrl+Shift+5 move container to workspace number    $ws10
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec pamixer --increase 5: #increase sound volume
@@ -250,27 +249,31 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+#terminals
+assign [class="Gnome-terminal"]                             $ws1
+
+#messengers
+assign [class="Pidgin"]                                     $ws2
+for_window [class="^Pidgin$" window_role="^conversation$"]  resize grow width 0 px or 30 ppt; move left
+
+#games
 assign [class="Steam"]                                      $ws3
 assign [class="csgo_linux"]                                 $ws3
 for_window [class="csgo_linux"]                             fullscreen enable
 for_window [class="eu4"]                                    fullscreen enable
 
-
-# Web Browsers
-assign [class="google-chrome" window_role="browser"]        $ws7
-assign [class="chromium" window_role="browser"]             $ws6
-
-#Pidgin
-assign [class="Pidgin"]                                     $ws2
-for_window [class="^Pidgin$" window_role="^conversation$"]  resize grow width 0 px or 30 ppt; move left
-
-#Thunderbird
+#mail
 assign [class="Thunderbird"]                                $ws4
 
-#terminals
-assign [class="Gnome-terminal"]                             $ws1
-
-#Nuvola Player
+#music players
 assign [class="nuvolaplayer3-google-play-music"]            $ws5
 assign [class="nuvolaplayer3"]                              $ws5
 assign [class="google-music-electron"]                      $ws5
+
+#web browsers
+assign [class="chromium" window_role="browser"]             $ws6
+assign [class="google-chrome" window_role="browser"]        $ws7
+
+#ide
+assign [class="jetbrains-idea-ce"]                          $ws8
+assign [class="Eclipse"]                                    $ws8

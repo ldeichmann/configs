@@ -1,0 +1,13 @@
+{
+    "color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
+    "font_face": "GohuFont",
+    "font_size": 10,
+    "ignored_packages":
+    [
+        "Vintage",
+        "Package Control"
+    ],
+    "theme": "Numix Dark.sublime-theme",
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true
+}

@@ -1,0 +1,14 @@
+{
+	"in_process_packages":
+	[
+		"Package Control"
+	],
+	"installed_packages":
+	[
+		"Numix Theme",
+		"Package Control",
+		"Rust",
+		"SublimeLinter",
+		"SublimeLinter-cppcheck"
+	]
+}

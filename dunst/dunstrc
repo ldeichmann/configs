@@ -1,5 +1,5 @@
 [global]
-    font = Droid Sans 9
+    font = Roboto 9
 
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -73,7 +73,7 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.).
-    transparency = 0
+    transparency = 20
 
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
     # for longer than idle_threshold seconds.
@@ -148,8 +148,8 @@
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 [frame]
-    width = 1
-    color = "#424242"
+    width = 0
+    color = "#ffffff"
 
 [shortcuts]
 
@@ -177,12 +177,10 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#222222"
     foreground = "#568081"
-#    foreground = "#888888"
     timeout = 5
 
 [urgency_normal]
     background = "#222222"
-#    foreground = "#568081"
     foreground = "#ff8547"
     timeout = 5
 
