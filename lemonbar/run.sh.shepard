@@ -1,3 +1,0 @@
-#!/bin/bash
-killall lemonbar
-~/.config/lemonbar/lemonbar DVI-I-1 | lemonbar -f "Roboto-11" -f "FontAwesome-13" -B "#00000000" -F "#FFFFFFFF" -g 2560x20+0+0 | bash &
