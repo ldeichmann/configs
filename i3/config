@@ -199,7 +199,7 @@ exec --no-startup-id xset s off
 exec --no-startup-id xautolock -time 10 -locker '~/.config/i3/lock.py'
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id redshift
-exec --no-startup-id setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de
+exec --no-startup-id setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de -variant ,qwerty
 
 
 bindsym $mod+1 workspace        $ws1
