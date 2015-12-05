@@ -2,10 +2,10 @@
 
 ps -aux | grep openvpn | grep -v 'grep' | grep -v 'sed' > /dev/null
 if [ $? -eq 1 ]; then
-	FULL=""
+    FULL=""
 else
-	VPN=$(ps -aux | grep openvpn | grep -v 'grep openvpn' | egrep -o '\-\-remote [a-z\.]+' | sed 's/--remote //g')
-	FULL=" $VPN"
+    VPN=$(ps -aux | grep openvpn | grep -v 'grep openvpn' | egrep -o '\-\-remote [a-z\.]+' | sed 's/--remote //g')
+    FULL=" $VPN"
 fi
 case $BLOCK_BUTTON in
     1) echo "$FULL"; urxvt -e nmtui & ;;

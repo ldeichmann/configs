@@ -2,20 +2,18 @@
 
 case $BLOCK_BUTTON in
     1) pamixer --toggle-mute ;;
-	3) pavucontrol & ;;
-	4) pamixer --increase 5 & ;;
-	5) pamixer --decrease 5 & ;;
+    3) nohup pavucontrol &>/dev/null & ;;
+    4) pamixer --increase 5 & ;;
+    5) pamixer --decrease 5 & ;;
 esac
 
 ISMUTE=$(pamixer --get-mute)
 VOL=$(pamixer --get-volume)
 if [ $ISMUTE = true ]; then
-	FULL="   $VOL%"
-	echo "$FULL";
-	echo "$FULL";
-	echo "#FF0000"
+    FULL="   $VOL%"
+    echo "$FULL";
+    echo "#FF0000"
 else
-	FULL=" $VOL%"
-	echo "$FULL";
-	echo "$FULL";
+    FULL=" $VOL%"
+    echo "$FULL";
 fi
