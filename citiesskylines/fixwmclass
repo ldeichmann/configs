@@ -1,7 +1,0 @@
-#!/bin/bash
-
-($@; wait;) &
-sleep 5
-xprop -name "Cities: Skylines" -f WM_CLASS 8s -set WM_CLASS "citiesskylines"
-
-
