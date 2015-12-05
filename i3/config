@@ -214,13 +214,6 @@ bindsym $mod+Ctrl+4 workspace   $ws9
 bindsym $mod+Ctrl+5 workspace   $ws10
 bindsym $mod+Tab workspace back_and_forth
 
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+Shift+plus scratchpad show
-
-bindsym $mod+Shift+s sticky toggle
-# put YouTube into fullscreen and execute this for media mode
-bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable; move window to position 1515 20
-
 bindsym $mod+Shift+1 move container to workspace number         $ws1
 bindsym $mod+Shift+2 move container to workspace number         $ws2
 bindsym $mod+Shift+3 move container to workspace number         $ws3
@@ -233,22 +226,22 @@ bindsym $mod+Ctrl+Shift+4 move container to workspace number    $ws9
 bindsym $mod+Ctrl+Shift+5 move container to workspace number    $ws10
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec pamixer --increase 5: #increase sound volume
-bindsym XF86AudioLowerVolume exec pamixer --decrease 5: #decrease sound volume
-bindsym XF86AudioMute exec pamixer --toggle-mute # mute sound
+bindsym XF86AudioRaiseVolume    exec pamixer --increase 5: #increase sound volume
+bindsym XF86AudioLowerVolume    exec pamixer --decrease 5: #decrease sound volume
+bindsym XF86AudioMute           exec pamixer --toggle-mute # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp     exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown   exec xbacklight -dec 20 # decrease screen brightness
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay   exec playerctl play
+bindsym XF86AudioPause  exec playerctl pause
+bindsym XF86AudioNext   exec playerctl next
+bindsym XF86AudioPrev   exec playerctl previous
 
 #terminals
 assign [class="Gnome-terminal"]                             $ws1
@@ -256,10 +249,13 @@ assign [class="Gnome-terminal"]                             $ws1
 #messengers
 assign [class="Pidgin"]                                     $ws2
 for_window [class="^Pidgin$" window_role="^conversation$"]  resize grow width 0 px or 30 ppt; move left
+assign [instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]    $ws2
 
 #games
 assign [class="Steam"]                                      $ws3
 assign [class="csgo_linux"]                                 $ws3
+
+for_window [class="Steam" title="Steam - Update News"]      kill
 for_window [class="csgo_linux"]                             fullscreen enable
 for_window [class="eu4"]                                    fullscreen enable
 
@@ -267,8 +263,6 @@ for_window [class="eu4"]                                    fullscreen enable
 assign [class="Thunderbird"]                                $ws4
 
 #music players
-assign [class="nuvolaplayer3-google-play-music"]            $ws5
-assign [class="nuvolaplayer3"]                              $ws5
 assign [class="google-music-electron"]                      $ws5
 
 #web browsers
@@ -278,3 +272,4 @@ assign [class="google-chrome" window_role="browser"]        $ws7
 #ide
 assign [class="jetbrains-idea-ce"]                          $ws8
 assign [class="Eclipse"]                                    $ws8
+assign [title="^Eclipse$"]                                  $ws8
