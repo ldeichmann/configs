@@ -254,6 +254,7 @@ assign [instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]    $ws2
 
 #games
 assign [class="Steam"]                                      $ws3
+assign [title="Steam"]                                      $ws3
 assign [class="csgo_linux"]                                 $ws3
 
 for_window [class="Steam" title="Steam - Update News"]      kill
