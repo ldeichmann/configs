@@ -36,3 +36,18 @@ URxvt*scrollBar:          false
 URxvt*scrollColor:        #000000
 URxvt.depth: 32
 URxvt.font: xft:GohuFont:size=10
+URxvt*scrollTtyOutput:      false
+URxvt*scrollWithBuffer:     true
+URxvt*scrollTtyKeypress:    true
+URxvt*saveLines:            10000
+
+rofi.opacity: 90
+rofi.width: 50
+rofi.lines: 5
+rofi.columns: 1
+rofi.font: Hack 11
+rofi.fg: #fff
+rofi.bg: #333
+rofi.hlfg: #fff
+rofi.hlbg: #1976D2
+rofi.bc: #1976D2
