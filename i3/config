@@ -249,7 +249,7 @@ assign [class="Gnome-terminal"]                             $ws1
 
 #messengers
 assign [class="Pidgin"]                                     $ws2
-for_window [class="^Pidgin$" window_role="^conversation$"]  resize grow width 0 px or 30 ppt; move left
+# signal chrome app
 assign [instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]    $ws2
 
 #games
