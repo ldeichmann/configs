@@ -29,13 +29,13 @@ set $magenta     #6A1B9A
 set $darkmagenta #4A148C
 set $cyan        #00ACC1
 set $darkcyan    #0097A7
+set $zyan        #23b196
 set $white       #FFFFFF
 set $darkwhite   #FAFAFA
-set $background  #000000
 set $trans       #00000000
 
 #                       BORDER      BACKGROUND  TEXT   INDICATOR
-client.focused          $darkblue   $darkblue   $black $darkblue
+client.focused          $zyan       $zyan       $black $zyan
 client.unfocused        $black      $black      $white $black
 client.focused_inactive $black      $black      $white $black
 client.urgent           $red        $red        $white $red
@@ -47,9 +47,10 @@ gaps outer $default_gaps_outer
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Roboto Mono 8 # not like they are visible anyway
+# not like they are visible anyway
+font pango: Roboto Mono 8
 
-new_window pixel 2px
+new_window pixel 1px
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 

@@ -49,5 +49,5 @@ rofi.font: Hack 11
 rofi.fg: #fff
 rofi.bg: #333
 rofi.hlfg: #fff
-rofi.hlbg: #1976D2
-rofi.bc: #1976D2
+rofi.hlbg: #23b196
+rofi.bc: #23b196
