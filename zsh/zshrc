@@ -79,9 +79,9 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias vibrance="~/Code/configs/csgo/vibrancetoggle.sh"
+alias vibrance='~/Code/configs/csgo/vibrancetoggle.sh'
 alias clean_packages='sudo pacman -Rns $(pacman -Qqtd)'
-alias stopidy="kill `ps ax | grep mopidy | grep -v grep | grep -v bash | cut -d' ' -f2`"
+alias stopidy='kill `ps ax | grep mopidy | grep -v grep | grep -v bash | cut -d" " -f1`'
 export EDITOR="nano"
 export VISUAL="nano"
 export GOPATH=~/Code/go

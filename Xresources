@@ -13,7 +13,7 @@ Xft.hintstyle:              hintfull
 !#################################
 
 urxvt*foreground: white
-URxvt.background: [90]#222222
+URxvt.background: [80]#000000
 
 *color0:  #2E3436
 *color1:  #a40000

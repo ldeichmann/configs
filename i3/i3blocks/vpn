@@ -8,6 +8,6 @@ else
     FULL=" $VPN"
 fi
 case $BLOCK_BUTTON in
-    1) echo "$FULL"; urxvt -e nmtui & ;;
+    1) echo "$FULL"; nohup bash -c 'urxvt -e nmtui' &>/dev/null & ;;
     *) echo "$FULL" ;;
 esac
