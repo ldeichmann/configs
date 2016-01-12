@@ -194,7 +194,7 @@ bar {
 exec_always --no-startup-id ~/.config/i3/disable-standby-fs.py
 exec_always --no-startup-id xset dpms 0 640 660
 
-exec --no-startup-id feh --bg-fill ~/Sync/Wallpapers/Minimalist/Glitch.png
+exec --no-startup-id feh --bg-fill ~/Sync/wallpapers/Minimalist/Glitch.png
 #exec --no-startup-id nm-applet
 exec --no-startup-id compton --config ~/.config/compton.conf
 exec --no-startup-id xset s 0 0
