@@ -1,0 +1,77 @@
+#! /bin/sh
+#
+# Example panel for lemonbar
+
+. ./panel_colors
+
+while read -r line ; do
+    case $line in
+        S*)
+            # clock output
+            sys="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
+            ;;
+        B*)
+            # battery output
+            battery="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
+            ;;
+        X*)
+            # brightness output
+            brightness="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
+            ;;
+        Y*)
+            # wifi output
+            wifi="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
+            ;;
+        T*)
+            # xtitle output
+            title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
+            ;;
+        R*)
+            # redshift output
+            redshift="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
+            ;;
+        V*)
+            # redshift output
+            volume="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
+            ;;
+        N*)
+            # vpn output
+            vpn="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
+            ;;
+        M*)
+            mpris="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
+            ;;
+        W*)
+            # workspace output
+            workspace="%{A5:/usr/bin/i3-msg workspace next_on_output > /dev/null 2>&1:}%{A4:i3-msg workspace prev_on_output > /dev/null 2>&1:}"
+            wsline=$(echo ${line#?} | jshon)
+            num_ws=$(echo "$wsline" | jshon -l)
+
+            for i in $(seq 0 $((num_ws-1)) ); do
+                ws=$(echo "$wsline" | jshon -e "$i")
+                name=$(echo "$ws" | jshon -e name -u)
+                num=$(echo "$ws" | jshon -e num -u)
+                case $ws in
+                    *'"focused": true'* )
+                        FG=$COLOR_FOCUSED_OCCUPIED_FG
+                        BG=$COLOR_FOCUSED_OCCUPIED_BG
+                        ;;
+                    *'"focused": false'*'"urgent": true'* )
+                        FG=$COLOR_URGENT_FG
+                        BG=$COLOR_URGENT_BG
+                        ;;
+                    *'"focused": false'*'"urgent": false'* )
+                        FG=$COLOR_OCCUPIED_FG
+                        BG=$COLOR_OCCUPIED_BG
+                        ;;
+                esac
+                workspace="${workspace}%{F${FG}}%{B${BG}}%{A:i3-msg workspace number ${num} > /dev/null 2>&1:} ${name} %{A}%{B-}%{F-}"
+            done
+            workspace="${workspace}""%{A}%{A}"
+#            workspace="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
+#            wsline=$(jshon ${line#?})
+#            workspace=$(echo ${line#?} | jshon -l)
+            ;;
+    esac
+    printf "%s\n" "%{l}${workspace}%{c}${mpris} ${title}%{r}${wifi} ${brightness} ${battery} ${redshift} ${volume} ${vpn} ${sys}"
+done

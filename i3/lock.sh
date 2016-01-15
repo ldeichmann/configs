@@ -17,4 +17,5 @@ SCREENSHOT="scrot $IMAGE" # 0.46s
 $SCREENSHOT
 convert -scale 10% -scale 1000% $IMAGE $IMAGE
 i3lock -i $IMAGE
+sleep 5
 rm $IMAGE

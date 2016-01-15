@@ -1,0 +1,17 @@
+#!/bin/bash
+
+batterytest=$(acpi -b)
+if [[ $batterytest  != *Battery* ]] ; then
+    exit 0;
+fi
+
+while true; do
+
+    BAT=$(acpi -b | cut -d, -f2 | sed 's/ //g')
+    FULL="Battery: $BAT"
+
+    echo "$FULL"
+
+    sleep 10;
+
+done

@@ -1,0 +1,16 @@
+#!/bin/sh
+while true; do
+    CLICK="%{A1:urxvt -e nmtui &:}"
+    ps -aux | grep openvpn | grep -v 'grep' | grep -v 'sed' > /dev/null
+    if [ $? -eq 1 ]; then
+        FULL=$CLICK"%{F#ffff6961}""""%{F#ffffffff}""%{A}"
+    else
+        VPN=$(nmcli c show --active | grep vpn | awk '{ printf "%s\n", $1 }')
+        FULL=$CLICK" $VPN""%{A}"
+    fi
+    #sed -i "12 c\\$FULL" ~/.config/lemonbar/bar.out
+
+    echo "$FULL"
+
+    sleep 10;
+done

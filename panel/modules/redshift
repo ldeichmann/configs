@@ -1,0 +1,11 @@
+#!/bin/sh
+while true; do
+    TEMP=$(redshift -p | grep K | sed 's/.*: //')
+    CLICK="%{A1:pkill -USR1 redshift &:}"
+    FULL=$CLICK" $TEMP""%{A}"
+    #sed -i "11 c\\$FULL" ~/.config/lemonbar/bar.out
+
+    printf "%s\n" "$FULL"
+
+    sleep 10;
+done

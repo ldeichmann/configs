@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+
+from subprocess import Popen, PIPE
+import json
+import sys
+import i3ipc
+
+
+def getActiveOutputs(searchOutput):
+    (stdout, stderr) = Popen(["i3-msg", "-t", "get_outputs"],
+                             stdout=PIPE).communicate()
+    outputs = json.loads(stdout.decode("utf-8"))
+
+    for i in outputs:
+        if i['name'] == searchOutput:
+            return i['current_workspace']
+    getWorkspacesOnOutput(searchOutput)
+
+
+def getWorkspacesOnOutput(searchOutput):
+    (stdout, stderr) = Popen(["i3-msg", "-t", "get_workspaces"],
+                             stdout=PIPE).communicate()
+    outputs = json.loads(stdout.decode("utf-8"))
+    workspaces = []
+    for i in outputs:
+        if i['output'] == searchOutput:
+            workspaces.append({'name': i['name'], 'visible': i['visible'],
+                              'focused': i['focused'], 'urgent': i['urgent']})
+    return workspaces
+
+
+def buildString(searchOutput, active, workspaces):
+    returnstring = "W%{A5:/usr/bin/i3-msg workspace next_on_output:}" \
+                    + "%{A4:i3-msg workspace prev_on_output:}"
+    for i in workspaces:
+        if (i['visible'] is True and i['focused'] is True):
+            returnstring += "%{F#ffffffff}" + i['name'] + "%{F#ffffffff} "
+        elif (i['focused'] is False and i['urgent'] is True):
+            returnstring += "%{F#ffff0000}" + i['name'] + "%{F#ffffffff} "
+        elif i['visible'] is True and i['focused'] is False:
+            returnstring += "%{F#ff17fff0}" + i['name'] + "%{F#ffffffff} "
+        else:
+            returnstring += "%{A:/usr/bin/i3-msg workspace " + i['name']\
+                            + ":}" + "%{F#ff888888}" + i['name']\
+                            + "%{F#ffffffff}" + "%{A} "
+    returnstring = returnstring[:-1]
+    returnstring += "%{A}%{A}"
+
+    return returnstring
+
+
+def on_workspace(self, e):
+    # The first parameter is the connection to the ipc
+    # and the second is an object
+    # with the data of the event sent from i3.
+    currws = getActiveOutputs(sys.argv[1])
+    listws = getWorkspacesOnOutput(sys.argv[1])
+    print(buildString(sys.argv[1], currws, listws), end="\n", flush=True)
+
+if __name__ == '__main__':
+
+    if len(sys.argv) > 1:
+        # Create the Connection object that can be used to send commands
+        # and subscribe to events.
+        conn = i3ipc.Connection()
+
+        # Subscribe to the workspace event
+        conn.on('workspace', on_workspace)
+
+        # Start the main loop and wait for events to come in.
+        conn.main()
+
+    else:
+        print("xrandr output name required")

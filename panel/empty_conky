@@ -1,0 +1,16 @@
+conky.config = {
+    alignment = 'top_middle',
+    background = false,
+    minimum_height = 40,
+    minimum_width = 1920,
+    border_width = 0,
+    own_window = true,
+    own_window_type = 'panel',
+    own_window_argb_visual = true,
+    own_window_transparent = true,
+    update_interval = 2000,
+    short_units = true
+}
+conky.text = [[
+
+]]

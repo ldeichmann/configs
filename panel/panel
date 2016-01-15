@@ -1,0 +1,53 @@
+#! /bin/sh
+
+. ./panel_colors
+. ./profile
+
+if xdo id -a "$PANEL_WM_NAME" > /dev/null ; then
+    printf "%s\n" "The panel is already running." >&2
+    killall lemonbar
+#    exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+# MONITOR_WIDTH=$(bspc query -T -m | jshon -e rectangle -e width -u)
+# WINDOW_GAP=$(bspc query -T -d | jshon -e windowGap)
+# PANEL_GAP=$((2 * WINDOW_GAP))
+# PANEL_WIDTH=$((MONITOR_WIDTH - PANEL_GAP))
+
+MONITOR_WIDTH=$(i3-msg -t "get_workspaces" | jshon -e 0 -e rect -e width)
+#MONITOR_OUTPUT=$(i3-msg -t "get_workspaces" | jshon -e 0 -e output -u)
+WINDOW_GAP=30
+PANEL_GAP=$((2 * WINDOW_GAP))
+PANEL_WIDTH=$((MONITOR_WIDTH - PANEL_GAP))
+
+# bspc config top_padding $((PANEL_HEIGHT+WINDOW_GAP))
+# bspc subscribe report > "$PANEL_FIFO" &
+#xtitle -sf 'T%s' > "$PANEL_FIFO" &
+#clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
+modules/redshift | xargs -L 1 -d '\n' printf "R%s\n" > "$PANEL_FIFO" &
+modules/date | xargs -L 1 -d '\n' printf "S%s\n" > "$PANEL_FIFO" &
+modules/volume | xargs -L 1 -d '\n' printf "V%s\n" > "$PANEL_FIFO" &
+modules/vpn | xargs -L 1 -d '\n' printf "N%s\n" > "$PANEL_FIFO" &
+modules/battery | xargs -L 1 -d '\n' printf "B%s\n" > "$PANEL_FIFO" &
+modules/brightness | xargs -L 1 -d '\n' printf "X%s\n" > "$PANEL_FIFO" &
+modules/wifi wlp2s0 | xargs -L 1 -d '\n' printf "Y%s\n" > "$PANEL_FIFO" &
+modules/workspace | xargs -L 1 -d '\n' printf "W%s\n" > "$PANEL_FIFO" &
+modules/mediaplayer | xargs -L 1 -d '\n' printf "M%s\n" > "$PANEL_FIFO" &
+
+./panel_bar < "$PANEL_FIFO" | lemonbar -d -a 32 -n "$PANEL_WM_NAME" -g "$PANEL_WIDTH"x"$PANEL_HEIGHT"+"$WINDOW_GAP"+"$WINDOW_GAP" -f "$PANEL_FONT" -f "$PANEL_ICONS" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
+
+# wid=$(xdo id -a "$PANEL_WM_NAME")
+# tries_left=20
+# while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
+#     sleep 0.05
+#     wid=$(xdo id -a "$PANEL_WM_NAME")
+#     tries_left=$((tries_left - 1))
+# done
+# [ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
+#
+wait

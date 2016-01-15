@@ -1,0 +1,18 @@
+#!/bin/bash
+
+test=$(xbacklight)
+
+if [[ -z $test ]] ; then
+    exit 0
+fi
+
+while true; do
+    BRIGHT=$(xbacklight | awk '{printf("%1.f\n", $1)}')
+    BUP="%{A4:xbacklight -inc 10:}"
+    BDOWN="%{A5:xbacklight -dec 10:}"
+    FULL="$BUP""$BDOWN""Brightness: $BRIGHT%""%{A}%{A}"
+
+    echo -n "$FULL"
+
+    sleep 1;
+done
