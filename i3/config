@@ -78,6 +78,8 @@ bindsym $mod+d exec rofi -show run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+bindsym $mod+y exec toggle_panel
+
 bindsym Control+mod1+l exec sh ~/.config/i3/lock.sh
 # change focus
 bindsym $mod+j focus left
@@ -131,6 +133,8 @@ for_window [class="Steam"] floating enable
 for_window [title="Steam"] floating disable
 for_window [class="Steam" title="Steam - Update News$"] floating enable
 
+for_window [instance="i3_panel"] floating enable
+
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/Pictures/Screenshots/'
 
 # reload the configuration file
@@ -170,6 +174,7 @@ bindsym $mod+r mode "resize"
 exec_always --no-startup-id ~/.config/i3/disable-standby-fs.py
 exec_always --no-startup-id xset dpms 0 640 660
 
+exec --no-startup-id conky -c ~/.config/panel/empty_conky
 exec --no-startup-id feh --bg-fill ~/Sync/wallpapers/Minimalist/Glitch.png
 exec --no-startup-id compton --config ~/.config/compton.conf
 exec --no-startup-id xset s 0 0
@@ -178,9 +183,8 @@ exec --no-startup-id xautolock -time 10 -locker '~/.config/i3/lock.py'
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id redshift
 exec --no-startup-id setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de -variant ,qwerty
-exec --no-startup-id conky -c ~/.config/panel/empty_conky
 
-exec_always --no-startup-id (cd ~/.config/panel/ && ./panel)
+exec_always --no-startup-id toggle_panel
 
 bindsym $mod+1 workspace        $ws1
 bindsym $mod+2 workspace        $ws2

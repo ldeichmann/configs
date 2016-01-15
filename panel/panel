@@ -5,8 +5,11 @@
 
 killall perl
 
+
 if xdo id -a "$PANEL_WM_NAME" > /dev/null ; then
     printf "%s\n" "The panel is already running." >&2
+    killall panel_bar
+    killall panel
     killall lemonbar
 #    exit 1
 fi
@@ -27,10 +30,6 @@ WINDOW_GAP=30
 PANEL_GAP=$((2 * WINDOW_GAP))
 PANEL_WIDTH=$((MONITOR_WIDTH - PANEL_GAP))
 
-# bspc config top_padding $((PANEL_HEIGHT+WINDOW_GAP))
-# bspc subscribe report > "$PANEL_FIFO" &
-#xtitle -sf 'T%s' > "$PANEL_FIFO" &
-#clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
 modules/redshift | xargs -L 1 -d '\n' printf "R%s\n" > "$PANEL_FIFO" &
 modules/date | xargs -L 1 -d '\n' printf "S%s\n" > "$PANEL_FIFO" &
 modules/volume | xargs -L 1 -d '\n' printf "V%s\n" > "$PANEL_FIFO" &
@@ -43,13 +42,4 @@ modules/mediaplayer | xargs -L 1 -d '\n' printf "M%s\n" > "$PANEL_FIFO" &
 
 ./panel_bar < "$PANEL_FIFO" | lemonbar -d -a 32 -n "$PANEL_WM_NAME" -g "$PANEL_WIDTH"x"$PANEL_HEIGHT"+"$WINDOW_GAP"+"$WINDOW_GAP" -f "$PANEL_FONT" -f "$PANEL_ICONS" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
 
-# wid=$(xdo id -a "$PANEL_WM_NAME")
-# tries_left=20
-# while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
-#     sleep 0.05
-#     wid=$(xdo id -a "$PANEL_WM_NAME")
-#     tries_left=$((tries_left - 1))
-# done
-# [ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
-#
 wait

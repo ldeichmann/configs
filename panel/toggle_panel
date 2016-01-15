@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if pgrep "lemonbar" > /dev/null
+then
+    printf "%s\n" "The panel is already running."
+    killall -SIGKILL panel_bar
+    killall -SIGKILL panel
+    pkill -f lemonbar
+    pkill -f i3subscribe
+    pkill -f modules/mediaplayer
+    pkill -f modules/vpn
+    pkill -f modules/redshift
+else
+    echo "Stopped"
+    (cd ~/.config/panel/ && ./panel) &  > /dev/null 2>&1
+fi
