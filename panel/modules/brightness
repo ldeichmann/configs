@@ -12,7 +12,7 @@ while true; do
     BDOWN="%{A5:xbacklight -dec 10:}"
     FULL="$BUP""$BDOWN""Brightness: $BRIGHT%""%{A}%{A}"
 
-    echo -n "$FULL"
+    echo "$FULL"
 
     sleep 1;
 done
