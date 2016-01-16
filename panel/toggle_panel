@@ -12,13 +12,18 @@ start ()
 
 stop ()
 {
-    killall -SIGKILL panel_bar
-    killall -SIGKILL panel
+    pkill -f "sh ./panel_bar"
+    pkill -f "sh ./panel"
     pkill -f lemonbar
     pkill -f "i3subscribe workspace"
     pkill -f modules/mediaplayer
     pkill -f modules/vpn
     pkill -f modules/redshift
+    pkill -f modules/date
+    pkill -f modules/volume
+    pkill -f modules/battery
+    pkill -f modules/brightness
+    pkill -f modules/wifi wlp2s0
 }
 
 toggle ()

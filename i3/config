@@ -183,8 +183,10 @@ exec --no-startup-id xautolock -time 10 -locker '~/.config/i3/lock.py'
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id redshift
 exec --no-startup-id setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de -variant ,qwerty
-exec --no-startup-id toggle_panel start
-exec --no-startup-id ~/.config/panel/watch_fullscreen
+#exec --no-startup-id toggle_panel start
+#exec --no-startup-id ~/.config/panel/watch_fullscreen
+
+popup_during_fullscreen smart
 
 bindsym $mod+1 workspace        $ws1
 bindsym $mod+2 workspace        $ws2
