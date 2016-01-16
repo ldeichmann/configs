@@ -1,47 +1,33 @@
-#!/usr/bin/env perl
+#!/usr/bin/env python3
 
-BEGIN { $| = 1 } # flush \n
+import sys
+import i3ipc
 
-use strict;
-use warnings;
-use Data::Dumper;
-use AnyEvent::I3;
-use v5.10;
 
-my $i3 = i3();
-$i3->connect->recv or die "Error connecting to i3";
+class i3subscribe:
 
-sub subscribe {
-    my $ev = $_[0];
-    my $dump = $_[1];
-    if($i3->subscribe({
-        $ev => sub {
-            my ($msg) = @_;
-            say "$ev:$msg->{'change'}";
-            if($dump) {
-                print Dumper($msg);
-            }
-        }
-    })->recv->{success}) {
-        say "Successfully subscribed to $ev-event";
-    }
-}
+    def connect(self):
+        # Create the Connection object that can be used to send commands
+        # and subscribe to events.
+        self.conn = i3ipc.Connection()
 
-my $nextArg = shift;
-if(!$nextArg) {
-    say "Subscribe to i3-events";
-    say "Usage:   $0 workspace|output|mode|window|barconfig_update|binding [dump]";
-    say "Example: $0 workspace dump window binding dump";
-    exit 1;
-}
-while($nextArg) {
-    my $arg = $nextArg;
-    $nextArg = shift;
-    my $dump = 0;
-    if($nextArg and $nextArg eq "dump") {
-        $dump = 1;
-        $nextArg = shift;
-    }
-    subscribe("$arg", $dump);
-}
-AE::cv->recv;
+    def on_event(self, ipc, e):
+        print("Event occured", flush=True)
+
+    def subscribe(self, event):
+        # Subscribe to the workspace event
+        self.conn.on(event, self.on_event)
+
+    def __init__(self):
+        if len(sys.argv) > 1:
+            self.connect()
+            self.subscribe(sys.argv[1])
+            # Start the main loop and wait for events to come in.
+            self.conn.main()
+
+
+if __name__ == '__main__':
+    try:
+        i3subscribe()
+    except Exception as e:
+        pass
