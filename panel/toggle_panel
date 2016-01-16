@@ -1,16 +1,47 @@
 #!/bin/bash
 
-if pgrep "lemonbar" > /dev/null
-then
-    printf "%s\n" "The panel is already running."
+start ()
+{
+    if pgrep "lemonbar" > /dev/null
+    then
+        printf "%s\n" "The panel is already running."
+    else
+        (cd ~/.config/panel/ && ./panel) &  > /dev/null 2>&1
+    fi
+}
+
+stop ()
+{
     killall -SIGKILL panel_bar
     killall -SIGKILL panel
     pkill -f lemonbar
-    pkill -f i3subscribe
+    pkill -f "i3subscribe workspace"
     pkill -f modules/mediaplayer
     pkill -f modules/vpn
     pkill -f modules/redshift
+}
+
+toggle ()
+{
+    if pgrep "lemonbar" > /dev/null
+    then
+        printf "%s\n" "The panel is already running."
+        stop
+    else
+        echo "Stopped"
+        start
+    fi
+}
+
+if [ -n "$1" ] ; then
+    if [ "$1" = "start" ] ; then
+        start
+        exit 0
+    elif [ "$1" = "stop" ] ; then
+        stop
+        exit 0
+    fi
 else
-    echo "Stopped"
-    (cd ~/.config/panel/ && ./panel) &  > /dev/null 2>&1
+    toggle
+    exit 0
 fi

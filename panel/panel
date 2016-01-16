@@ -3,15 +3,9 @@
 . ./panel_colors
 . ./profile
 
-killall perl
-
-
 if xdo id -a "$PANEL_WM_NAME" > /dev/null ; then
     printf "%s\n" "The panel is already running." >&2
-    killall panel_bar
-    killall panel
-    killall lemonbar
-#    exit 1
+    exit 1
 fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT

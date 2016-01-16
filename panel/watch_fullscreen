@@ -1,0 +1,11 @@
+#!/bin/bash
+
+i3subscribe window dump | grep  --line-buffered "'fullscreen_mode' => " | grep --line-buffered -o "[0-9]*" | while read -r line; do
+    if [ $line -eq 0 ]; then
+        echo "no fullscreen"
+        (toggle_panel start > /dev/null 2>&1)
+    else
+        echo "fullscreen"
+        (toggle_panel stop > /dev/null 2>&1)
+    fi
+done
