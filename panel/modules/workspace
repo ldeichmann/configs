@@ -1,6 +1,6 @@
 #!/bin/sh
 while true; do
-    i3subscribe.py workspace | while read -r event; do
+    i3subscribe workspace | while read -r event; do
         i3-msg -t "get_workspaces"
     done
 done

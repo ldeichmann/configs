@@ -135,6 +135,9 @@ for_window [class="Steam" title="Steam - Update News$"] floating enable
 
 for_window [instance="i3_panel"] floating enable
 
+# don't show popups over fullscreen windows
+popup_during_fullscreen smart
+
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/Pictures/Screenshots/'
 
 # reload the configuration file
@@ -161,9 +164,6 @@ exec --no-startup-id redshift
 exec --no-startup-id setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de -variant ,qwerty
 exec --no-startup-id toggle_panel start
 #exec --no-startup-id ~/.config/panel/watch_fullscreen
-
-# don't show popups over fullscreen windows
-popup_during_fullscreen smart
 
 bindsym $mod+1 workspace        $ws1
 bindsym $mod+2 workspace        $ws2
