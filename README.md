@@ -1,5 +1,5 @@
 # configs
-My personal config files and some scripts I wrote I don't yet have the heart to remove.
+My personal config files and some scripts I use
 
 ## Desktop
 ![Screenshot](screenshot.png)
