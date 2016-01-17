@@ -142,7 +142,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec ~/.config/i3/shutdown_menu -com
+bindsym $mod+Shift+e exec "~/.config/i3/shutdown_menu -c"
 
 bindsym $mod+r mode "resize"
 
@@ -150,7 +150,7 @@ exec_always --no-startup-id ~/.config/i3/disable-standby-fs.py
 exec_always --no-startup-id xset dpms 0 640 660
 
 exec --no-startup-id conky -c ~/.config/panel/empty_conky
-exec --no-startup-id feh --bg-fill ~/Sync/wallpapers/Minimalist/Yosemite-Color-Block-2880x1800.png
+exec --no-startup-id feh --bg-fill ~/Sync/wallpapers/Minimal/Yosemite-Color-Block-2880x1800.png
 exec --no-startup-id compton --config ~/.config/compton.conf
 exec --no-startup-id xset s 0 0
 exec --no-startup-id xset s off
