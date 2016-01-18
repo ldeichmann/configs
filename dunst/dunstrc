@@ -64,7 +64,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-40+30"
+    geometry = "300x5-30+55"
 
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
@@ -73,7 +73,7 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.).
-    transparency = 20
+    transparency = 10
 
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
     # for longer than idle_threshold seconds.
@@ -175,17 +175,17 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#222222"
-    foreground = "#568081"
+    background = "#333232"
+    foreground = "#a7a5a5"
     timeout = 5
 
 [urgency_normal]
-    background = "#222222"
-    foreground = "#ff8547"
+    background = "#333232"
+    foreground = "#ffffff"
     timeout = 5
 
 [urgency_critical]
-    background = "#222222"
+    background = "#333232"
     foreground = "#B14D4C"
     timeout = 5
 

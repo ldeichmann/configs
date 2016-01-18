@@ -15,7 +15,7 @@ set $ws8  "8:  "
 set $ws9  "9:  "
 set $ws10 "10:  "
 
-set $black       #212121
+set $black       #333232
 set $darkblack   #000000
 set $red         #C62828
 set $darkred     #B71C1C
@@ -30,7 +30,7 @@ set $darkmagenta #4A148C
 set $cyan        #00ACC1
 set $darkcyan    #0097A7
 set $zyan        #23b196
-set $grey        #555555
+set $grey        #a7a5a5
 set $white       #FFFFFF
 set $darkwhite   #FAFAFA
 set $trans       #00000000
