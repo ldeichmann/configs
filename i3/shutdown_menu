@@ -33,12 +33,12 @@
 FG_COLOR="#fff"
 BG_COLOR="#333"
 HLFG_COLOR="#fff"
-HLBG_COLOR="#555"
-BORDER_COLOR="#555"
+HLBG_COLOR="#a5a7a7"
+BORDER_COLOR="#a5a7a7"
 
 # Options not related to colors
 ROFI_TEXT="Quit:"
-ROFI_OPTIONS="-width -11 -location 0 -hide-scrollbar -bw 1"
+ROFI_OPTIONS="-width -11 -location 0 -hide-scrollbar -bw 3"
 
 # Zenity options
 ZENITY_TITLE="Menu"
