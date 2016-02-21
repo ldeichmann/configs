@@ -12,12 +12,15 @@ class watch_panel:
         self.conn = i3ipc.Connection()
 
     def on_event(self, ipc, e):
-        if e.container.focused and e.container.fullscreen_mode:
-            self.stopPanel()
-            # print("Focused Fullscreen")
-        elif e.container.focused and not e.container.fullscreen_mode:
+        try:
+            if e.container.focused and e.container.fullscreen_mode:
+                self.stopPanel()
+                # print("Focused Fullscreen")
+            elif e.container.focused and not e.container.fullscreen_mode:
+                self.startPanel()
+                # print("Focused non fullscreen")
+        except Exception as e:
             self.startPanel()
-            # print("Focused non fullscreen")
 
     def subscribe(self, event):
         # Subscribe to the workspace event
@@ -28,6 +31,7 @@ class watch_panel:
         self.running = False
         self.subscribe('window::focus')
         self.subscribe('window::fullscreen_mode')
+        self.subscribe('workspace::focus')
         # Start the main loop and wait for events to come in.
         self.conn.main()
 
@@ -46,4 +50,5 @@ if __name__ == '__main__':
     try:
         watch_panel()
     except Exception as e:
+        print("Handling run-time error:", e)
         print("exeption flew")
