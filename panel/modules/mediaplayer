@@ -10,15 +10,16 @@ import dbus
 from gi.repository import GObject
 from dbus.mainloop.glib import DBusGMainLoop
 from dbus.exceptions import DBusException
+import sys
 
 
 class MPRISNotifier(object):
-    def __init__(self):
+    def __init__(self, player):
         """initialise."""
         bus_loop = DBusGMainLoop(set_as_default=True)
         self.bus = dbus.SessionBus(mainloop=bus_loop)
         loop = GObject.MainLoop()
-        self.playername = "mopidy"
+        self.playername = player
         try:
             self.props_changed_listener()
         except DBusException as e:  # NOQA
@@ -94,4 +95,5 @@ class MPRISNotifier(object):
             return 'Except'
 
 if __name__ == "__main__":
-    MPRISNotifier()
+    if len(sys.argv) > 1:
+        MPRISNotifier(sys.argv[1])

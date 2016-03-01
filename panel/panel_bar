@@ -22,10 +22,10 @@ while read -r line ; do
             # wifi output
             wifi="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
             ;;
-        T*)
-            # xtitle output
-            title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
-            ;;
+        # T*)
+        #     # xtitle output
+        #     title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
+        #     ;;
         R*)
             # redshift output
             redshift="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
@@ -40,6 +40,9 @@ while read -r line ; do
             ;;
         M*)
             mpris="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
+            ;;
+        G*)
+            gmusic="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
             ;;
         W*)
             # workspace output
@@ -73,5 +76,5 @@ while read -r line ; do
 #            workspace=$(echo ${line#?} | jshon -l)
             ;;
     esac
-    printf "%s\n" "%{l}${workspace}%{c}${mpris} ${title}%{r}${wifi} ${brightness} ${battery} ${redshift} ${volume} ${vpn} ${sys}"
+    printf "%s\n" "%{l}${workspace}%{c}${mpris} ${gmusic}%{r}${wifi} ${brightness} ${battery} ${redshift} ${volume} ${vpn} ${sys}"
 done
