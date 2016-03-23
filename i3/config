@@ -4,16 +4,12 @@
 
 set $mod Mod4
 
-set $ws1  "1:  "
-set $ws2  "2:  "
-set $ws3  "3:  "
-set $ws4  "4:  "
-set $ws5  "5:  "
-set $ws6  "6:  "
-set $ws7  "7:  "
-set $ws8  "8:  "
-set $ws9  "9:  "
-set $ws10 "10:  "
+set $ws1  "1:  "
+set $ws2  "2:  "
+set $ws3  "3:  "
+set $ws4  "4:  "
+set $ws5  "5:  "
+set $ws6  "6:  "
 
 set $black       #333232
 set $darkblack   #000000
@@ -30,14 +26,15 @@ set $darkmagenta #4A148C
 set $cyan        #00ACC1
 set $darkcyan    #0097A7
 set $zyan        #23b196
-set $grey        #a7a5a5
+set $grey        #E4E5E8
+set $darkgrey    #788491
 set $white       #FFFFFF
 set $darkwhite   #FAFAFA
 set $trans       #00000000
 
 #                       BORDER      BACKGROUND  TEXT       INDICATOR
-client.focused          $grey       $grey       $white     $grey
-client.unfocused        $black      $black      $white     $black
+client.focused          $grey       $grey       $darkgrey  $grey
+client.unfocused        $darkgrey   $darkgrey   $grey      $darkgrey
 client.focused_inactive $black      $black      $white     $black
 client.urgent           $red        $red        $white     $red
 
@@ -127,11 +124,6 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# Enables Floating for all steam windows apart from the main ui
-for_window [class="Steam"] floating enable
-for_window [title="Steam"] floating disable
-for_window [class="Steam" title="Steam - Update News$"] floating enable
-
 # don't show popups over fullscreen windows
 popup_during_fullscreen smart
 
@@ -172,9 +164,10 @@ bindsym $mod+r mode "resize"
 
 exec_always --no-startup-id ~/.config/i3/disable-standby-fs.py
 exec_always --no-startup-id xset dpms 0 640 660
+exec_always --no-startup-id ~/.config/panel/watch
 
 exec --no-startup-id conky -c ~/.config/panel/empty_conky
-exec --no-startup-id feh --bg-fill ~/Sync/wallpapers/Minimal/Yosemite-Color-Block-2880x1800.png
+exec --no-startup-id feh --bg-fill ~/Sync/wallpapers/Nature/reflections-2560x1440.png
 exec --no-startup-id compton --config ~/.config/compton.conf
 exec --no-startup-id xset s 0 0
 exec --no-startup-id xset s off
@@ -183,18 +176,13 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id redshift
 exec --no-startup-id setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de -variant ,qwerty
 exec --no-startup-id toggle_panel start
-exec --no-startup-id ~/.config/panel/watch
 
 bindsym $mod+1 workspace        $ws1
 bindsym $mod+2 workspace        $ws2
 bindsym $mod+3 workspace        $ws3
 bindsym $mod+4 workspace        $ws4
 bindsym $mod+5 workspace        $ws5
-bindsym $mod+Ctrl+1 workspace   $ws6
-bindsym $mod+Ctrl+2 workspace   $ws7
-bindsym $mod+Ctrl+3 workspace   $ws8
-bindsym $mod+Ctrl+4 workspace   $ws9
-bindsym $mod+Ctrl+5 workspace   $ws10
+bindsym $mod+6 workspace        $ws6
 bindsym $mod+Tab workspace back_and_forth
 
 bindsym $mod+Shift+1 move container to workspace number         $ws1
@@ -202,11 +190,7 @@ bindsym $mod+Shift+2 move container to workspace number         $ws2
 bindsym $mod+Shift+3 move container to workspace number         $ws3
 bindsym $mod+Shift+4 move container to workspace number         $ws4
 bindsym $mod+Shift+5 move container to workspace number         $ws5
-bindsym $mod+Ctrl+Shift+1 move container to workspace number    $ws6
-bindsym $mod+Ctrl+Shift+2 move container to workspace number    $ws7
-bindsym $mod+Ctrl+Shift+3 move container to workspace number    $ws8
-bindsym $mod+Ctrl+Shift+4 move container to workspace number    $ws9
-bindsym $mod+Ctrl+Shift+5 move container to workspace number    $ws10
+bindsym $mod+Shift+6 move container to workspace number         $ws6
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume    exec pamixer --increase 5: #increase sound volume
@@ -226,33 +210,33 @@ bindsym XF86AudioPause  exec playerctl pause
 bindsym XF86AudioNext   exec playerctl next
 bindsym XF86AudioPrev   exec playerctl previous
 
+# web browsers
+assign [class="chromium" window_role="browser"]             $ws1
+assign [class="google-chrome" window_role="browser"]        $ws1
 
-#signal chrome app
-assign [instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]    $ws2
+# ide
+assign [class="jetbrains-idea-ce"]                          $ws2
+assign [class="Eclipse"]                                    $ws2
+assign [title="^Eclipse$"]                                  $ws2
 
-#games
-assign [class="Steam"]                                      $ws3
-assign [title="Steam"]                                      $ws3
-assign [class="csgo_linux"]                                 $ws3
+# messaging
+## signal chrome app
+assign [instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]    $ws3
+assign [class="Thunderbird"]                                $ws3
 
+# music players
+assign [class="google-music-electron"]                      $ws4
+
+# games
+assign [class="Steam"]                                      $ws5
+assign [title="Steam"]                                      $ws5
+assign [class="csgo_linux"]                                 $ws5
+
+## Enables Floating for all steam windows apart from the main ui
+for_window [class="Steam"] floating enable
+for_window [title="Steam"] floating disable
+## Close Update News
 for_window [class="Steam" title="Steam - Update News"]      kill
-for_window [class="csgo_linux"]                             fullscreen enable
-for_window [class="eu4"]                                    fullscreen enable
-
-#mail
-assign [class="Thunderbird"]                                $ws4
-
-#music players
-assign [class="google-music-electron"]                      $ws5
-
-#web browsers
-assign [class="chromium" window_role="browser"]             $ws6
-assign [class="google-chrome" window_role="browser"]        $ws7
-
-#ide
-assign [class="jetbrains-idea-ce"]                          $ws8
-assign [class="Eclipse"]                                    $ws8
-assign [title="^Eclipse$"]                                  $ws8
 
 #voice
-assign [class="TeamSpeak 3"]                                $ws9
+assign [class="TeamSpeak 3"]                                $ws6
