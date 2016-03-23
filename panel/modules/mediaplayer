@@ -85,8 +85,8 @@ class MPRISNotifier(object):
             title = player.get_title()
 
             if artist and title:
-                return playbackicon + playercmdpause \
-                    + playercmdprev + playercmdnext \
+                return playercmdpause + playercmdprev \
+                    + playercmdnext + playbackicon \
                     + artist + ' - ' + title + "%{A}%{A}%{A}"
             else:
                 return 'Not Playing'
