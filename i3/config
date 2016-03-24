@@ -33,8 +33,8 @@ set $darkwhite   #FAFAFA
 set $trans       #00000000
 
 #                       BORDER      BACKGROUND  TEXT       INDICATOR
-client.focused          $darkgrey   $darkgrey   $grey      $darkgrey
-client.unfocused        $grey       $grey       $darkgrey  $grey
+client.focused          $grey       $grey       $darkgrey  $grey
+client.unfocused        $darkgrey   $darkgrey   $grey      $darkgrey
 client.focused_inactive $black      $black      $white     $black
 client.urgent           $red        $red        $white     $red
 
