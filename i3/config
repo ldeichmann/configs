@@ -46,7 +46,7 @@ gaps outer 0
 # not like they are visible anyway
 font pango:Roboto Mono 8
 
-new_window pixel 3px
+new_window pixel 1px
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 
