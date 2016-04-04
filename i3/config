@@ -216,6 +216,7 @@ assign [class="google-chrome" window_role="browser"]        $ws1
 
 # ide
 assign [class="jetbrains-idea-ce"]                          $ws2
+assign [class="jetbrains-idea"]                             $ws2
 assign [class="Eclipse"]                                    $ws2
 assign [title="^Eclipse$"]                                  $ws2
 
