@@ -219,6 +219,7 @@ assign [class="jetbrains-idea-ce"]                          $ws2
 assign [class="jetbrains-idea"]                             $ws2
 assign [class="Eclipse"]                                    $ws2
 assign [title="^Eclipse$"]                                  $ws2
+assign [class="jetbrains-webstorm"]                         $ws2
 
 # messaging
 ## signal chrome app
