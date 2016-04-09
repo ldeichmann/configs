@@ -12,29 +12,15 @@ set $ws5  "5:  "
 set $ws6  "6:  "
 
 set $black       #333232
-set $darkblack   #000000
 set $red         #C62828
-set $darkred     #B71C1C
-set $green       #2E7D32
-set $darkgreen   #1B5E20
-set $yellow      #F9A825
-set $darkyellow  #F57F17
-set $blue        #1E88E5
-set $darkblue    #1976D2
-set $magenta     #6A1B9A
-set $darkmagenta #4A148C
-set $cyan        #00ACC1
-set $darkcyan    #0097A7
-set $zyan        #23b196
-set $grey        #E4E5E8
+set $blue        #5294E2
+set $grey        #E7E8EB
 set $darkgrey    #788491
 set $white       #FFFFFF
-set $darkwhite   #FAFAFA
-set $trans       #00000000
 
 #                       BORDER      BACKGROUND  TEXT       INDICATOR
-client.focused          $grey       $grey       $darkgrey  $grey
-client.unfocused        $darkgrey   $darkgrey   $grey      $darkgrey
+client.focused          $blue       $blue       $white     $blue
+client.unfocused        $grey       $grey       $darkgrey  $grey
 client.focused_inactive $black      $black      $white     $black
 client.urgent           $red        $red        $white     $red
 
@@ -44,7 +30,7 @@ gaps outer 0
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # not like they are visible anyway
-font pango:Roboto Mono 8
+font pango:Roboto Condensed 8
 
 new_window pixel 1px
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
