@@ -155,7 +155,7 @@ exec_always --no-startup-id "sh -c 'sleep 10; exec xset s 0 0'"
 exec_always --no-startup-id "sh -c 'sleep 10; exec xset s off'"
 
 exec --no-startup-id conky -c ~/.config/panel/empty_conky
-exec --no-startup-id feh --bg-fill ~/Sync/wallpapers/Nature/reflections-2560x1440.png
+exec --no-startup-id feh --bg-fill ~/Sync/wallpapers/Minimal/vulkan.png
 exec --no-startup-id compton --config ~/.config/compton.conf
 exec --no-startup-id xautolock -time 10 -locker '~/.config/i3/lock.py'
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
