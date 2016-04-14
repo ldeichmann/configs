@@ -1,6 +1,6 @@
-!##############
+!#################################
 !# Xft settings
-!##############
+!#################################
 
 Xft.dpi:                    96
 Xft.antialias:              true
@@ -9,7 +9,7 @@ Xft.hinting:                true
 Xft.hintstyle:              hintfull
 
 !#################################
-!# Color settings (Solarized dark)
+!# URxvt/Color settings
 !#################################
 
 urxvt*foreground: white
@@ -32,23 +32,28 @@ URxvt.background: [80]#000000
 *color14: #fcaf3e
 *color15: #EEEEEC
 
-URxvt*scrollBar:          false
-URxvt*scrollColor:        #000000
-URxvt.depth: 32
-URxvt.font: xft:Roboto Mono Light:size=10
+URxvt*scrollBar:            false
+URxvt*scrollColor:          #000000
+URxvt.depth:                32
+URxvt.font:                 xft:Roboto Mono Light:size=10
 URxvt*scrollTtyOutput:      false
 URxvt*scrollWithBuffer:     true
 URxvt*scrollTtyKeypress:    true
 URxvt*saveLines:            10000
 
-rofi.opacity: 90
-rofi.width: 50
-rofi.lines: 5
-rofi.columns: 1
-rofi.font: Hack 11
-rofi.fg: #fff
-rofi.bg: #333
-rofi.hlfg: #fff
-rofi.hlbg: #a7a5a5
-rofi.bc: #a7a5a5
-rofi.bw: 3
+!#################################
+!# Rofi settings
+!#################################
+
+rofi.opacity:           90
+rofi.width:             15
+rofi.lines:             10
+rofi.columns:           1
+rofi.font:              Roboto Mono Light 11
+rofi.fg:                #fff
+rofi.bg:                #333
+rofi.hlfg:              #fff
+rofi.hlbg:              #5294E2
+rofi.bc:                #5294E2
+rofi.bw:                1
+rofi.hide-scrollbar:    true
