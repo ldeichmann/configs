@@ -21,7 +21,7 @@ def on_fullscreen_mode(i3, e):
         call(['xset', 's', 'off'])
         call(['xset', '-dpms'])
     else:
-        call(['xset', 's', 'on'])
+        call(['xset', 's', 'off'])
         call(['xset', '+dpms'])
 
 
