@@ -17,10 +17,11 @@ set $blue        #5294E2
 set $grey        #E7E8EB
 set $darkgrey    #788491
 set $white       #FFFFFF
+set $dark        #5f6980
 
 #                       BORDER      BACKGROUND  TEXT       INDICATOR
 client.focused          $blue       $blue       $white     $blue
-client.unfocused        $grey       $grey       $darkgrey  $grey
+client.unfocused        $dark       $dark       $white     $dark
 client.focused_inactive $black      $black      $white     $black
 client.urgent           $red        $red        $white     $red
 
@@ -32,10 +33,9 @@ gaps outer 0
 # not like they are visible anyway
 font pango:Roboto Condensed 8
 
-new_window pixel 1px
+new_window pixel 3px
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -64,24 +64,12 @@ bindsym $mod+y exec toggle_panel
 bindsym Control+mod1+l exec sh ~/.config/i3/lock.sh
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -130,12 +118,6 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
@@ -150,11 +132,9 @@ bindsym $mod+r mode "resize"
 
 exec_always --no-startup-id ~/.config/i3/disable-standby-fs.py
 exec_always --no-startup-id xset dpms 0 640 660
-exec_always --no-startup-id ~/.config/panel/watch
-exec_always --no-startup-id "sh -c 'sleep 10; exec xset s 0 0'"
-exec_always --no-startup-id "sh -c 'sleep 10; exec xset s off'"
+exec_always --no-startup-id xset s 0 0
+exec_always --no-startup-id xset s off
 
-exec --no-startup-id conky -c ~/.config/panel/empty_conky
 exec --no-startup-id feh --bg-fill ~/Sync/wallpapers/Minimal/vulkan.png
 exec --no-startup-id compton --config ~/.config/compton.conf
 exec --no-startup-id xautolock -time 10 -locker '~/.config/i3/lock.py'
@@ -162,7 +142,6 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 exec --no-startup-id redshift
 exec --no-startup-id setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de -variant ,qwerty
-exec --no-startup-id toggle_panel start
 
 bindsym $mod+1 workspace        $ws1
 bindsym $mod+2 workspace        $ws2
@@ -203,10 +182,10 @@ assign [class="google-chrome" window_role="browser"]        $ws1
 
 # ide
 assign [class="jetbrains-idea-ce"]                          $ws2
+assign [class="jetbrains-webstorm"]                         $ws2
 assign [class="jetbrains-idea"]                             $ws2
 assign [class="Eclipse"]                                    $ws2
 assign [title="^Eclipse$"]                                  $ws2
-assign [class="jetbrains-webstorm"]                         $ws2
 
 # messaging
 ## signal chrome app
@@ -219,7 +198,6 @@ assign [class="google-music-electron"]                      $ws4
 # games
 assign [class="Steam"]                                      $ws5
 assign [title="Steam"]                                      $ws5
-assign [class="csgo_linux"]                                 $ws5
 
 ## Enables Floating for all steam windows apart from the main ui
 for_window [class="Steam"] floating enable

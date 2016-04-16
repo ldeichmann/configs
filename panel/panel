@@ -17,10 +17,7 @@ mkfifo "$PANEL_FIFO"
 # PANEL_WIDTH=$((MONITOR_WIDTH - PANEL_GAP))
 
 MONITOR_WIDTH=$(i3-msg -t "get_workspaces" | jshon -e 0 -e rect -e width)
-#MONITOR_OUTPUT=$(i3-msg -t "get_workspaces" | jshon -e 0 -e output -u)
-WINDOW_GAP=30
-PANEL_GAP=$((2 * WINDOW_GAP))
-PANEL_WIDTH=$((MONITOR_WIDTH - PANEL_GAP))
+PANEL_WIDTH=$((MONITOR_WIDTH))
 
 modules/redshift | xargs -L 1 -d '\n' printf "R%s\n" > "$PANEL_FIFO" &
 modules/date | xargs -L 1 -d '\n' printf "S%s\n" > "$PANEL_FIFO" &
@@ -33,6 +30,6 @@ modules/workspace | xargs -L 1 -d '\n' printf "W%s\n" > "$PANEL_FIFO" &
 modules/mediaplayer mopidy | xargs -L 1 -d '\n' printf "M%s\n" > "$PANEL_FIFO" &
 modules/mediaplayer google-play-music-desktop-player | xargs -L 1 -d '\n' printf "G%s\n" > "$PANEL_FIFO" &
 
-./panel_bar < "$PANEL_FIFO" | lemonbar -d -a 32 -n "$PANEL_WM_NAME" -g "$PANEL_WIDTH"x"$PANEL_HEIGHT"+"$WINDOW_GAP"+"$WINDOW_GAP" -f "$PANEL_FONT" -f "$PANEL_ICONS" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
+./panel_bar < "$PANEL_FIFO" | lemonbar -a 32 -n "$PANEL_WM_NAME" -g "$PANEL_WIDTH"x"$PANEL_HEIGHT" -f "$PANEL_FONT" -f "$PANEL_ICONS" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
 
 wait

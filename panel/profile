@@ -1,6 +1,6 @@
 #!/bin/bash
 PANEL_FIFO=/tmp/panel-fifo
-PANEL_HEIGHT=24
+PANEL_HEIGHT=30
 PANEL_FONT="Roboto Condensed-10"
 PANEL_ICONS="FontAwesome-10"
 PANEL_WM_NAME=i3_panel
