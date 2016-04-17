@@ -49,7 +49,7 @@ rofi.opacity:           90
 rofi.width:             15
 rofi.lines:             10
 rofi.columns:           1
-rofi.font:              Roboto Mono Light 11
+rofi.font:              Roboto Mono Light 10
 rofi.fg:                #fff
 rofi.bg:                #333
 rofi.hlfg:              #fff
