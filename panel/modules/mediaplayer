@@ -75,11 +75,11 @@ class MPRISNotifier(object):
             playbackicon = ''
 
             if "Playing" == playerstatus:
-                playbackicon = '  '
+                playbackicon = ' '
             elif "Paused" == playerstatus:
-                playbackicon = '  '
+                playbackicon = ' '
             elif "Stopped" == playerstatus:
-                playbackicon = '  '
+                playbackicon = ' '
 
             artist = player.get_artist()
             title = player.get_title()
@@ -89,7 +89,7 @@ class MPRISNotifier(object):
                     + playercmdnext + playbackicon \
                     + artist + ' - ' + title + "%{A}%{A}%{A}"
             else:
-                return 'Not Playing'
+                return ' Not Playing'
 
         except:
             return 'Except'
