@@ -177,27 +177,27 @@ bindsym XF86AudioNext   exec playerctl next
 bindsym XF86AudioPrev   exec playerctl previous
 
 # web browsers
-assign [class="chromium" window_role="browser"]             $ws1
-assign [class="google-chrome" window_role="browser"]        $ws1
+assign [class="chromium" window_role="browser"]             1 $ws1
+assign [class="google-chrome" window_role="browser"]        1 $ws1
 
 # ide
-assign [class="jetbrains-idea-ce"]                          $ws2
-assign [class="jetbrains-webstorm"]                         $ws2
-assign [class="jetbrains-idea"]                             $ws2
-assign [class="Eclipse"]                                    $ws2
-assign [title="^Eclipse$"]                                  $ws2
+assign [class="jetbrains-idea-ce"]                          2 $ws2
+assign [class="jetbrains-webstorm"]                         2 $ws2
+assign [class="jetbrains-idea"]                             2 $ws2
+assign [class="Eclipse"]                                    2 $ws2
+assign [title="^Eclipse$"]                                  2 $ws2
 
 # messaging
 ## signal chrome app
-assign [instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]    $ws3
-assign [class="Thunderbird"]                                $ws3
+assign [instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]    3 $ws3
+assign [class="Thunderbird"]                                3 $ws3
 
 # music players
-assign [class="google-music-electron"]                      $ws4
+assign [class="google-music-electron"]                      4 $ws4
 
 # games
-assign [class="Steam"]                                      $ws5
-assign [title="Steam"]                                      $ws5
+assign [class="Steam"]                                      5 $ws5
+assign [title="Steam"]                                      5 $ws5
 
 ## Enables Floating for all steam windows apart from the main ui
 for_window [class="Steam"] floating enable
@@ -206,4 +206,4 @@ for_window [title="Steam"] floating disable
 for_window [class="Steam" title="Steam - Update News"]      kill
 
 #voice
-assign [class="TeamSpeak 3"]                                $ws6
+assign [class="TeamSpeak 3"]                                6 $ws6
