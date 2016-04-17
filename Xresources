@@ -35,7 +35,7 @@ URxvt.background: [80]#000000
 URxvt*scrollBar:            false
 URxvt*scrollColor:          #000000
 URxvt.depth:                32
-URxvt.font:                 xft:Roboto Mono Light:size=9
+URxvt.font:                 xft:Roboto Mono Light:size=10
 URxvt*scrollTtyOutput:      false
 URxvt*scrollWithBuffer:     true
 URxvt*scrollTtyKeypress:    true
