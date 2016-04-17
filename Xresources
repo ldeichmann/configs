@@ -55,5 +55,5 @@ rofi.bg:                #333
 rofi.hlfg:              #fff
 rofi.hlbg:              #5294E2
 rofi.bc:                #5294E2
-rofi.bw:                1
+rofi.bw:                3
 rofi.hide-scrollbar:    true
