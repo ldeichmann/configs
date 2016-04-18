@@ -3,7 +3,8 @@
 # Example panel for lemonbar
 
 . ./panel_colors
-
+trans="%{F#00000000}%{B#00000000}          %{B-}%{F-}"
+sp="    "
 while read -r line ; do
     case $line in
         S*)
@@ -74,5 +75,5 @@ while read -r line ; do
 #            workspace=$(echo ${line#?} | jshon -l)
             ;;
     esac
-    printf "%s\n" "%{l}          ${workspace}      ${gmusic}      ${mpris}%{c}${clock}%{r}${wifi}      ${brightness}      ${battery}      ${redshift}      ${volume}      ${vpn}          "
+    printf "%s\n" "%{l}${trans} ${sp} ${workspace} ${sp} ${gmusic} ${sp} ${mpris}%{c}${clock}%{r}${wifi} ${sp} ${brightness} ${sp} ${battery} ${sp} ${redshift} ${sp} ${volume} ${sp} ${vpn} ${sp} ${trans}"
 done
