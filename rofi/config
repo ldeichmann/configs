@@ -1,0 +1,15 @@
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+rofi.color-enabled: true
+rofi.color-window: #333333, #5294e2, #000000
+rofi.color-normal: #333333, #ffffff, #333333, #5294e2, #ffffff
+
+rofi.opacity:           90
+rofi.width:             15
+rofi.lines:             10
+rofi.columns:           1
+rofi.font:              Roboto Mono Light 10
+rofi.bw:                3
+rofi.hide-scrollbar:    true
+

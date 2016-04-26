@@ -40,20 +40,3 @@ URxvt*scrollTtyOutput:      false
 URxvt*scrollWithBuffer:     true
 URxvt*scrollTtyKeypress:    true
 URxvt*saveLines:            10000
-
-!#################################
-!# Rofi settings
-!#################################
-
-rofi.opacity:           90
-rofi.width:             15
-rofi.lines:             10
-rofi.columns:           1
-rofi.font:              Roboto Mono Light 10
-rofi.fg:                #fff
-rofi.bg:                #333
-rofi.hlfg:              #fff
-rofi.hlbg:              #5294E2
-rofi.bc:                #5294E2
-rofi.bw:                3
-rofi.hide-scrollbar:    true
