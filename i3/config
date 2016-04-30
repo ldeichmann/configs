@@ -4,12 +4,12 @@
 
 set $mod Mod4
 
-set $ws1  web
-set $ws2  dev
-set $ws3  messaging
-set $ws4  media
-set $ws5  games
-set $ws6  voice
+set $ws1  1:web
+set $ws2  2:dev
+set $ws3  3:messaging
+set $ws4  4:media
+set $ws5  5:games
+set $ws6  6:voice
 
 set $black       #333232
 set $red         #C62828
@@ -141,6 +141,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 exec --no-startup-id redshift
 exec --no-startup-id setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de -variant ,qwerty
+exec --no-startup-id toggle_panel start
 
 bindsym $mod+1 workspace number 1 $ws1
 bindsym $mod+2 workspace number 2 $ws2
