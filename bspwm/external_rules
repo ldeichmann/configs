@@ -1,0 +1,25 @@
+#! /bin/bash
+
+wid=$1
+class=$2
+instance=$3
+title=$(xtitle "$wid")
+
+# echo -ne "id $wid\nclass $class\ninst $instance\ntitle $title\n" >> /tmp/extout.txt
+
+if [ "$class" = "chromium" ] ; then
+    if [ "$instance" = "crx_bikioccmkafdpakkkcpdbppfkghcmihk" ] ; then
+        echo "desktop=^3"
+    else
+        echo "desktop=^1"
+    fi
+elif [ "$class" = "Steam" ] ; then
+    case "$title" in
+        "Friends")
+            echo "state=floating"
+            ;;
+        "Steam - Update News")
+            echo "window -c"
+            ;;
+    esac
+fi
