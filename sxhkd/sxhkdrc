@@ -20,7 +20,7 @@ super + Escape
 
 # quit bspwm normally
 super + alt + Escape
-    ~/.config/i3/shutdown_menu -c
+    ~/.config/bspwm/scripts/shutdown_menu -c
     # bspc quit
 
 # close and kill
