@@ -149,9 +149,9 @@ ctrl + alt + l
 
 # Pulse Audio controls
 XF86AudioRaiseVolume
-    pamixer --increase 5: #increase sound volume
+    pamixer --increase 5 #increase sound volume
 XF86AudioLowerVolume
-    exec pamixer --decrease 5: #decrease sound volume
+    exec pamixer --decrease 5 #decrease sound volume
 XF86AudioMute
     pamixer --toggle-mute # mute sound
 
