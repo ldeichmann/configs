@@ -4,9 +4,9 @@
 feh --bg-fill ~/Sync/wallpapers/Universe/Beautiful_Dream-3000x1688.png
 compton --config ~/.config/compton.conf &
 redshift &
-xautolock -time 10 -locker '/home/lukas/.config/bspwm/scripts/lock_test_fullscreen.sh'
+xautolock -time 10 -locker '/home/lukas/.config/bspwm/scripts/lock_test_fullscreen.sh' &
 
-~/.config/bspwm/scripts/disable-fullscreen-standby.py
+~/.config/bspwm/scripts/disable-fullscreen-standby.sh &
 xset dpms 0 640 660
 xset s 0 0
 xset s off
@@ -53,4 +53,4 @@ bspc config external_rules_command "$(realpath ~/.config/bspwm/external_rules)"
 
 toggle_panel start
 
-xsetroot -cursor_name left_ptr
+#xsetroot -cursor_name left_ptr
