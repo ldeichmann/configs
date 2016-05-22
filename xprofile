@@ -8,3 +8,5 @@ NPM_PACKAGES="$HOME/.npm-packages"
 
 # Tell our environment about user-installed node tools
 PATH="$NPM_PACKAGES/bin:$PATH"
+
+export _JAVA_AWT_WM_NONREPARENTING=1

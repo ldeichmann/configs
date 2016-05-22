@@ -3,7 +3,9 @@
 # Example panel for lemonbar
 
 . ./panel_colors
-trans="%{F#00000000}%{B#00000000}          %{B-}%{F-}"
+
+num_mon=$(bspc query -M | wc -l)
+
 sp="    "
 while read -r line ; do
     case $line in
@@ -42,37 +44,78 @@ while read -r line ; do
             gmusic="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
             ;;
         W*)
-            # workspace output
-            workspace="%{A5:/usr/bin/i3-msg workspace next_on_output > /dev/null 2>&1:}%{A4:i3-msg workspace prev_on_output > /dev/null 2>&1:}"
-            wsline=$(echo ${line#?} | jshon)
-            num_ws=$(echo "$wsline" | jshon -l)
-
-            for i in $(seq 0 $((num_ws-1)) ); do
-                ws=$(echo "$wsline" | jshon -e "$i")
-                num=$(echo "$ws" | jshon -e num -u)
+            # bspwm's state
+            wm="%{A5:bspc node -f @next.occupied\:/:}%{A4:bspc node -f @prev.occupied\:/:}"
+            IFS=':'
+            set -- ${line#?}
+            while [ $# -gt 0 ] ; do
+                item=$1
+                name=${item#?}
                 ICON=
-                case $ws in
-                    *'"focused": true'* )
-                        FG=$COLOR_FOCUSED_OCCUPIED_FG
-                        BG=$COLOR_FOCUSED_OCCUPIED_BG
-                        ICON=
+                case $item in
+                    [mM]*)
+                        [ $num_mon -lt 2 ] && shift && continue
+                        case $item in
+                            m*)
+                                # monitor
+                                FG=$COLOR_MONITOR_FG
+                                BG=$COLOR_MONITOR_BG
+                                ;;
+                            M*)
+                                # focused monitor
+                                FG=$COLOR_FOCUSED_MONITOR_FG
+                                BG=$COLOR_FOCUSED_MONITOR_BG
+                                ;;
+                        esac
+                        wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc monitor -f ${name}:} ${name} %{A}%{B-}%{F-}"
                         ;;
-                    *'"focused": false'*'"urgent": true'* )
-                        FG=$COLOR_URGENT_FG
-                        BG=$COLOR_URGENT_BG
+                        # [fFoOuU]*)
+                    [FoOuU]*)
+                        case $item in
+                            f*)
+                                # free desktop
+                                FG=$COLOR_FREE_FG
+                                BG=$COLOR_FREE_BG
+                                ;;
+                            F*)
+                                # focused free desktop
+                                FG=$COLOR_FOCUSED_FREE_FG
+                                BG=$COLOR_FOCUSED_FREE_BG
+                                ICON=
+                                ;;
+                            o*)
+                                # occupied desktop
+                                FG=$COLOR_OCCUPIED_FG
+                                BG=$COLOR_OCCUPIED_BG
+                                ;;
+                            O*)
+                                # focused occupied desktop
+                                FG=$COLOR_FOCUSED_OCCUPIED_FG
+                                BG=$COLOR_FOCUSED_OCCUPIED_BG
+                                ICON=
+                                ;;
+                            u*)
+                                # urgent desktop
+                                FG=$COLOR_URGENT_FG
+                                BG=$COLOR_URGENT_BG
+                                ;;
+                            U*)
+                                # focused urgent desktop
+                                FG=$COLOR_FOCUSED_URGENT_FG
+                                BG=$COLOR_FOCUSED_URGENT_BG
+                                ;;
+                        esac
+                        wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc desktop -f ${name}:} $ICON %{A}%{B-}%{F-}"
                         ;;
-                    *'"focused": false'*'"urgent": false'* )
-                        FG=$COLOR_OCCUPIED_FG
-                        BG=$COLOR_OCCUPIED_BG
-                        ;;
+                    # [LTG]*)
+                    #     # layout, state and flags
+                    #     wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG} ${name} %{B-}%{F-}"
+                    #     ;;
                 esac
-                workspace="${workspace}%{F${FG}}%{B${BG}}%{A:i3-msg workspace number ${num} > /dev/null 2>&1:} $ICON %{A}%{B-}%{F-}"
+                shift
             done
-            workspace="${workspace}""%{A}%{A}"
-#            workspace="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
-#            wsline=$(jshon ${line#?})
-#            workspace=$(echo ${line#?} | jshon -l)
+            wm="${wm}""%{A}%{A}"
             ;;
     esac
-    printf "%s\n" "%{l}${trans} ${sp} ${workspace} ${sp} ${gmusic} ${sp} ${mpris}%{c}${clock}%{r}${wifi} ${sp} ${brightness} ${sp} ${battery} ${sp} ${redshift} ${sp} ${volume} ${sp} ${vpn} ${sp} ${trans}"
+    printf "%s\n" "%{l}${sp} ${wm} ${sp} ${gmusic} ${sp} ${mpris}%{c}${clock}%{r}${wifi} ${sp} ${brightness} ${sp} ${battery} ${sp} ${redshift} ${sp} ${volume} ${sp} ${vpn} ${sp}"
 done
