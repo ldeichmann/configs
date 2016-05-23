@@ -53,4 +53,4 @@ bspc config external_rules_command "$(realpath ~/.config/bspwm/external_rules)"
 
 toggle_panel start
 
-#xsetroot -cursor_name left_ptr
+xsetroot -cursor_name left_ptr
