@@ -9,17 +9,19 @@ title=$(xtitle "$wid")
 
 if [ "$class" = "chromium" ] ; then
     if [ "$instance" = "crx_bikioccmkafdpakkkcpdbppfkghcmihk" ] ; then
-        echo "desktop=^3"
+        echo "desktop=^3 follow=off"
     else
-        echo "desktop=^1"
+        echo "desktop=^1 follow=off"
     fi
 elif [ "$class" = "Steam" ] ; then
     case "$title" in
         "Friends")
-            echo "state=floating"
+            echo "state=floating follow=off"
             ;;
-        "Steam - Update News")
+        "Steam - Update News"*)
             echo "window -c"
             ;;
+        *)
+            echo "desktop=^5 follow=off"
     esac
 fi

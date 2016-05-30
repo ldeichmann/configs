@@ -32,22 +32,22 @@ bspc monitor -d 1 2 3 4 5 6
 
 # bspc rule -a Gimp desktop=^8 state=floating follow=on
 # web browsers
-bspc rule -a chromium                   desktop=^1 follow=off
-bspc rule -a google-chrome              desktop=^1 follow=off
+bspc rule -a chromium                               desktop=^1 follow=off
+bspc rule -a google-chrome                          desktop=^1 follow=off
 
 # ide
-bspc rule -a jetbrains-idea-ce          desktop=^2 follow=off
-bspc rule -a jetbrains-webstorm         desktop=^2 follow=off
-bspc rule -a jetbrains-idea             desktop=^2 follow=off
+bspc rule -a jetbrains-idea-ce                      desktop=^2 follow=off
+bspc rule -a jetbrains-webstorm                     desktop=^2 follow=off
+bspc rule -a jetbrains-idea                         desktop=^2 follow=off
 
 # messaging
-bspc rule -a Thunderbird                desktop=^3 follow=off
+bspc rule -a Thunderbird                            desktop=^3 follow=off
 
 # music players
-bspc rule -a "Google Play Music"        desktop=^4 follow=off
+bspc rule -a "Google Play Music Desktop Player"     desktop=^4 follow=off
 
 #voice
-bspc rule -a "TeamSpeak 3"              desktop=^6 follow=off
+bspc rule -a "TeamSpeak 3"                          desktop=^6 follow=off
 
 bspc config external_rules_command "$(realpath ~/.config/bspwm/external_rules)"
 

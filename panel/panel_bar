@@ -103,6 +103,7 @@ while read -r line ; do
                                 # focused urgent desktop
                                 FG=$COLOR_FOCUSED_URGENT_FG
                                 BG=$COLOR_FOCUSED_URGENT_BG
+                                ICON=
                                 ;;
                         esac
                         wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc desktop -f ${name}:} $ICON %{A}%{B-}%{F-}"
