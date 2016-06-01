@@ -1,12 +1,11 @@
 #! /bin/sh
 
-#sxhkd &
-feh --bg-fill ~/Sync/wallpapers/Universe/Beautiful_Dream-3000x1688.png
+feh --bg-fill ~/Sync/wallpapers/Minimal/V4LLEY-2880x1800.png
 compton --config ~/.config/compton.conf &
 redshift &
 xautolock -time 10 -locker '/home/lukas/.config/bspwm/scripts/lock_test_fullscreen.sh' &
 
-~/.config/bspwm/scripts/disable-fullscreen-standby.sh &
+~/.config/bspwm/scripts/disable_fullscreen_standby.sh &
 xset dpms 0 640 660
 xset s 0 0
 xset s off
@@ -16,12 +15,10 @@ setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de -variant ,qwe
 bspc config border_width            4
 bspc config window_gap              30
 
-# bspc config split_ratio             0.52
 bspc config borderless_monocle      true
 bspc config gapless_monocle         true
-bspc config focus_by_distance       true
-bspc config history_aware_focus     true
 bspc config focus_follows_pointer   true
+bspc config pointer_follows_focus   true
 
 bspc config active_border_color   "#5F6980"
 bspc config focused_border_color  "#5294E2"
@@ -30,7 +27,6 @@ bspc config normal_border_color   "#5F6980"
 
 bspc monitor -d 1 2 3 4 5 6
 
-# bspc rule -a Gimp desktop=^8 state=floating follow=on
 # web browsers
 bspc rule -a chromium                               desktop=^1 follow=off
 bspc rule -a google-chrome                          desktop=^1 follow=off
@@ -52,5 +48,4 @@ bspc rule -a "TeamSpeak 3"                          desktop=^6 follow=off
 bspc config external_rules_command "$(realpath ~/.config/bspwm/external_rules)"
 
 toggle_panel start
-
 xsetroot -cursor_name left_ptr
