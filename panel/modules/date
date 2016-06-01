@@ -2,9 +2,9 @@
 
 while true; do
 
-    DATE=$(date "+%a %d %b, %H:%M")
+    DATE=$(date "+%a %d %b, %T")
 
     printf "%s\n" "$DATE"
 
-    sleep 10;
+    sleep 0.5;
 done
