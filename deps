@@ -1,13 +1,12 @@
 #Desktop deps
 
 acpi
+bspwm-git
 compton
 conky
 dunst
 feh
 gohufont
-i3-gaps-next-git
-i3ipc-python-git
 i3lock
 imagemagick
 jshon
@@ -20,13 +19,16 @@ pulseaudio
 redshift
 rofi
 scrot
+sxhkd-git
 ttf-font-awesome
 ttf-google-fonts-git
 wireless_tools
 xautolock
+xcb-util-cursor
 xdo-git
 xorg-setxkbmap
 xorg-xbacklight
+xtitle
 
 #Misc
 
