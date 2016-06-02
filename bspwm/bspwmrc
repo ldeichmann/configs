@@ -1,6 +1,6 @@
 #! /bin/sh
 
-feh --bg-fill ~/Sync/wallpapers/Minimal/V4LLEY-2880x1800.png
+feh --bg-fill ~/Sync/wallpapers/Nature/Herb_by_winnichip-4608x3072.jpg
 compton --config ~/.config/compton.conf &
 redshift &
 xautolock -time 10 -locker '/home/lukas/.config/bspwm/scripts/lock_test_fullscreen.sh' &
@@ -13,7 +13,7 @@ xset s off
 setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de -variant ,qwerty
 
 bspc config border_width            4
-bspc config window_gap              30
+bspc config window_gap              60
 
 bspc config borderless_monocle      true
 bspc config gapless_monocle         true
