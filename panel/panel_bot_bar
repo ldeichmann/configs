@@ -6,52 +6,17 @@
 
 num_mon=$(bspc query -M | wc -l)
 
-sp="    "
 while read -r line ; do
     case $line in
-        S*)
-            # clock output
-            clock="%{F$COLOR_CLOCK_FG}%{B$COLOR_CLOCK_BG}  ${line#?}  %{B-}%{F-}"
-            ;;
-        B*)
-            # battery output
-            battery="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
-            ;;
-        X*)
-            # brightness output
-            brightness="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
-            ;;
-        Y*)
-            # wifi output
-            wifi="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
-            ;;
-        R*)
-            # redshift output
-            redshift="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
-            ;;
-        V*)
-            # redshift output
-            volume="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
-            ;;
-        N*)
-            # vpn output
-            vpn="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
-            ;;
-        M*)
-            mpris="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
-            ;;
-        G*)
-            gmusic="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
-            ;;
         W*)
             # bspwm's state
-            wm="%{A5:bspc node -f @next.occupied\:/:}%{A4:bspc node -f @prev.occupied\:/:}"
+            wm="%{A5:bspc desktop -f next:}%{A4:bspc desktop -f prev:}"
             IFS=':'
             set -- ${line#?}
             while [ $# -gt 0 ] ; do
                 item=$1
                 name=${item#?}
-                ICON=
+                ICON=
                 case $item in
                     [mM]*)
                         [ $num_mon -lt 2 ] && shift && continue
@@ -70,7 +35,7 @@ while read -r line ; do
                         wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc monitor -f ${name}:} ${name} %{A}%{B-}%{F-}"
                         ;;
                         # [fFoOuU]*)
-                    [FoOuU]*)
+                    [fFoOuU]*)
                         case $item in
                             f*)
                                 # free desktop
@@ -81,7 +46,7 @@ while read -r line ; do
                                 # focused free desktop
                                 FG=$COLOR_FOCUSED_FREE_FG
                                 BG=$COLOR_FOCUSED_FREE_BG
-                                ICON=
+                                ICON=
                                 ;;
                             o*)
                                 # occupied desktop
@@ -92,18 +57,19 @@ while read -r line ; do
                                 # focused occupied desktop
                                 FG=$COLOR_FOCUSED_OCCUPIED_FG
                                 BG=$COLOR_FOCUSED_OCCUPIED_BG
-                                ICON=
+                                ICON=
                                 ;;
                             u*)
                                 # urgent desktop
                                 FG=$COLOR_URGENT_FG
                                 BG=$COLOR_URGENT_BG
+                                ICON=
                                 ;;
                             U*)
                                 # focused urgent desktop
                                 FG=$COLOR_FOCUSED_URGENT_FG
                                 BG=$COLOR_FOCUSED_URGENT_BG
-                                ICON=
+                                ICON=
                                 ;;
                         esac
                         wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc desktop -f ${name}:} $ICON %{A}%{B-}%{F-} "
@@ -118,5 +84,5 @@ while read -r line ; do
             wm="${wm}""%{A}%{A}"
             ;;
     esac
-    printf "%s\n" "%{l}${sp} ${wm}%{c}${gmusic} ${sp} ${mpris}%{r}${wifi} ${sp} ${brightness} ${sp} ${battery} ${sp} ${redshift} ${sp} ${volume} ${sp} ${vpn} ${sp} ${clock} ${sp}"
+    printf "%s\n" "%{c}${wm}"
 done

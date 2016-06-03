@@ -7,9 +7,9 @@ while true; do
     ISMUTE=$(pamixer --get-mute)
     VOL=$(pamixer --get-volume)
     if [ $ISMUTE = true ]; then
-        FULL="$MUTE""$OPENPAVU""%{F#ffff6961}""   $VOL%""%{F#ffffffff}""%{A}""%{A}"
+        FULL="$MUTE""$OPENPAVU""%{F#ffff6961}"" $VOL%""%{F#ffffffff}""%{A}""%{A}"
     else
-        FULL="$MUTE""$OPENPAVU""$VOLDOWN""$VOLUP"" $VOL%""%{A}%{A}%{A}%{A}"
+        FULL="$MUTE""$OPENPAVU""$VOLDOWN""$VOLUP"" $VOL%""%{A}%{A}%{A}%{A}"
     fi
 
     echo "$FULL"

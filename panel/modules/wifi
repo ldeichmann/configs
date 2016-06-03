@@ -10,7 +10,7 @@ while true; do
     QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
     CLICK="%{A1:urxvt -e nmtui &:}"
 
-    printf '%s %s (%s%%)%%{A}\n' "$CLICK" $SSID $QUALITY
+    printf '%s %s (%s%%)%%{A}\n' "$CLICK" $SSID $QUALITY
 
     sleep 10
 done

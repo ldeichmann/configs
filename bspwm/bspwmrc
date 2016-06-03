@@ -1,6 +1,6 @@
 #! /bin/sh
 
-feh --bg-fill ~/Sync/wallpapers/Nature/Herb_by_winnichip-4608x3072.jpg
+feh --bg-fill ~/Sync/wallpapers/Nature/snV6nAD.jpg
 compton --config ~/.config/compton.conf &
 redshift &
 xautolock -time 10 -locker '/home/lukas/.config/bspwm/scripts/lock_test_fullscreen.sh' &
@@ -20,7 +20,7 @@ bspc config gapless_monocle         true
 bspc config focus_follows_pointer   true
 
 bspc config active_border_color   "#5F6980"
-bspc config focused_border_color  "#5294E2"
+bspc config focused_border_color  "#CCCCCC"
 bspc config presel_feedback_color "#748FA4"
 bspc config normal_border_color   "#5F6980"
 

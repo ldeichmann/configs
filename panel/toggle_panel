@@ -13,9 +13,10 @@ start ()
 stop ()
 {
     pkill -f "lemonbar"
-    pkill -f "/bin/bash ./panel_bar"
+    pkill -f "/bin/bash ./panel_top_bar"
+    pkill -f "/bin/bash ./panel_bot_bar"
     pkill -f "/bin/bash ./panel"
-    pkill -f "i3subscribe workspace"
+    pkill -f "modules/workspace"
     pkill -f "modules/mediaplayer"
     pkill -f "modules/vpn"
     pkill -f "modules/redshift"
@@ -33,7 +34,7 @@ toggle ()
         printf "%s\n" "The panel is already running."
         stop
     else
-        echo "Stopped"
+        echo "Starting panel"
         start
     fi
 }
@@ -43,6 +44,9 @@ if [ -n "$1" ] ; then
         start
     elif [ "$1" = "stop" ] ; then
         stop
+    elif [ "$1" = "restart" ] ; then
+        stop;
+        start;
     fi
 else
     toggle
