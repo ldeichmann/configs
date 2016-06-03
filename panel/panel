@@ -19,7 +19,7 @@ MONITOR_WIDTH=$(bspc query -T -m | jshon -e rectangle -e width -u)
 WINDOW_GAP=$(bspc query -T -d | jshon -e windowGap)
 PANEL_GAP=$((2 * WINDOW_GAP))
 PANEL_WIDTH=$((MONITOR_WIDTH - PANEL_GAP))
-TOP_GAP=15
+TOP_GAP=10
 BOT_GAP=10
 
 # MONITOR_WIDTH=$(i3-msg -t "get_workspaces" | jshon -e 0 -e rect -e width)
