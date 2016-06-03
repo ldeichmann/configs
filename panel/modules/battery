@@ -18,7 +18,7 @@ while true; do
     else
 
       if [ $BAT -le 15 ] ; then
-        FULL="%{F#ffff6961} $BAT%{%F-}"
+        FULL="%{F#ffff6961} $BAT%%{F-}"
       else
         FULL=" $BAT%"
       fi
