@@ -20,7 +20,6 @@ redshift
 rofi
 scrot
 sxhkd-git
-ttf-font-awesome
 ttf-google-fonts-git
 wireless_tools
 xautolock
@@ -29,6 +28,8 @@ xdo-git
 xorg-setxkbmap
 xorg-xbacklight
 xtitle
+
+https://github.com/google/material-design-icons
 
 #Misc
 
