@@ -7,8 +7,23 @@ fi
 
 while true; do
 
-    BAT=$(acpi -b | cut -d, -f2 | sed 's/ //g')
-    FULL=" $BAT"
+    CHRGING=$(acpi -b | cut -d: -f2 | cut -d, -f1 | sed 's/ //g')
+    BAT=$(acpi -b | cut -d, -f2 | sed 's/ //g' | sed 's/%//g')
+    FULL=""
+
+    if [ $CHRGING = "Charging" ] ; then
+
+      FULL=" $BAT%"
+
+    else
+
+      if [ $BAT -le 15 ] ; then
+        FULL="%{F#ffff6961} $BAT%{%F-}"
+      else
+        FULL=" $BAT%"
+      fi
+
+    fi
 
     echo "$FULL"
 
