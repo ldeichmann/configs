@@ -17,10 +17,8 @@ elif [ "$class" = "Steam" ] ; then
     case "$title" in
         "Friends")
             echo "state=floating follow=off"
-            ;;
         "Steam - Update News"*)
-            echo "window -c"
-            ;;
+            echo "-c"
         *)
             echo "desktop=^5 follow=off"
     esac
