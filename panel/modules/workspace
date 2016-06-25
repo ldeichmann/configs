@@ -1,9 +1,0 @@
-#!/bin/sh
-# i3-msg -t "get_workspaces"
-# while true; do
-#     i3subscribe workspace | while read -r event; do
-#         i3-msg -t "get_workspaces"
-#     done
-# done
-
-bspc subscribe report
