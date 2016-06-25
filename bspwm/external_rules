@@ -15,11 +15,11 @@ if [ "$class" = "chromium" ] ; then
     fi
 elif [ "$class" = "Steam" ] ; then
     case "$title" in
-        "Friends")
-            echo "state=floating follow=off"
         "Steam - Update News"*)
             echo "-c"
+            ;;
         *)
-            echo "desktop=^5 follow=off"
+            echo "desktop=^5 follow=off state=tiled"
+            ;;
     esac
 fi
