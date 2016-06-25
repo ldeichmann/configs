@@ -1,0 +1,37 @@
+#!/bin/bash
+
+start ()
+{
+    if pgrep -x "compton" > /dev/null ; then
+        printf "%s\n" "Compton running"
+    else
+        printf "%s\n" "Starting compton"
+        compton --config ~/.config/compton.conf &
+    fi
+}
+
+stop () {
+    printf "%s\n" "Stopping compton"
+    pkill -x compton
+}
+
+toggle () {
+    if pgrep "compton" > /dev/null ; then
+        stop
+    else
+        start
+    fi
+}
+
+if [ -n "$1" ] ; then
+    if [ "$1" = "start" ] ; then
+        start
+    elif [ "$1" = "stop" ] ; then
+        stop
+    elif [ "$1" = "restart" ] ; then
+        stop;
+        start;
+    fi
+else
+    toggle
+fi

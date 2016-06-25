@@ -3,8 +3,9 @@
 . ./icons
 
 INTERFACE=$1
-[[ ! -d /sys/class/net/${INTERFACE}/wireless ]] ||
-    [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]] && exit
+[[ ! -d /sys/class/net/${INTERFACE}/wireless ]] || [[ ! -f /sys/class/net/${INTERFACE}/dormant ]] && printf '%s%s Disabled\n' "$SPAN" "$SPANEND" && exit
+
+[[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]] && printf '%s%s Disconnected\n' "$SPAN" "$SPANEND" && exit
 
 SSID=$(iwgetid -r)
 QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')

@@ -1,0 +1,75 @@
+#!/bin/bash
+
+OUTPUTS=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
+
+ACTIVE_OUTPUTS=$(xrandr | grep -E " connected (primary )?[0-9]+" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
+
+PRIMARY_OUTPUT=$(xrandr | grep -E "primary" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
+
+[[ "$PRIMARY_OUTPUT" == "$OUTPUTS" ]] && exit
+
+TOGGLE=0
+for OUTPUT in $OUTPUTS ; do
+    if [[ "$ACTIVE_OUTPUTS" != *"$OUTPUT"* ]] ; then
+        TOGGLE=1
+    fi
+done
+
+echo $TOGGLE
+
+function getPreferedResolution {
+    echo "$1" | grep + | cut -d ' ' -f1
+}
+
+function getResolutions {
+    xrandr | sed -n '/'$1' connected/,/connected/ p' | head -n -1 | sed 1d | tr -s ' ' | cut -d ' ' -f2,3,4
+}
+
+function getSmallerResolution {
+    res1="$1"
+    res1="$2"
+    res1_x=$(echo "$1" | cut -d 'x' -f1)
+    res1_y=$(echo "$1" | cut -d 'x' -f2)
+    res2_x=$(echo "$2" | cut -d 'x' -f1)
+    res2_y=$(echo "$2" | cut -d 'x' -f2)
+    if [[ res1_x -lt res2_x ]] || [[ res1_y -lt res2_y ]]; then
+        echo "$res1"
+    else
+        echo "$res2"
+    fi
+}
+
+if [ $TOGGLE -eq 1 ] ; then
+    echo "Enable cloning"
+
+    res="1920x1080"
+
+    for OUTPUT in $OUTPUTS ; do
+        res3=$(getResolutions "$OUTPUT")
+        res2=$(getPreferedResolution "$res3")
+        res=$(getSmallerResolution "$res" "$res2")
+    done
+
+    setup="xrandr --output $PRIMARY_OUTPUT --mode $res"
+
+    for OUTPUT in $OUTPUTS ; do
+        if [[ "$OUTPUT" != "$PRIMARY_OUTPUT" ]] ; then
+            setup=$(echo $setup " --output $OUTPUT --mode $res")
+        fi
+    done
+else
+    echo "Disable cloning"
+    setup="xrandr --output $PRIMARY_OUTPUT --auto"
+    for OUTPUT in $OUTPUTS ; do
+        if [[ "$OUTPUT" != "$PRIMARY_OUTPUT" ]] ; then
+            setup=$(echo $setup " --output $OUTPUT --off")
+        fi
+    done
+fi
+
+eval $setup
+toggle_compton restart
+toggle_panel restart
+# echo -e "outputs: \n$OUTPUTS"
+# echo -e "active:\n$ACTIVE_OUTPUTS"
+# echo -e "primary:\n$PRIMARY_OUTPUT"
