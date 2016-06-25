@@ -181,3 +181,6 @@ XF86AudioNext
     playerctl next
 XF86AudioPrev
     playerctl previous
+
+super + F1
+    toggle_display
