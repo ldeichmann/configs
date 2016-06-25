@@ -115,6 +115,8 @@ class MPRISNotifier(object):
 
                 if artist and title:
                     text = artist + " - " + title
+                    # replace ampersands as pango goes crazy otherwise
+                    text = text.replace("&", "&amp;")
 
                 return "{}{}{} {}".format(matSpan, playbackicon, matEnd, text)
 
