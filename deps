@@ -10,7 +10,6 @@ gohufont
 i3lock
 imagemagick
 jshon
-lemonbar-xft-git
 networkmanager
 pamixer
 pavucontrol
@@ -28,8 +27,10 @@ xdo-git
 xorg-setxkbmap
 xorg-xbacklight
 xtitle
+yabar-git
 
 https://github.com/google/material-design-icons
+i3-gnome for bspwm
 
 #Misc
 
@@ -61,7 +62,6 @@ gstreamer0.10
 gstreamer0.10-plugins
 gvfs-mtp
 gvfs-smb
-i3-gnome
 infinality-bundle
 infinality-bundle-multilib
 intellij-idea-community-edition
