@@ -6,8 +6,12 @@ start ()
     then
         printf "%s\n" "The panel is already running."
     else
-        bash -c "cd ~/.config/yabar/ && (nohup yabar > /dev/null 2>&1) &"
-
+        hostname=$(uname -n)
+        if [[ $hostname == "bilbo" ]] ; then
+            bash -c "cd ~/.config/yabar/ && (nohup yabar -c ~/.config/yabar/yabar_mobil.conf > /dev/null 2>&1) &"
+        else
+            bash -c "cd ~/.config/yabar/ && (nohup yabar > /dev/null 2>&1) &"
+        fi
         # move lower when fullscreen
         wid=$(xdo id -a yabar)
         tries_left=20
