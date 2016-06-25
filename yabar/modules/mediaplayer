@@ -1,0 +1,141 @@
+#!/usr/bin/env python3
+"""
+Display the current "artist - title" playing list of media players
+
+based on scripy by
+author Francois LASSERRE <choiz@me.com>
+@license GNU GPL http://www.gnu.org/licenses/gpl.html
+"""
+import gi
+import dbus
+from gi.repository import GObject
+from dbus.mainloop.glib import DBusGMainLoop
+from dbus.exceptions import DBusException
+import sys
+gi.require_version('Playerctl', '1.0')
+from gi.repository import Playerctl  # NOQA
+
+matSpan = "<span font_desc=\"Material Icons 12\" rise=\'-2000\'>"
+matEnd = "</span>"
+
+
+class Player():
+    def __init__(self, player, number):
+        self.name = player
+        self.number = number
+        self.running = False
+
+    def __str__(self):
+        s = 'name: {} number: {} running: {}'.format(self.name, self.number,
+                                                     self.running)
+        return s
+
+    def __repr__(self):
+        return self.__str__()
+
+
+class MPRISNotifier(object):
+    def __init__(self, players):
+        """initialise."""
+        bus_loop = DBusGMainLoop(set_as_default=True)
+        self.bus = dbus.SessionBus(mainloop=bus_loop)
+        loop = GObject.MainLoop()
+        self.players = players
+        self.player = {}
+        self.session_bus = self.bus.get_object("org.freedesktop.DBus",
+                                               "/org/freedesktop/DBus")
+        for player in self.players:
+            self.session_bus.connect_to_signal("NameOwnerChanged",
+                                               self.handle_name_owner_changed,
+                                               arg0="org.mpris.MediaPlayer2." +
+                                               player.name)
+
+            try:
+                self.props_changed_listener(player.name)
+            except DBusException as e:  # NOQA
+                pass
+
+        loop.run()
+
+    def props_changed_listener(self, name):
+        """Hook up callback to PropertiesChanged event."""
+        self.player[name] = self.bus.get_object("org.mpris.MediaPlayer2." +
+                                                name,
+                                                "/org/mpris/MediaPlayer2")
+
+        self.player[name].connect_to_signal("PropertiesChanged",
+                                            self.handle_properties_changed)
+        playerString = self.buildString()
+        if playerString:
+            print(playerString, end="\n", flush=True)
+
+    def handle_name_owner_changed(self, name, older_owner, new_owner):
+        """Introspect the NameOwnerChanged signal to work out if MPRIS Player
+        has started."""
+        for player in self.players:
+            if name == ("org.mpris.MediaPlayer2." + player.name):
+                if new_owner:
+                    # Player has been launched - hook it up.
+                    print(player.name, "has launched")
+                    player.running = True
+                    self.props_changed_listener(player.name)
+                else:
+                    player.running = False
+                    print("", end="\n", flush=True)
+
+    def handle_properties_changed(self, interface, changed_props,
+                                  invalidated_props):
+        """Handle track changes."""
+        playerString = self.buildString()
+        if playerString:
+            print(playerString, end="\n", flush=True)
+
+    def buildString(self):
+        for player in self.players:
+            # if not player.running:
+            #     continue
+
+            try:
+                player = Playerctl.Player(player_name=player.name)
+                playerstatus = player.props.status
+
+                if playerstatus is None or playerstatus is 'None':
+                    continue
+                    # return ''
+
+                playbackicon = ''
+
+                if "Playing" == playerstatus:
+                    playbackicon = ''
+                elif "Paused" == playerstatus:
+                    playbackicon = ''
+                elif "Stopped" == playerstatus:
+                    playbackicon = ''
+                else:
+                    playbackicon = ''
+
+                artist = player.get_artist()
+                title = player.get_title()
+                text = ""
+
+                if artist and title:
+                    text = artist + " - " + title
+                else:
+                    text = "Not Playing"
+
+                return "{}{}{} {}".format(matSpan, playbackicon, matEnd, text)
+
+            except:
+                return 'Except'
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        i = -1
+        players = []
+        for player in sys.argv:
+            i += 1
+            if i == 0:
+                continue
+            players.append(Player(player, i))
+
+        MPRISNotifier(players)

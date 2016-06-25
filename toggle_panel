@@ -1,0 +1,54 @@
+#!/bin/bash
+
+start ()
+{
+    if pgrep "yabar" > /dev/null
+    then
+        printf "%s\n" "The panel is already running."
+    else
+        bash -c "cd ~/.config/yabar/ && (nohup yabar > /dev/null 2>&1) &"
+
+        # move lower when fullscreen
+        wid=$(xdo id -a yabar)
+        tries_left=20
+        while [ -z "$wid" ] && [ "$tries_left" -gt 0 ] ; do
+            sleep 0.05
+            wid=$(xdo id -a yabar)
+            tries_left=$((tries_left - 1))
+        done
+        for w in $wid; do
+            [ -n "$w" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$w"
+        done
+
+    fi
+}
+
+stop ()
+{
+    pkill -f "yabar"
+}
+
+toggle ()
+{
+    if pgrep "yabar" > /dev/null
+    then
+        printf "%s\n" "The panel is already running."
+        stop
+    else
+        echo "Starting panel"
+        start
+    fi
+}
+
+if [ -n "$1" ] ; then
+    if [ "$1" = "start" ] ; then
+        start
+    elif [ "$1" = "stop" ] ; then
+        stop
+    elif [ "$1" = "restart" ] ; then
+        stop;
+        start;
+    fi
+else
+    toggle
+fi

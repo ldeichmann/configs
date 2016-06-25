@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ "$#" -lt 2 ]; then
+    echo "Illegal number of parameters"
+    exit
+fi
+
+LIST=$(playerctl -l)
+CMD="playerctl --player="
+
+for var in "$@"
+do
+    if [[ $var == *$LIST* ]]
+    then
+        CMD="$CMD$var $1"
+            eval $CMD
+            exit
+    fi
+done

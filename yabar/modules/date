@@ -1,0 +1,10 @@
+#! /bin/sh
+
+while true; do
+
+    DATE=$(date "+%a %d %b, %T")
+
+    printf "%s\n" "$DATE"
+
+    sleep 0.5;
+done

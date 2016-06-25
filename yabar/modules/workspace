@@ -1,0 +1,85 @@
+#!/bin/sh
+# i3-msg -t "get_workspaces"
+# while true; do
+#     i3subscribe workspace | while read -r event; do
+#         i3-msg -t "get_workspaces"
+#     done
+# done
+
+#! /bin/bash
+#
+# Example panel for lemonbar
+
+#. ./panel_colors
+
+num_mon=$(bspc query -M | wc -l)
+
+. ./icons
+
+
+bspc subscribe report | \
+while read -r line ; do
+    case $line in
+        W*)
+            # bspwm's state
+            wm=""
+            IFS=':'
+            set -- ${line#?}
+            while [ $# -gt 0 ] ; do
+                item=$1
+                name=${item#?}
+                ICON=$ICON_WS_FREE
+                case $item in
+                    [mM]*)
+                        [ $num_mon -lt 2 ] && shift && continue
+                        case $item in
+                            m*)
+                                # monitor
+                                ;;
+                            M*)
+                                # focused monitor
+                                ;;
+                        esac
+                        wm="${name} "
+                        ;;
+                        # [fFoOuU]*)
+                    [fFoOuU]*)
+                        case $item in
+                            f*)
+                                # free desktop
+                                ;;
+                            F*)
+                                # focused free desktop
+                                ICON=$ICON_WS_FOCUSED
+                                ;;
+                            o*)
+                                # occupied desktop
+                                ICON=$ICON_WS_OCCUPIED
+                                ;;
+                            O*)
+                                # focused occupied desktop
+                                ICON=$ICON_WS_FOCUSED
+                                ;;
+                            u*)
+                                # urgent desktop
+                                ICON=$ICON_WS_URGENT
+                                ;;
+                            U*)
+                                # focused urgent desktop
+                                ICON=$ICON_WS_URGENT_FOCUSED
+                                ;;
+                        esac
+                        wm="${wm} $ICON  "
+                        ;;
+                    # [LTG]*)
+                    #     # layout, state and flags
+                    #     wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG} ${name} %{B-}%{F-}"
+                    #     ;;
+                esac
+                shift
+            done
+            wm="${wm}"
+            ;;
+    esac
+    printf "%s\n" "${wm}"
+done
