@@ -6,6 +6,8 @@ ACTIVE_OUTPUTS=$(xrandr | grep -E " connected (primary )?[0-9]+" | sed -e "s/\([
 
 PRIMARY_OUTPUT=$(xrandr | grep -E "primary" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
 
+[[ "$PRIMARY_OUTPUT" == "$OUTPUTS" ]] && exit
+
 TOGGLE=0
 for OUTPUT in $OUTPUTS ; do
     if [[ "$ACTIVE_OUTPUTS" != *"$OUTPUT"* ]] ; then
