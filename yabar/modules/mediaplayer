@@ -15,7 +15,7 @@ import sys
 gi.require_version('Playerctl', '1.0')
 from gi.repository import Playerctl  # NOQA
 
-matSpan = "<span font_desc=\"Material Icons 12\" rise=\'-2000\'>"
+matSpan = "<span font_desc=\"Material Icons 10\" rise=\'-2500\'>"
 matEnd = "</span>"
 
 
@@ -92,9 +92,6 @@ class MPRISNotifier(object):
 
     def buildString(self):
         for player in self.players:
-            # if not player.running:
-            #     continue
-
             try:
                 player = Playerctl.Player(player_name=player.name)
                 playerstatus = player.props.status
@@ -103,7 +100,8 @@ class MPRISNotifier(object):
                     continue
                     # return ''
 
-                playbackicon = ''
+                playbackicon = ""
+                text = ""
 
                 if "Playing" == playerstatus:
                     playbackicon = ''
@@ -111,17 +109,16 @@ class MPRISNotifier(object):
                     playbackicon = ''
                 elif "Stopped" == playerstatus:
                     playbackicon = ''
+                    text = "Stopped"
                 else:
                     playbackicon = ''
+                    text = "Not Playing"
 
                 artist = player.get_artist()
                 title = player.get_title()
-                text = ""
 
                 if artist and title:
                     text = artist + " - " + title
-                else:
-                    text = "Not Playing"
 
                 return "{}{}{} {}".format(matSpan, playbackicon, matEnd, text)
 

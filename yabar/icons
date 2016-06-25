@@ -1,6 +1,6 @@
 #!/bin/bash
-SPAN="<span font_desc='Material Icons 12' rise='-2000'>"
-SPANRED="<span font_desc='Material Icons 12' foreground='#ff6961' rise='-2000'>"
+SPAN="<span font_desc='Material Icons 10' rise='-2500'>"
+SPANRED="<span font_desc='Material Icons 10' foreground='#ff6961' rise='-2500'>"
 
 SPANEND="</span>"
 
