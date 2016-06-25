@@ -76,7 +76,6 @@ class MPRISNotifier(object):
             if name == ("org.mpris.MediaPlayer2." + player.name):
                 if new_owner:
                     # Player has been launched - hook it up.
-                    print(player.name, "has launched")
                     player.running = True
                     self.props_changed_listener(player.name)
                 else:
@@ -103,19 +102,16 @@ class MPRISNotifier(object):
                 playbackicon = ""
                 text = ""
 
+                artist = player.get_artist()
+                title = player.get_title()
+
                 if "Playing" == playerstatus:
                     playbackicon = ''
                 elif "Paused" == playerstatus:
                     playbackicon = ''
                 elif "Stopped" == playerstatus:
-                    playbackicon = ''
+                    playbackicon = ''
                     text = "Stopped"
-                else:
-                    playbackicon = ''
-                    text = "Not Playing"
-
-                artist = player.get_artist()
-                title = player.get_title()
 
                 if artist and title:
                     text = artist + " - " + title

@@ -8,12 +8,15 @@ fi
 LIST=$(playerctl -l)
 CMD="playerctl --player="
 
+echo $LIST
+
 for var in "$@"
 do
-    if [[ $var == *$LIST* ]]
-    then
+    if [[ "$LIST" == *"$var"* ]] ; then
         CMD="$CMD$var $1"
             eval $CMD
             exit
+    else
+        echo "no player named $var found"
     fi
 done
