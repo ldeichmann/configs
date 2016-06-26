@@ -19,6 +19,8 @@ bspc config borderless_monocle      true
 bspc config gapless_monocle         true
 bspc config focus_follows_pointer   true
 bspc config merge_overlapping_monitors true
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
 
 bspc config active_border_color   "#5F6980"
 bspc config focused_border_color  "#CCCCCC"
