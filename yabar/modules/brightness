@@ -2,12 +2,23 @@
 
 . ./icons
 
-test=$(xbacklight)
+printBrightness() {
 
-if [[ -z $test ]] ; then
-    exit 0
-fi
+    test=$(xbacklight)
 
-BRIGHT=$(xbacklight | awk '{printf("%1.f\n", $1)}')
-FULL="$SPAN$SPANEND $BRIGHT%"
-echo "$FULL"
+    if [[ -z $test ]] ; then
+        printf "xbacklight error"
+        return
+    fi
+
+    BRIGHT=$(xbacklight | awk '{printf("%1.f\n", $1)}')
+    FULL="$SPAN$SPANEND $BRIGHT%"
+    echo "$FULL"
+}
+
+printBrightness
+
+inotifywait -m /sys/class/backlight/intel_backlight/actual_brightness | \
+while read -r _ ; do
+    printBrightness
+done
