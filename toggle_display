@@ -7,7 +7,7 @@ ACTIVE_OUTPUTS=$(xrandr | grep -E " connected (primary )?[0-9]+" | sed -e "s/\([
 PRIMARY_OUTPUT="LVDS1"
 
 [[ "$PRIMARY_OUTPUT" == "$OUTPUTS" ]] && exit
-[[ *"$PRIMARY_OUTPUT"* != "$OUTPUTS" ]] && exit
+[[ "$OUTPUTS" != *"$PRIMARY_OUTPUT"* ]] && exit
 
 TOGGLE=0
 for OUTPUT in $OUTPUTS ; do
@@ -68,7 +68,7 @@ else
     done
 fi
 
-echo $setup
+eval $setup
 toggle_compton restart
 toggle_panel restart
 # echo -e "outputs: \n$OUTPUTS"
