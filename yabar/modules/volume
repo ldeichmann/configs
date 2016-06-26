@@ -1,16 +1,26 @@
 #!/bin/sh
 . ./icons
 
-ISMUTE=$(pamixer --get-mute)
-VOL=$(pamixer --get-volume)
-if [ $ISMUTE = true ]; then
-    FULL="$ICON_VOL_MUTE $VOL%"
-else
-    if [ "$VOL" -lt 40 ] ; then
-        FULL="$ICON_VOL_LOW $VOL%"
+printVol() {
+    ISMUTE=$(pamixer --get-mute)
+    VOL=$(pamixer --get-volume)
+    if [ $ISMUTE = true ]; then
+        FULL="$ICON_VOL_MUTE $VOL%"
     else
-        FULL="$ICON_VOL_HIGH $VOL%"
+        if [ "$VOL" -lt 40 ] ; then
+            FULL="$ICON_VOL_LOW $VOL%"
+        else
+            FULL="$ICON_VOL_HIGH $VOL%"
+        fi
     fi
-fi
 
-echo "$FULL"
+    printf "%s\n" "$FULL"
+
+}
+
+printVol
+
+pactl subscribe | grep --line-buffered sink | \
+while read -r _ ; do
+    printVol
+done
