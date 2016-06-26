@@ -82,10 +82,9 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 alias vibrance='~/Code/configs/csgo/vibrancetoggle.sh'
 alias clean_packages='sudo pacman -Rns $(pacman -Qqtd)'
 alias stopidy='kill `ps ax | grep mopidy | grep -v grep | grep -v bash | cut -d" " -f1`'
-export EDITOR="nano"
-export VISUAL="nano"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export GOPATH=~/Code/go
-
 
 # Setup NPM according to https://stackoverflow.com/a/13021677
 # NPM packages in homedir
