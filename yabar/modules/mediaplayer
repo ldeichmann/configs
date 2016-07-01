@@ -118,10 +118,12 @@ class MPRISNotifier(object):
                     playbackicon = ''
                     text = "Stopped"
 
-                if artist and title:
+                if artist and title and len(artist) and len(title):
                     text = artist + " - " + title
                     # replace ampersands as pango goes crazy otherwise
                     text = text.replace("&", "&amp;")
+                else:
+                    text = "Stopped"  # This shouldn't be seen
 
                 return "{}{}{} {}".format(matSpan, playbackicon, matEnd, text)
 
