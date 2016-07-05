@@ -16,8 +16,14 @@ if [ "$class" = "chromium" ] ; then
 elif [ "$class" = "Steam" ] ; then
     case "$title" in
         "Steam - Update News"*)
-            echo "-c"
+            echo "close"
             ;;
+        "Friends")
+            echo "split_ratio=0.8 split_dir=east"
+            ;&
+        "Steam")
+            echo "split_ratio=0.8 split_dir=west"
+            ;&
         *)
             echo "desktop=^5 follow=off state=tiled"
             ;;

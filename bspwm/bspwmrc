@@ -12,20 +12,21 @@ xset s off
 
 setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de -variant ,qwerty
 
-bspc config border_width            4
-bspc config window_gap              50
+bspc config border_width                4
+bspc config window_gap                  50
 
-bspc config borderless_monocle      true
-bspc config gapless_monocle         true
-bspc config focus_follows_pointer   true
-bspc config merge_overlapping_monitors true
-bspc config remove_disabled_monitors true
-bspc config remove_unplugged_monitors true
+bspc config borderless_monocle          true
+bspc config gapless_monocle             true
+bspc config paddingless_monocle         true
+bspc config focus_follows_pointer       true
+bspc config merge_overlapping_monitors  true
+bspc config remove_disabled_monitors    true
+bspc config remove_unplugged_monitors   true
 
-bspc config active_border_color   "#5F6980"
-bspc config focused_border_color  "#CCCCCC"
-bspc config presel_feedback_color "#748FA4"
-bspc config normal_border_color   "#5F6980"
+bspc config active_border_color         "#5F6980"
+bspc config focused_border_color        "#CCCCCC"
+bspc config presel_feedback_color       "#748FA4"
+bspc config normal_border_color         "#5F6980"
 
 bspc monitor -d 1 2 3 4 5 6
 
@@ -48,6 +49,25 @@ bspc rule -a "Google Play Music Desktop Player"     desktop=^4 follow=off
 bspc rule -a "TeamSpeak 3"                          desktop=^6 follow=off
 
 bspc config external_rules_command "$(realpath ~/.config/bspwm/external_rules)"
+
+if [ "shepard" = "$(uname -n)" ] ; then
+
+    bspc config top_padding                 50
+    bspc config bottom_padding              50
+    bspc config left_padding                50
+    bspc config right_padding               50
+
+    bspc config --desktop ^3 top_padding    50
+    bspc config --desktop ^3 bottom_padding 50
+    bspc config --desktop ^3 left_padding   50
+    bspc config --desktop ^3 right_padding  50
+    
+    bspc config --desktop ^4 top_padding    50
+    bspc config --desktop ^4 bottom_padding 50
+    bspc config --desktop ^4 left_padding   50
+    bspc config --desktop ^4 right_padding  50
+
+fi
 
 toggle_panel start
 xsetroot -cursor_name left_ptr

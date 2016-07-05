@@ -77,7 +77,11 @@ class MPRISNotifier(object):
                     self.props_changed_listener(player.name)
                 else:
                     player.running = False
-                    print("", end="\n", flush=True)
+                    playerString = self.buildString()
+                    if playerString:
+                        print(playerString, end="\n", flush=True)
+                    else:
+                        print("", end="\n", flush=True)
 
     def handle_properties_changed(self, interface, changed_props,
                                   invalidated_props):
