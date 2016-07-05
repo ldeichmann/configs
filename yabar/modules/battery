@@ -18,7 +18,7 @@ if [ $CHRGING = "Charging" ] ; then
 else
 
   if [ $BAT -le 15 ] ; then
-    FULL="$SPANRED$SPANEND $BAT%%{F-}"
+    FULL="$SPANRED$SPANEND $BAT%"
   else
     FULL="$SPAN$SPANEND $BAT%"
   fi
