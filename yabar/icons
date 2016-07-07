@@ -9,9 +9,9 @@ ICON_VOL_HIGH="$SPAN$SPANEND"
 ICON_VOL_MUTE="$SPANRED$SPANEND"
 
 #workspaces
-SPANOCC="<span font_desc='Material Icons 12' foreground='#ffffff'>"
-SPANRED="<span font_desc='Material Icons 12' foreground='#ff6961'>"
-SPANFREE="<span font_desc='Material Icons 12' foreground='#788491'>"
+SPANOCC="<span font_desc='Material Icons 10' rise='-2500' foreground='#ffffff'>"
+SPANRED="<span font_desc='Material Icons 10' rise='-2500' foreground='#ff6961'>"
+SPANFREE="<span font_desc='Material Icons 10' rise='-2500' foreground='#788491'>"
 SPANEND="</span>"
 
 ICON_WS_FREE="$SPANFREE$SPANEND"
