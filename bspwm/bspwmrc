@@ -1,5 +1,7 @@
 #! /bin/sh
 
+sxhkd &
+
 feh --bg-fill ~/Sync/wallpapers/Nature/snV6nAD.jpg
 compton --config ~/.config/compton.conf &
 redshift &
@@ -61,7 +63,7 @@ if [ "shepard" = "$(uname -n)" ] ; then
     bspc config --desktop ^3 bottom_padding 50
     bspc config --desktop ^3 left_padding   50
     bspc config --desktop ^3 right_padding  50
-    
+
     bspc config --desktop ^4 top_padding    50
     bspc config --desktop ^4 bottom_padding 50
     bspc config --desktop ^4 left_padding   50
