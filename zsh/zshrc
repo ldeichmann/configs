@@ -81,26 +81,25 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 alias vibrance='~/Code/configs/csgo/vibrancetoggle.sh'
 alias clean_packages='sudo pacman -Rns $(pacman -Qqtd)'
-alias stopidy='kill `ps ax | grep mopidy | grep -v grep | grep -v bash | cut -d" " -f1`'
 export EDITOR="nvim"
 export VISUAL="nvim"
-export GOPATH=~/Code/go
+#export GOPATH=~/Code/go
 
 # Setup NPM according to https://stackoverflow.com/a/13021677
 # NPM packages in homedir
-NPM_PACKAGES="$HOME/.npm-packages"
+#NPM_PACKAGES="$HOME/.npm-packages"
 
 # Tell our environment about user-installed node tools
-PATH="$NPM_PACKAGES/bin:$PATH"
+#PATH="$NPM_PACKAGES/bin:$PATH"
 # Unset manpath so we can inherit from /etc/manpath via the `manpath` command
 unset MANPATH  # delete if you already modified MANPATH elsewhere in your configuration
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # Tell Node about these packages
-NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+#NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 
-export WORKON_HOME=~/Envs
-source /usr/bin/virtualenvwrapper.sh
+#export WORKON_HOME=~/Envs
+#source /usr/bin/virtualenvwrapper.sh
 
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
