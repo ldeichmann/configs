@@ -6,6 +6,7 @@ feh --bg-fill ~/Sync/wallpapers/Nature/snV6nAD.jpg
 compton --config ~/.config/compton.conf &
 redshift &
 xautolock -time 10 -locker 'lock_test_fullscreen.sh' &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 ~/.config/bspwm/scripts/disable_fullscreen_standby.sh &
 xset dpms 0 640 660
