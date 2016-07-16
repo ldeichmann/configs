@@ -148,7 +148,7 @@ ctrl + alt + l
     ~/.config/bspwm/scripts/lock.sh
 
 Print
- scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/Pictures/Screenshots/' && notify-send "Screenshot taken"
+ mkdir -p ~/Pictures/Screenshots/ && scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/Pictures/Screenshots/' && notify-send "Screenshot taken"
 
 #
 # function keys
