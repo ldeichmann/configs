@@ -69,6 +69,10 @@ if [ "shepard" = "$(uname -n)" ] ; then
     bspc config --desktop ^4 bottom_padding 50
     bspc config --desktop ^4 left_padding   50
     bspc config --desktop ^4 right_padding  50
+else
+
+    bspc config top_padding                 30
+    bspc config window_gap                  20
 
 fi
 
