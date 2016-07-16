@@ -1,13 +1,17 @@
 #!/bin/sh
 . ./icons
 
+THRESHOLD=40
+
 printVol() {
+
     ISMUTE=$(pamixer --get-mute)
     VOL=$(pamixer --get-volume)
-    if [ $ISMUTE = true ]; then
+
+    if [ "$ISMUTE" = "true" ]; then
         FULL="$ICON_VOL_MUTE $VOL%"
     else
-        if [ "$VOL" -lt 40 ] ; then
+        if [ "$VOL" -lt "$THRESHOLD" ] ; then
             FULL="$ICON_VOL_LOW $VOL%"
         else
             FULL="$ICON_VOL_HIGH $VOL%"
@@ -20,7 +24,11 @@ printVol() {
 
 printVol
 
-pactl subscribe | grep --line-buffered sink | \
-while read -r _ ; do
-    printVol
+while true; do
+    pactl subscribe | grep --line-buffered sink | \
+    while read -r _ ; do
+        printVol
+    done
+    printf "%s\n" "Error"
+    sleep 1
 done
