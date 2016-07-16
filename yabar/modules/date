@@ -1,0 +1,13 @@
+#!/bin/bash
+
+. ./icons
+
+printDate() {
+
+    DATE=$(date +'%a %d %b, %H:%M')
+
+    FULL="$SPAN$SPANEND $DATE"
+    echo "$FULL"
+}
+
+printDate
