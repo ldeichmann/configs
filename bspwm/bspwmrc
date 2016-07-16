@@ -16,7 +16,6 @@ xset s off
 setxkbmap -option grp:switch,grp:shift_toggle,grp_led:scroll us,de -variant ,qwerty
 
 bspc config border_width                4
-bspc config window_gap                  50
 
 bspc config borderless_monocle          true
 bspc config gapless_monocle             true
@@ -55,20 +54,9 @@ bspc config external_rules_command "$(realpath ~/.config/bspwm/external_rules)"
 
 if [ "shepard" = "$(uname -n)" ] ; then
 
-    bspc config top_padding                 50
-    bspc config bottom_padding              50
-    bspc config left_padding                50
-    bspc config right_padding               50
+    bspc config top_padding                 30
+    bspc config window_gap                  50
 
-    bspc config --desktop ^3 top_padding    50
-    bspc config --desktop ^3 bottom_padding 50
-    bspc config --desktop ^3 left_padding   50
-    bspc config --desktop ^3 right_padding  50
-
-    bspc config --desktop ^4 top_padding    50
-    bspc config --desktop ^4 bottom_padding 50
-    bspc config --desktop ^4 left_padding   50
-    bspc config --desktop ^4 right_padding  50
 else
 
     bspc config top_padding                 30
