@@ -1,5 +1,5 @@
 [global]
-    font = Roboto Condensed 9
+    font = Roboto Condensed 10
 
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -64,7 +64,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-50+50"
+    geometry = "110x1-20+30"
 
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
@@ -73,7 +73,7 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.).
-    transparency = 10
+    transparency = 20
 
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
     # for longer than idle_threshold seconds.
@@ -148,7 +148,7 @@
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 [frame]
-    width = 4
+    width = 0
     color = "#94E252"
 
 [shortcuts]
@@ -175,17 +175,17 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#2f343f"
+    background = "#00000"
     foreground = "#a7a5a5"
     timeout = 5
 
 [urgency_normal]
-    background = "#2f343f"
+    background = "#00000"
     foreground = "#ffffff"
     timeout = 5
 
 [urgency_critical]
-    background = "#2f343f"
+    background = "#00000"
     foreground = "#B14D4C"
     timeout = 5
 
