@@ -13,13 +13,13 @@ if [ "$class" = "chromium" ] ; then
     else
         echo "desktop=^1 follow=off"
     fi
-elif [ "$class" = "Steam" ] ; then
+elif [ "$class" = "Steam" ] || [ "$title" = "Steam" ] ; then
     case "$title" in
         "Steam - Update News"*)
-            echo "close"
+            echo "hidden=on"
             ;;
         "Friends")
-            echo "split_ratio=0.8 split_dir=east"
+            echo "split_ratio=0.2 split_dir=west"
             ;&
         "Steam")
             echo "split_ratio=0.8 split_dir=west"
