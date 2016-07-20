@@ -2,27 +2,38 @@
 
 . ./config
 
-batterytest=$(acpi -b)
-if [[ $batterytest  != *Battery* ]] ; then
-    exit 0;
-fi
+printBattery() {
 
-CHRGING=$(acpi -b | cut -d: -f2 | cut -d, -f1 | sed 's/ //g')
-BAT=$(acpi -b | cut -d, -f2 | sed 's/ //g' | sed 's/%//g')
-FULL=""
+    batterytest=$(acpi -b)
+    if [[ $batterytest  != *Battery* ]] ; then
+        return 0;
+    fi
 
-if [ $CHRGING = "Charging" ] ; then
+    CHRGING=$(acpi -a)
+    BAT=$(acpi -b | cut -d, -f2 | sed 's/ //g' | sed 's/%//g')
+    FULL=""
 
-  FULL="$SPAN$SPANEND $BAT%"
+    if [[ $CHRGING = *"on-line"* ]] ; then
 
-else
+      FULL="$BATTERY_ICON_CHARGING $BAT%"
 
-  if [ $BAT -le 15 ] ; then
-    FULL="$SPANRED$SPANEND $BAT%"
-  else
-    FULL="$SPAN$SPANEND $BAT%"
-  fi
+    else
 
-fi
+      if [ $BAT -le 15 ] ; then
+        FULL="$BATTERY_ICON_CRITICAL $BAT%"
+      else
+        FULL="$BATTERY_ICON $BAT%"
+      fi
 
-echo "$FULL"
+    fi
+
+    printf "%s\n" "$FULL"
+
+}
+
+printBattery
+
+while true; do
+    inotifywait -q -e close /sys/class/power_supply/BAT0/charge_now > /dev/null 2>&1
+    printBattery
+done

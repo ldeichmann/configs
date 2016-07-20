@@ -91,6 +91,17 @@ if [[ $hostname == "bilbo" ]] ; then
     BRIGHTNESS_ENABLED=1
     WIFI_ENABLED=1
 fi
+
+### battery
+
+BATTERY_ICON_CHARGING=""
+BATTERY_ICON_CRITICAL="%{F$COLOR_RED}%{B$COLOR_DEFAULT_BG}$PANEL_COLOR_END"
+BATTERY_ICON=""
+
+### brightness
+
+BRIGHTNESS_ICON=""
+
 ### redshift
 
 REDSHIFT_ICON_ENABLED=""
