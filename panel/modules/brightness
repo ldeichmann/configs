@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./icons
+. ./config
 
 printBrightness() {
 

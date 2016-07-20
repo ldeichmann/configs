@@ -1,0 +1,32 @@
+#!/bin/bash
+
+. ./config
+
+OPENNMTUI="%{A1:urxvt -e nmtui &:}"
+
+INTERFACE=$1
+
+printWifi() {
+
+
+[[ ! -d /sys/class/net/${INTERFACE}/wireless ]] || [[ ! -f /sys/class/net/${INTERFACE}/dormant ]] && printf '%s Disabled%s\n' "$WIFI_DISABLED" "$PANEL_COLOR_END" && exit
+
+[[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]] && printf '%s Disconnected%s\n' "$WIFI_DISCONNECTED" "$PANEL_COLOR_END" && exit
+
+SSID=$(iwgetid -r)
+QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
+
+printf '%s%s%s (%s%%)%s%s\n' "$OPENNMTUI" "$WIFI_ICON_CONNECTED" "$WIFI_CONNECTED" "$SSID" "$QUALITY" "$PANEL_COLOR_END" "$PANEL_COLOR_END"
+
+}
+
+printWifi
+
+while true; do
+    nmcli m | grep --line-buffered "$INTERFACE" | \
+    while read -r _ ; do
+        printWifi
+    done
+    printf "wifi: %s\n" "Error watching nmcli m"
+    sleep 1
+done

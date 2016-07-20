@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./icons
+. ./config
 
 batterytest=$(acpi -b)
 if [[ $batterytest  != *Battery* ]] ; then

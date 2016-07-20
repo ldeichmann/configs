@@ -1,20 +1,8 @@
 #!/bin/sh
-# i3-msg -t "get_workspaces"
-# while true; do
-#     i3subscribe workspace | while read -r event; do
-#         i3-msg -t "get_workspaces"
-#     done
-# done
-
-#! /bin/bash
-#
-# Example panel for lemonbar
-
-#. ./panel_colors
 
 num_mon=$(bspc query -M | wc -l)
 
-. ./icons
+. ./config
 
 
 bspc subscribe report | \
@@ -22,13 +10,13 @@ while read -r line ; do
     case $line in
         W*)
             # bspwm's state
-            wm=""
+            wm="%{A5:bspc desktop -f next:}%{A4:bspc desktop -f prev:}"
             IFS=':'
             set -- ${line#?}
             while [ $# -gt 0 ] ; do
                 item=$1
                 name=${item#?}
-                ICON=$ICON_WS_FREE
+                ICON=$WORKSPACE_ICON_FREE
                 case $item in
                     [mM]*)
                         [ $num_mon -lt 2 ] && shift && continue
@@ -40,7 +28,7 @@ while read -r line ; do
                                 # focused monitor
                                 ;;
                         esac
-                        wm="${name} "
+                        wm="${wm}%{A:bspc monitor -f ${name}:} ${name} %{A}"
                         ;;
                         # [fFoOuU]*)
                     [fFoOuU]*)
@@ -50,26 +38,26 @@ while read -r line ; do
                                 ;;
                             F*)
                                 # focused free desktop
-                                ICON=$ICON_WS_FOCUSED
+                                ICON=$WORKSPACE_ICON_FOCUSED
                                 ;;
                             o*)
                                 # occupied desktop
-                                ICON=$ICON_WS_OCCUPIED
+                                ICON=$WORKSPACE_ICON_OCCUPIED
                                 ;;
                             O*)
                                 # focused occupied desktop
-                                ICON=$ICON_WS_FOCUSED
+                                ICON=$WORKSPACE_ICON_FOCUSED
                                 ;;
                             u*)
                                 # urgent desktop
-                                ICON=$ICON_WS_URGENT
+                                ICON=$WORKSPACE_ICON_URGENT
                                 ;;
                             U*)
                                 # focused urgent desktop
-                                ICON=$ICON_WS_URGENT_FOCUSED
+                                ICON=$WORKSPACE_ICON_URGENT_FOCUSED
                                 ;;
                         esac
-                        wm="${wm} $ICON  "
+                        wm="${wm}%{A:bspc desktop -f ${name}:} $ICON %{A} "
                         ;;
                     # [LTG]*)
                     #     # layout, state and flags
@@ -78,7 +66,7 @@ while read -r line ; do
                 esac
                 shift
             done
-            wm="${wm}"
+            wm="${wm}""%{A}%{A}"
             ;;
     esac
     printf "%s\n" "${wm}"

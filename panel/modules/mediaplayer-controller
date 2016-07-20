@@ -6,7 +6,7 @@ if [ "$#" -lt 2 ]; then
 fi
 
 LIST=$(playerctl -l)
-CMD="playerctl --player="
+CMD="timeout 0.1 playerctl --player="
 
 echo $LIST
 

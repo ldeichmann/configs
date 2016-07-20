@@ -2,22 +2,18 @@
 
 start ()
 {
-    if pgrep "yabar" > /dev/null
+    if pgrep "lemonbar" > /dev/null
     then
         printf "%s\n" "The panel is already running."
     else
-        hostname=$(uname -n)
-        if [[ $hostname == "bilbo" ]] ; then
-            bash -c "cd ~/.config/yabar/ && (nohup yabar -c ~/.config/yabar/yabar_mobil.conf > /dev/null 2>&1) &"
-        else
-            bash -c "cd ~/.config/yabar/ && (nohup yabar > /dev/null 2>&1) &"
-        fi
+        bash -c "cd ~/.config/panel/ && (nohup ./panel > /dev/null 2>&1) &"
+
         # move lower when fullscreen
-        wid=$(xdo id -a yabar)
+        wid=$(xdo id -a "$PANEL_TOP_WM_NAME")
         tries_left=20
         while [ -z "$wid" ] && [ "$tries_left" -gt 0 ] ; do
             sleep 0.05
-            wid=$(xdo id -a yabar)
+            wid=$(xdo id -a "$PANEL_TOP_WM_NAME")
             tries_left=$((tries_left - 1))
         done
         for w in $wid; do
@@ -29,12 +25,15 @@ start ()
 
 stop ()
 {
-    pkill -f "yabar"
+    pkill -f "/bin/bash ./panel"
+    pkill -f "/bin/bash modules/"
+    pkill -f "/bin/sh modules/"
+    pkill -f "python3 modules/"
 }
 
 toggle ()
 {
-    if pgrep "yabar" > /dev/null
+    if pgrep "lemonbar" > /dev/null
     then
         printf "%s\n" "The panel is already running."
         stop

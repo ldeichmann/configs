@@ -1,7 +1,0 @@
-#!/bin/sh
-. ./icons
-
-TEMP=$(redshift -p | grep K | sed 's/.*: //')
-FULL="$SPAN$SPANEND $TEMP"
-
-printf "%s\n" "$FULL"

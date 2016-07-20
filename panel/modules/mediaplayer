@@ -12,8 +12,10 @@ from dbus.mainloop.glib import DBusGMainLoop
 from dbus.exceptions import DBusException
 import sys
 
-matSpan = "<span font_desc=\"Material Icons 10\" rise=\'-2500\'>"
-matEnd = "</span>"
+
+command_template = "%{{A{0}:~/.config/panel/modules/mediaplayer-controller\
+                    {1} {2}:}}"
+commands = {1: 'play-pause', 2: 'previous', 3: 'next'}
 
 
 class Player():
@@ -51,6 +53,12 @@ class MPRISNotifier(object):
                 self.props_changed_listener(player.name)
             except DBusException as e:  # NOQA
                 pass
+
+        self.prefix = ""
+        self.postfix = ""
+        for key, cmd in commands.items():
+            self.prefix += command_template.format(key, cmd, ' '.join(map((lambda x: x.name), self.players)))  # NOQA
+            self.postfix += "%{A}"
 
         loop.run()
 
@@ -129,7 +137,8 @@ class MPRISNotifier(object):
                 else:
                     text = "Stopped"  # This shouldn't be seen
 
-                return "{}{}{} {}".format(matSpan, playbackicon, matEnd, text)
+                return "{}{} {}{}".format(self.prefix, playbackicon, text,
+                                          self.postfix)
 
             except Exception as e:
                 continue

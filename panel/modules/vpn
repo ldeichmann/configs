@@ -1,0 +1,36 @@
+#!/bin/sh
+
+. ./config
+
+OPENNMTUI="%{A1:urxvt -e nmtui &:}"
+
+printVPN() {
+
+    FULL="$OPENNMTUI"
+
+    ps -aux | grep openvpn | grep -v 'grep' | grep -v 'sed' > /dev/null
+    if [ $? -eq 1 ]; then
+        VPN="No Connection"
+        FULL="$FULL""$VPN_ICON_DISCONNECTED""$VPN_DISCONNECTED"" $VPN""$PANEL_COLOR_END"
+    else
+        VPN=$(nmcli c show --active | grep vpn | awk '{ printf "%s\n", $1 }')
+        FULL="$FULL""$VPN_ICON_CONNECTED""$VPN_CONNECTED"" $VPN""$PANEL_COLOR_END"
+    fi
+
+    FULL="$FULL""%{A}"
+
+    echo "$FULL"
+
+}
+
+printVPN
+
+
+while true; do
+    nmcli m | grep --line-buffered "connection profile changed" | \
+    while read -r _ ; do
+        printVPN
+    done
+    printf "vpn: %s\n" "Error watching nmcli m"
+    sleep 1
+done
