@@ -11,14 +11,20 @@ printBrightness() {
         return
     fi
 
+    ONCLICK="%{A4:xbacklight -steps 1 -inc 10 &:}""%{A5:xbacklight -steps 1 -dec 10 &:}"
+
     BRIGHT=$(xbacklight | awk '{printf("%1.f\n", $1)}')
-    FULL="$SPAN$SPANEND $BRIGHT%"
-    echo "$FULL"
+    if [ "$BRIGHT" -eq "100" ] ; then
+        FULL="$ONCLICK""$BRIGHTNESS_ICON"" $BRIGHT""%""%{A}""%{A}"
+    else
+        FULL="$ONCLICK""$BRIGHTNESS_ICON""   $BRIGHT""%""%{A}""%{A}"
+    fi
+    printf "%s\n" "$FULL"
 }
 
 printBrightness
 
-inotifywait -m /sys/class/backlight/intel_backlight/actual_brightness | \
+inotifywait -q -m /sys/class/backlight/intel_backlight/actual_brightness | \
 while read -r _ ; do
     printBrightness
 done
