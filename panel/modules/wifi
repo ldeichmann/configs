@@ -8,15 +8,29 @@ INTERFACE=$1
 
 printWifi() {
 
+    DEVICES=$(nmcli -t -f device,state,connection dev)
 
-[[ ! -d /sys/class/net/${INTERFACE}/wireless ]] || [[ ! -f /sys/class/net/${INTERFACE}/dormant ]] && printf '%s Disabled%s\n' "$WIFI_DISABLED" "$PANEL_COLOR_END" && exit
+    if [[ "$DEVICES" != *"$INTERFACE"* ]] ; then
+        printf '%s %s' "$WIFI_ICON_DISCONNECTED" "Unavailable"
+        exit
+    fi
 
-[[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]] && printf '%s Disconnected%s\n' "$WIFI_DISCONNECTED" "$PANEL_COLOR_END" && exit
+    DEVICE=$(echo "$DEVICES" | grep "$INTERFACE")
+    LIST_WIFI=$(nmcli -t -f ssid,signal dev wifi)
 
-SSID=$(iwgetid -r)
-QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
+    IFS=':' read -r -a array <<< "$DEVICE"
 
-printf '%s%s%s (%s%%)%s%s\n' "$OPENNMTUI" "$WIFI_ICON_CONNECTED" "$WIFI_CONNECTED" "$SSID" "$QUALITY" "$PANEL_COLOR_END" "$PANEL_COLOR_END"
+    if [[ "${array[1]}" = "unavailable" ]] ; then
+        printf '%s%s%s Disabled%s%s\n' "$OPENNMTUI" "$WIFI_ICON_DISCONNECTED" "$WIFI_DISABLED" "$PANEL_COLOR_END" "%{A}"
+    elif [[ "${array[1]}" = "disconnected" ]] ; then
+        printf '%s%s%s Disconnected%s%s\n' "$OPENNMTUI" "$WIFI_ICON_DISCONNECTED" "$WIFI_DISCONNECTED" "$PANEL_COLOR_END" "%{A}"
+    elif [[ "${array[1]}" = "connecting"* ]] ; then
+        printf '%s%s%s Connecting%s%s\n' "$OPENNMTUI" "$WIFI_ICON_DISCONNECTED" "$WIFI_DISCONNECTED" "$PANEL_COLOR_END" "%{A}"
+    elif [[ "${array[1]}" = "connected" ]] ; then
+        SSID="${array[2]}"
+        QUALITY=$(echo $LIST_WIFI | grep "$SSID" | awk -F":" '{print $2}' | awk '{print $1}')
+        printf '%s%s%s %s (%s%%)%s%s\n' "$OPENNMTUI" "$WIFI_ICON_CONNECTED" "$WIFI_CONNECTED" "$SSID" "$QUALITY" "$PANEL_COLOR_END" "%{A}"
+    fi
 
 }
 
