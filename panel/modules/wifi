@@ -11,7 +11,7 @@ printWifi() {
     DEVICES=$(nmcli -t -f device,state,connection dev)
 
     if [[ "$DEVICES" != *"$INTERFACE"* ]] ; then
-        printf '%s %s' "$WIFI_ICON_DISCONNECTED" "Unavailable"
+        printf '%s %s\n' "$WIFI_ICON_DISCONNECTED" "Unavailable"
         exit
     fi
 
@@ -28,7 +28,7 @@ printWifi() {
         printf '%s%s%s Connecting%s%s\n' "$OPENNMTUI" "$WIFI_ICON_DISCONNECTED" "$WIFI_DISCONNECTED" "$PANEL_COLOR_END" "%{A}"
     elif [[ "${array[1]}" = "connected" ]] ; then
         SSID="${array[2]}"
-        QUALITY=$(echo $LIST_WIFI | grep "$SSID" | awk -F":" '{print $2}' | awk '{print $1}')
+        QUALITY=$(echo $LIST_WIFI | grep "$SSID" | awk -F":" '{print $2}' | awk '{print $1}' | tr -d '\n')
         printf '%s%s%s %s (%s%%)%s%s\n' "$OPENNMTUI" "$WIFI_ICON_CONNECTED" "$WIFI_CONNECTED" "$SSID" "$QUALITY" "$PANEL_COLOR_END" "%{A}"
     fi
 

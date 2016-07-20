@@ -7,7 +7,7 @@ printDate() {
     DATE=$(date +'%a %d %b, %H:%M')
 
     FULL="$SPAN$SPANEND $DATE"
-    echo "$FULL"
+    printf "%s\n" "$FULL"
 }
 
 while true; do

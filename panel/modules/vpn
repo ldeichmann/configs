@@ -19,7 +19,7 @@ printVPN() {
 
     FULL="$FULL""%{A}"
 
-    echo "$FULL"
+    printf "%s\n" "$FULL"
 
 }
 
