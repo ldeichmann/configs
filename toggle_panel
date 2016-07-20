@@ -29,6 +29,7 @@ stop ()
     pkill -f "/bin/bash modules/"
     pkill -f "/bin/sh modules/"
     pkill -f "python3 modules/"
+    pkill "redshift"
 }
 
 toggle ()
