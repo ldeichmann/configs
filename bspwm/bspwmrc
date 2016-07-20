@@ -4,7 +4,6 @@ sxhkd &
 
 feh --bg-fill ~/Sync/wallpapers/Nature/281\ -\ HNszoYe.jpg
 compton --config ~/.config/compton.conf &
-redshift &
 xautolock -time 10 -locker 'lock_test_fullscreen.sh' &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
