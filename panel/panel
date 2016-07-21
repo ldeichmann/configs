@@ -48,7 +48,7 @@ if [ $WORKSPACE_ENABLED -eq 1 ]; then
 modules/workspace | xargs -L 1 -d '\n' printf "W%s\n" > "$PANEL_TOP_FIFO" &
 fi
 
-./panel_top < "$PANEL_TOP_FIFO" | lemonbar -a 32 -n "$PANEL_TOP_WM_NAME" -g "$PANEL_WIDTH"x"$PANEL_HEIGHT"+"$WINDOW_GAP"+"$TOP_GAP" -f "$PANEL_FONT" -f "$PANEL_ICONS" -o -3 -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
+./panel_top < "$PANEL_TOP_FIFO" | lemonbar -a 32 -n "$PANEL_TOP_WM_NAME" -g "$PANEL_WIDTH"x"$PANEL_HEIGHT"+"$WINDOW_GAP"+"$TOP_GAP" -f "$PANEL_FONT" -f "$PANEL_ICONS" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
 
 # ./panel_bottom < "$PANEL_BOT_FIFO" | lemonbar -a 32 -n "$PANEL_BOT_WM_NAME" -g "$PANEL_WIDTH"x"$PANEL_HEIGHT"+"$WINDOW_GAP"+$(($MONITOR_HEIGHT  - $PANEL_HEIGHT - $BOT_GAP)) -f "$PANEL_FONT" -f "$PANEL_ICONS" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
 

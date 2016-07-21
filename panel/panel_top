@@ -32,7 +32,7 @@ while read -r line ; do
             ;;
         N*)
             # VPN output
-            VPN="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
+            VPN="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-} ${SEPARATOR}"
             ;;
         M*)
             # MPRIS output
@@ -40,8 +40,8 @@ while read -r line ; do
             ;;
         W*)
             # MPRIS output
-            WORKSPACE="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
+            WORKSPACE="${SEPARATOR} %{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG}${line#?}%{B-}%{F-}"
             ;;
     esac
-    printf "%s\n" "%{l}${WORKSPACE}%{c}${CLOCK}%{r}${MPRIS} ${WIFI} ${BRIGHTNESS} ${BATTERY} ${REDSHIFT} ${VOLUME} ${VPN}"
+    printf "%s\n" "%{l}${WORKSPACE}%{c}${CLOCK}%{r}${MPRIS} ${WIFI} ${BRIGHTNESS} ${BATTERY} ${REDSHIFT} ${VOLUME} ${VPN} "
 done
