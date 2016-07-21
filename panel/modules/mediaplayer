@@ -43,6 +43,13 @@ class MPRISNotifier(object):
         self.player = {}
         self.session_bus = self.bus.get_object("org.freedesktop.DBus",
                                                "/org/freedesktop/DBus")
+
+        self.prefix = ""
+        self.postfix = ""
+        for key, cmd in commands.items():
+            self.prefix += command_template.format(key, cmd, ' '.join(map((lambda x: x.name), self.players)))  # NOQA
+            self.postfix += "%{A}"
+
         for player in self.players:
             self.session_bus.connect_to_signal("NameOwnerChanged",
                                                self.handle_name_owner_changed,
@@ -53,12 +60,6 @@ class MPRISNotifier(object):
                 self.props_changed_listener(player.name)
             except DBusException as e:  # NOQA
                 pass
-
-        self.prefix = ""
-        self.postfix = ""
-        for key, cmd in commands.items():
-            self.prefix += command_template.format(key, cmd, ' '.join(map((lambda x: x.name), self.players)))  # NOQA
-            self.postfix += "%{A}"
 
         loop.run()
 
@@ -133,7 +134,7 @@ class MPRISNotifier(object):
                 if artist and title and len(artist) and len(title):
                     text = artist + " - " + title
                     # replace ampersands as pango goes crazy otherwise
-                    text = text.replace("&", "&amp;")
+                    # text = text.replace("&", "&amp;")
                 else:
                     text = "Stopped"  # This shouldn't be seen
 
