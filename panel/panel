@@ -13,9 +13,10 @@ mkfifo "$PANEL_BOT_FIFO"
 MONITOR_HEIGHT=$(bspc query -T -m | jshon -e rectangle -e height -u)
 MONITOR_WIDTH=$(bspc query -T -m | jshon -e rectangle -e width -u)
 WINDOW_GAP=$(bspc query -T -d | jshon -e windowGap)
+PADDING_TOP=$(bspc config top_padding)
 PANEL_GAP=$((2 * WINDOW_GAP))
 PANEL_WIDTH=$((MONITOR_WIDTH - PANEL_GAP))
-TOP_GAP=$(((WINDOW_GAP/2)-(PANEL_HEIGHT/2)))
+TOP_GAP=$(((WINDOW_GAP/2)-(PANEL_HEIGHT/2)+(PADDING_TOP/2)))
 BOT_GAP=10
 
 
