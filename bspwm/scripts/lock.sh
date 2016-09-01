@@ -14,5 +14,5 @@ SCREENSHOT="scrot $IMAGE"
 # Get the screenshot, add the blur and lock the screen with it
 $SCREENSHOT
 convert -filter Gaussian -resize 20% -define filter:sigma=1.5 -resize 500.5% -set colorspace Gray -separate -average $IMAGE $IMAGE
-i3lock -i $IMAGE
+i3lock -n -i $IMAGE
 rm $IMAGE
