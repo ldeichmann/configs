@@ -1,12 +1,21 @@
 #!/bin/bash
 
+screenname="panelscreen"
+
+is_panel_running ()
+{
+    if screen -list | grep -q $screenname ; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 start ()
 {
-    if pgrep "lemonbar" > /dev/null
-    then
-        printf "%s\n" "The panel is already running."
-    else
-        bash -c "cd ~/.config/panel/ && (nohup ./panel > /dev/null 2>&1) &"
+    if ! is_panel_running ; then
+        printf "%s\n" "Starting panel"
+        bash -c "cd ~/.config/panel/ && screen -dmS $screenname ./panel"
 
         # move lower when fullscreen
         wid=$(xdo id -a "$PANEL_TOP_WM_NAME")
@@ -19,28 +28,22 @@ start ()
         for w in $wid; do
             [ -n "$w" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$w"
         done
-
     fi
+
 }
 
 stop ()
 {
-    pkill -f "/bin/bash ./panel"
-    pkill -f "/bin/bash modules/"
-    pkill -f "/bin/sh modules/"
-    pkill -f "python3 modules/"
-    pkill "redshift"
+    printf "%s\n" "Stopping panel"
+    screen -X -S $screenname kill
 }
 
 toggle ()
 {
-    if pgrep "lemonbar" > /dev/null
-    then
-        printf "%s\n" "The panel is already running."
-        stop
-    else
-        echo "Starting panel"
+    if ! is_panel_running ; then
         start
+    else
+        stop
     fi
 }
 

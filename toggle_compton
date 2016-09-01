@@ -1,8 +1,17 @@
 #!/bin/bash
 
-start ()
+is_compton_running ()
 {
     if pgrep -x "compton" > /dev/null ; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+start ()
+{
+    if is_compton_running ; then
         printf "%s\n" "Compton running"
     else
         printf "%s\n" "Starting compton"
@@ -16,7 +25,7 @@ stop () {
 }
 
 toggle () {
-    if pgrep "compton" > /dev/null ; then
+    if is_compton_running ; then
         stop
     else
         start
