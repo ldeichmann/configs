@@ -71,7 +71,7 @@ printTrack() {
 printTrack
 
 while true; do
-    mpc -q status
+    mpc -q $HOST_CMD status
     while [ $? -eq 0 ]; do
         timeout 1 mpc $HOST_CMD idle | \
         while read -r _ ; do
