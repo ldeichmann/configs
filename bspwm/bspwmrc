@@ -44,6 +44,7 @@ bspc rule -a Thunderbird                            desktop=^3 follow=off
 
 # music players
 bspc rule -a "Google Play Music Desktop Player"     desktop=^4 follow=off
+bspc rule -a Upplay                                 desktop=^4 follow=off
 
 #voice
 bspc rule -a "TeamSpeak 3"                          desktop=^6 follow=off
