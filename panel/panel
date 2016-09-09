@@ -42,7 +42,7 @@ if [ $WIFI_ENABLED -eq 1 ]; then
 modules/wifi wlp2s0 | xargs -L 1 -d '\n' printf "Y%s\n" > "$PANEL_TOP_FIFO" &
 fi
 if [ $MEDIAPLAYER_ENABLED -eq 1 ]; then
-modules/mediaplayer google-play-music-desktop-player mopidy | xargs -L 1 -d '\n' printf "M%s\n" > "$PANEL_TOP_FIFO" &
+modules/mpd | xargs -L 1 -d '\n' printf "M%s\n" > "$PANEL_TOP_FIFO" &
 fi
 if [ $WORKSPACE_ENABLED -eq 1 ]; then
 modules/workspace | xargs -L 1 -d '\n' printf "W%s\n" > "$PANEL_TOP_FIFO" &
