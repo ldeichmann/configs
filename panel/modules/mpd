@@ -12,10 +12,6 @@ STATUS_PAUSED=""
 STATUS_STOPPED=""
 STATUS_ERROR=""
 
-PLAY="%{A1:mpc $HOST_CMD play:}"
-PAUSE="%{A1:mpc $HOST_CMD pause:}"
-PREV="%{A2:mpc $HOST_CMD prev:}"
-NEXT="%{A3:mpc $HOST_CMD next:}"
 
 # Use first host if none given
 if [ -z "$1" ] ; then
@@ -44,16 +40,31 @@ switchHost() {
 # execute switchHost when receiving SIGUSR1
 trap switchHost USR1
 
+
+PLAY="%{A1:mpc $HOST_CMD play:}"
+PAUSE="%{A1:mpc $HOST_CMD pause:}"
+PREV="%{A2:mpc $HOST_CMD prev:}"
+NEXT="%{A3:mpc $HOST_CMD next:}"
+
 printTrack() {
-    song=$(mpc $HOST_CMD current)
+    song=$(mpc $HOST_CMD --format "[%title%]" | head -n 1)
+    artist=$(mpc $HOST_CMD --format "[%artist%]" | head -n 1)
+
+    if [ ${#song} -ge 30 ] ; then
+        song=${song:0:28}".."
+    fi
+    if [ ${#artist} -ge 20 ] ; then
+        artist=${artist:0:18}".."
+    fi
+
     status=$(mpc $HOST_CMD status)
 
     case $status in
         *"[playing]"*)
-            FULL="$PAUSE""$PREV""$NEXT""$STATUS_PLAYING ""$song""%{A}%{A}%{A}"
+            FULL="$PAUSE""$PREV""$NEXT""$STATUS_PLAYING ""$artist - $song""%{A}%{A}%{A}"
         ;;
         *"[paused]"*)
-            FULL="$PLAY""$PREV""$NEXT""$STATUS_PAUSED ""$song""%{A}%{A}%{A}"
+            FULL="$PLAY""$PREV""$NEXT""$STATUS_PAUSED ""$artist - $song""%{A}%{A}%{A}"
         ;;
         *)
             FULL="$STATUS_STOPPED ""Not playing"
