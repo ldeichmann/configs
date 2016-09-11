@@ -2,23 +2,32 @@
 
 . ./config
 
+# This is shit...
 SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )""/""$(basename $0)"
 
-HOSTS=("gimli")
+HOSTS=("localhost" "gimli")
 
+STATUS_PLAYING=""
+STATUS_PAUSED=""
+STATUS_STOPPED=""
+STATUS_ERROR=""
+
+PLAY="%{A1:mpc $HOST_CMD play:}"
+PAUSE="%{A1:mpc $HOST_CMD pause:}"
+PREV="%{A2:mpc $HOST_CMD prev:}"
+NEXT="%{A3:mpc $HOST_CMD next:}"
+
+# Use first host if none given
 if [ -z "$1" ] ; then
-    HOST=""
-    HOST_CMD=""
+    HOST="${HOSTS[0]}"
 else
     HOST="$1"
-    HOST_CMD="-h $HOST"
 fi
+HOST_CMD="-h $HOST"
 
 switchHost() {
-    if [ -z $HOST ] ; then
+    if [[ "${HOSTS[-1]}" = "$HOST" ]]; then
         HOST="${HOSTS[0]}";
-    elif [[ "${HOSTS[-1]}" = "$HOST" ]]; then
-        HOST="";
     else
         for i in "${!HOSTS[@]}"; do
             if [[ "${HOSTS[$i]}" = "${HOST}" ]]; then
@@ -28,27 +37,14 @@ switchHost() {
             fi
         done
     fi
-    # echo "got SIGUSR1, restarting with $HOST";
+    notify-send "Switching MPD" "Now connecting to $HOST"
     exec $SCRIPT $HOST
 }
 
+# execute switchHost when receiving SIGUSR1
 trap switchHost USR1
 
-# echo "Starting with host $HOST"
-
-STATUS_PLAYING=""
-STATUS_PAUSED=""
-STATUS_STOPPED=""
-
-PLAY="%{A1:mpc $HOST_CMD play:}"
-PAUSE="%{A1:mpc $HOST_CMD pause:}"
-PREV="%{A2:mpc $HOST_CMD prev:}"
-NEXT="%{A3:mpc $HOST_CMD next:}"
-
-
-
 printTrack() {
-
     song=$(mpc $HOST_CMD current)
     status=$(mpc $HOST_CMD status)
 
@@ -65,19 +61,20 @@ printTrack() {
     esac
 
     printf "%s\n" "$FULL"
-
 }
 
-printTrack
-
-while true; do
-    mpc -q $HOST_CMD status
-    while [ $? -eq 0 ]; do
-        timeout 1 mpc $HOST_CMD idle | \
+loop() {
+    while true; do
+        printTrack
+        mpc $HOST_CMD idleloop | \
         while read -r _ ; do
             printTrack
         done
+        printf "%s\n" "$STATUS_ERROR Error connecting to $HOST"
+        sleep 5
     done
-    printf "%s\n" "Error"
-    sleep 1
-done
+}
+
+# do not block so we can receive signals
+loop &
+wait
