@@ -9,36 +9,7 @@ Xft.hinting:                true
 Xft.hintstyle:              hintfull
 
 !#################################
-!# URxvt/Color settings
+!# misc settings
 !#################################
-
-urxvt*foreground: white
-URxvt.background: [90]#2f343f
-
-*color0:  #2E3436
-*color1:  #a40000
-*color2:  #4E9A06
-*color3:  #C4A000
-*color4:  #3465A4
-*color5:  #75507B
-*color6:  #ce5c00
-*color7:  #babdb9
-*color8:  #555753
-*color9:  #EF2929
-*color10: #8AE234
-*color11: #FCE94F
-*color12: #729FCF
-*color13: #AD7FA8
-*color14: #fcaf3e
-*color15: #EEEEEC
-
-URxvt*scrollBar:            false
-URxvt*scrollColor:          #000000
-URxvt.depth:                32
-URxvt.font:                 xft:Roboto Mono Light:size=10
-URxvt*scrollTtyOutput:      false
-URxvt*scrollWithBuffer:     true
-URxvt*scrollTtyKeypress:    true
-URxvt*saveLines:            10000
 
 Xcursor.theme: Human
