@@ -2,7 +2,7 @@
 
 . ./config
 
-OPENNMTUI="%{A1:urxvt -e nmtui &:}"
+OPENNMTUI="%{A1:termite -e nmtui &:}"
 
 printVPN() {
 
