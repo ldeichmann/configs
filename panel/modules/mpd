@@ -57,8 +57,7 @@ printTrack() {
         artist=${artist:0:18}".."
     fi
 
-    status=$(mpc $HOST_CMD status)
-
+    status=$(mpc $HOST_CMD status 2>&1)
     case $status in
         *"[playing]"*)
             FULL="$PAUSE""$PREV""$NEXT""$STATUS_PLAYING ""$artist - $song""%{A}%{A}%{A}"
@@ -66,6 +65,9 @@ printTrack() {
         *"[paused]"*)
             FULL="$PLAY""$PREV""$NEXT""$STATUS_PAUSED ""$artist - $song""%{A}%{A}%{A}"
         ;;
+        *"mpd error: Address family not supported by protocol"*)
+	    FULL="$STATUS_ERROR Error connecting to $HOST"
+	;;
         *)
             FULL="$STATUS_STOPPED ""Not playing"
         ;;
@@ -81,7 +83,6 @@ loop() {
         while read -r _ ; do
             printTrack
         done
-        printf "%s\n" "$STATUS_ERROR Error connecting to $HOST"
         sleep 5
     done
 }
