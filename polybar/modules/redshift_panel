@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# trap "kill 0" SIGINT
+# trap "kill 0" SIGINT SIGUSR1
 
 ### redshift
 
@@ -8,9 +8,22 @@ COLOR_RED="#E25852"
 REDSHIFT_ICON_ENABLED=" "
 REDSHIFT_ICON_DISABLED="%{F$COLOR_RED} %{F-}"
 
-
 ENABLED=1
 TEMP="6500K"
+
+
+if [ ${XDG_RUNTIME_DIR:+x} ] ; then
+    TMP=$XDG_RUNTIME_DIR
+else
+    TMP=/tmp
+fi
+
+RED_TEMP=$TMP/redshift
+
+# get info into pipe
+pkill -x -USR1 "redshift"
+sleep 0.1 # give redshift a moment to react
+pkill -x -USR1 "redshift"
 
 printRedshift() {
 
@@ -26,7 +39,7 @@ printRedshift
 
 if [ $# -eq 0 ] ; then
     while true; do
-        redshift -v | grep --line-buffered -E "Status: |Color temperature: " | \
+        cat <>$RED_TEMP | \
         while read -r LINE ; do
             if [ "$LINE" = "Status: Enabled" ] ; then
                 ENABLED=1

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ "$#" -lt 2 ]; then
+    echo "Illegal number of parameters"
+    exit
+fi
+
+LIST=$(playerctl -l)
+CMD="timeout 0.1 playerctl --player="
+
+echo $LIST
+
+for var in "$@"
+do
+    if [[ "$LIST" == *"$var"* ]] ; then
+        CMD="$CMD$var $1"
+            eval $CMD
+            exit
+    else
+        echo "no player named $var found"
+    fi
+done

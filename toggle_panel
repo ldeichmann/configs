@@ -15,7 +15,11 @@ start ()
 {
     if ! is_panel_running ; then
         printf "%s\n" "Starting panel"
-        bash -c "screen -dmS $screenname polybar top -r"
+        if [ $(uname -n) == "shepard" ] ; then
+            bash -c "screen -dmS $screenname polybar top -r"
+        else
+            bash -c "screen -dmS $screenname polybar top_mobile -r"
+        fi
     fi
 }
 

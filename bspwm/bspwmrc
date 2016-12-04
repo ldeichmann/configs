@@ -7,6 +7,7 @@ compton --config ~/.config/compton.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 ~/.config/bspwm/scripts/disable_fullscreen_standby.sh &
+~/.local/bin/redshift_wrapper &
 xset dpms 0 640 660
 xset s 0 0
 xset s off

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+trap "kill 0" SIGINT
+trap "echo lol" SIGPIPE SIGUSR1
+
+if [ ${XDG_RUNTIME_DIR:+x} ] ; then
+    TMP=$XDG_RUNTIME_DIR
+else
+    TMP=/tmp
+fi
+
+RED_TEMP=$TMP/redshift
+
+[ -e "$RED_TEMP" ] && rm "$RED_TEMP"
+mkfifo "$RED_TEMP"
+
+while true; do
+    redshift -v | grep --line-buffered -E "Status: |Color temperature: " > $TMP/redshift
+    echo restart
+done
