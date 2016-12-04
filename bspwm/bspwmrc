@@ -2,7 +2,7 @@
 
 sxhkd &
 
-feh --bg-fill ~/Sync/wallpapers/Nature/281\ -\ HNszoYe.jpg
+feh --bg-fill ~/Sync/wallpapers/Games/The\ Last\ Of\ Us/II_Trailer_04.png
 compton --config ~/.config/compton.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
@@ -55,7 +55,7 @@ if [ "shepard" = "$(uname -n)" ] ; then
 
     bspc config top_padding                 30
     bspc config window_gap                  50
-    xautolock -time 10 -locker 'lock_test_fullscreen.sh' -killtime 50 -killer 'suspend_test_fullscreen.sh' &
+    xautolock -time 10 -locker 'lock_test_fullscreen.sh' -killtime 20 -killer 'suspend_test_fullscreen.sh' &
 
 else
 
