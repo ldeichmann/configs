@@ -13,14 +13,6 @@ offset-y = 25
 background = #2F343F
 foreground = #FFFFFF
 
-overline-size = 0
-overline-color = #f00
-underline-size = 0
-underline-color = #00f
-
-border-bottom = 0
-border-bottom-color = #333
-
 spacing = 1
 padding-left = 4
 padding-right = 4
@@ -111,4 +103,4 @@ type = internal/network
 interface = wlp2s0
 
 label-connected =  %essid% (%signal%)
-label-disconnected =  No Connection
+label-disconnected = %{F#E25852}%{F-} No Connection
