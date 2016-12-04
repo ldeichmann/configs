@@ -40,6 +40,7 @@ interval = 5
 type = custom/script
 exec = /home/cru/.config/polybar/modules/vpn
 tail = true
+click-left = bash -c "termite -e nmtui"
 
 [module/volume]
 type = custom/script
@@ -60,8 +61,8 @@ click-left = pkill -x -USR1 "redshift"
 [module/mpd]
 type = internal/mpd
 format-online = <toggle> <label-song>
-icon-play = ⏵
-icon-pause = ⏸
+icon-play = ⏵
+icon-pause = ⏸
 host = 127.0.0.1
 port = 6600
 
@@ -102,5 +103,5 @@ label =  %percentage%
 type = internal/network
 interface = wlp2s0
 
-label-connected =  %essid% (%signal%)
-label-disconnected = %{F#E25852}%{F-} No Connection
+label-connected = %{A1:bash -c "termite -e nmtui":} %essid% (%signal%)%{A}
+label-disconnected = %{A1:bash -c "termite -e nmtui":}%{F#E25852}%{F-} No Connection%{A}
