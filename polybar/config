@@ -1,0 +1,99 @@
+[global/wm]
+margin-top = 0
+margin-bottom = -10
+
+[bar/top]
+bottom = false
+dock = false
+width = 2460
+height = 30
+offset-x = 50
+offset-y = 25
+
+background = #2F343F
+foreground = #FFFFFF
+
+overline-size = 0
+overline-color = #f00
+underline-size = 0
+underline-color = #00f
+
+border-bottom = 0
+border-bottom-color = #333
+
+spacing = 1
+padding-left = 4
+padding-right = 4
+module-margin-left = 4
+module-margin-right = 4
+
+font-0 = Roboto Condensed:size=10;-1
+font-1 = FontAwesome:size=10;-2
+font-2 = NotoSans-Regular:size=10;0
+font-3 = Material Icons:size=10;-2
+
+modules-left = bspwm
+modules-center = date
+modules-right = mpd redshift volume openvpn
+
+tray-position = 
+wm-restack = bspwm
+
+[module/bspwm]
+type = internal/bspwm
+ws-icon-default = 
+
+label-focused = 
+label-focused-padding = 2
+
+label-occupied = 
+label-occupied-padding = 2
+
+label-urgent = 
+label-urgent-foreground = #E25852
+label-urgent-padding = 2
+
+label-empty = 
+label-empty-foreground = #788491
+label-empty-padding = 2
+
+enable-scroll = false
+
+scroll-up = bspc desktop -f prev
+scroll-down = bspc desktop -f next
+
+[module/date]
+type = internal/date
+date =  %a %d %b, %H:%M
+interval = 5
+
+[module/openvpn]
+type = custom/script
+exec = /home/cru/.config/polybar/modules/vpn
+tail = true
+
+[module/volume]
+type = custom/script
+exec = /home/cru/.config/polybar/modules/volume
+tail = true
+
+click-left = pamixer --toggle-mute &
+click-right = pavucontrol &
+scroll-up = pamixer --increase 5 &
+scroll-down = pamixer --decrease 5 &
+
+[module/redshift]
+type = custom/script
+exec = /home/cru/.config/polybar/modules/redshift_panel
+tail = true
+click-left = pkill -x -USR1 redshift
+
+[module/mpd]
+type = internal/mpd
+format-online = <toggle> <label-song>
+icon-play = ⏵
+icon-pause = ⏸
+host = 127.0.0.1
+port = 6600
+
+[bar/top_mobile]

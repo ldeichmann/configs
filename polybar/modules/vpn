@@ -1,23 +1,23 @@
 #!/bin/sh
 
-. ./config
+VPN_ICON_CONNECTED=""
+VPN_ICON_DISCONNECTED="%{F#E25852}%{F-}"
 
-OPENNMTUI="%{A1:termite -e nmtui &:}"
 
 printVPN() {
 
-    FULL="$OPENNMTUI"
+    FULL=""
 
     ps -aux | grep openvpn | grep -v 'grep' | grep -v 'sed' > /dev/null
     if [ $? -eq 1 ]; then
         VPN="No Connection"
-        FULL="$FULL""$VPN_ICON_DISCONNECTED""$VPN_DISCONNECTED"" $VPN""$PANEL_COLOR_END"
+        FULL="$FULL""$VPN_ICON_DISCONNECTED""   $VPN"
     else
         VPN=$(nmcli c show --active | grep vpn | awk '{ printf "%s\n", $1 }')
-        FULL="$FULL""$VPN_ICON_CONNECTED""$VPN_CONNECTED"" $VPN""$PANEL_COLOR_END"
+        FULL="$FULL""$VPN_ICON_CONNECTED""   $VPN"
     fi
 
-    FULL="$FULL""%{A}"
+    FULL="$FULL"
 
     printf "%s\n" "$FULL"
 

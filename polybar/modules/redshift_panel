@@ -1,10 +1,13 @@
 #!/bin/bash
 
-trap "kill 0" SIGINT
+# trap "kill 0" SIGINT
 
-. ./config
+### redshift
 
-ONCLICK="%{A1:pkill -x -USR1 redshift &:}"
+COLOR_RED="#E25852"
+REDSHIFT_ICON_ENABLED=" "
+REDSHIFT_ICON_DISABLED="%{F$COLOR_RED} %{F-}"
+
 
 ENABLED=1
 TEMP="6500K"
@@ -16,7 +19,7 @@ printRedshift() {
     if [ $ENABLED -eq 0 ]; then
         ICON="$REDSHIFT_ICON_DISABLED"
     fi
-    printf "%s%s%s%s\n" "$ONCLICK" "$ICON" "$TEMP" "%{A}"
+    printf "%s%s%s%s\n" "$ICON" "$TEMP"
 }
 
 printRedshift
