@@ -11,10 +11,10 @@ printVPN() {
     ps -aux | grep openvpn | grep -v 'grep' | grep -v 'sed' > /dev/null
     if [ $? -eq 1 ]; then
         VPN="No Connection"
-        FULL="$FULL""$VPN_ICON_DISCONNECTED""   $VPN"
+        FULL="$FULL""$VPN_ICON_DISCONNECTED"" $VPN"
     else
         VPN=$(nmcli c show --active | grep vpn | awk '{ printf "%s\n", $1 }')
-        FULL="$FULL""$VPN_ICON_CONNECTED""   $VPN"
+        FULL="$FULL""$VPN_ICON_CONNECTED"" $VPN"
     fi
 
     FULL="$FULL"
