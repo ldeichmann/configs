@@ -56,7 +56,7 @@ if [ "shepard" = "$(uname -n)" ] ; then
 
     bspc config top_padding                 30
     bspc config window_gap                  50
-    xautolock -time 10 -locker 'lock_test_fullscreen.sh' -killtime 20 -killer 'suspend_test_fullscreen.sh' &
+    xautolock -time 10 -locker 'lock_test_fullscreen.sh' -killtime 60 -killer 'suspend_test_fullscreen.sh' &
 
 else
 
