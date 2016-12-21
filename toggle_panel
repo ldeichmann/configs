@@ -29,7 +29,6 @@ stop ()
     screen -X -S $screenname kill
     pkill polybar
     pkill -f '.config/polybar/modules/'
-    pkill redshift
 }
 
 toggle ()
