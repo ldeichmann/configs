@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "shepard" = "$(uname -n)" ] ; then
+    if (pacmd list-sinks | grep "active port" | grep -q "output-speaker") ; then
+        pacmd set-sink-port 1 analog-output\;output-headphones-1
+    else
+        pacmd set-sink-port 1 analog-output\;output-speaker
+    fi
+fi

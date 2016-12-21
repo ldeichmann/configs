@@ -48,6 +48,7 @@ exec = /home/cru/.config/polybar/modules/volume
 tail = true
 
 click-left = pamixer --toggle-mute &
+click-middle = toggle_output
 click-right = pavucontrol &
 scroll-up = pamixer --increase 5 &
 scroll-down = pamixer --decrease 5 &
