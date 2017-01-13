@@ -103,6 +103,7 @@ label =  %percentage%
 [module/wifi]
 type = internal/network
 interface = wlp2s0
+interval = 5.0
 
 label-connected = %{A1:bash -c "termite -e nmtui":} %essid% (%signal%)%{A}
 label-disconnected = %{A1:bash -c "termite -e nmtui":}%{F#E25852}%{F-} No Connection%{A}
