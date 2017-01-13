@@ -2,7 +2,7 @@
 
 sxhkd &
 
-feh --bg-fill ~/Sync/wallpapers/Games/The\ Last\ Of\ Us/II_Trailer_04.png
+feh --bg-fill ~/Sync/wallpapers/current
 compton --config ~/.config/compton.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
@@ -39,7 +39,7 @@ bspc rule -a google-chrome                          desktop=^1 follow=off
 bspc rule -a jetbrains-idea-ce                      desktop=^2 follow=off
 bspc rule -a jetbrains-webstorm                     desktop=^2 follow=off
 bspc rule -a jetbrains-idea                         desktop=^2 follow=off
-
+bspc rule -a jetbrains-pycharm                      desktop=^2
 # messaging
 bspc rule -a Thunderbird                            desktop=^3 follow=off
 
@@ -66,5 +66,6 @@ else
 
 fi
 
+nmcli con up Netherlands &
 toggle_panel start
 xsetroot -cursor_name left_ptr

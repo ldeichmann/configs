@@ -4,7 +4,7 @@ margin-bottom = -10
 
 [bar/top]
 bottom = false
-dock = false
+override-redirect = true
 width = 2460
 height = 30
 offset-x = 50

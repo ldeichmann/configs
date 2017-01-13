@@ -9,23 +9,23 @@ title=$(xtitle "$wid")
 
 if [ "$class" = "chromium" ] ; then
     if [ "$instance" = "crx_bikioccmkafdpakkkcpdbppfkghcmihk" ] ; then
-        echo "desktop=^3 follow=off"
+        echo "desktop=^3"
     else
-        echo "desktop=^1 follow=off"
+        echo "desktop=^1"
     fi
 elif [ "$class" = "Steam" ] || [ "$title" = "Steam" ] ; then
     case "$title" in
         "Steam - Update News"*)
-            echo "hidden=on"
+            echo "-c"
             ;;
-        "Friends")
+	"Friends")
             echo "split_ratio=0.2 split_dir=west"
             ;&
         "Steam")
             echo "split_ratio=0.8 split_dir=west"
             ;&
         *)
-            echo "desktop=^5 follow=off state=tiled"
+            echo "desktop=^5 floating=on"
             ;;
     esac
 fi
