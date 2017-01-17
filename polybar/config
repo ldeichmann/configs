@@ -90,20 +90,20 @@ type = internal/battery
 battery = BAT0
 adapter = ADP0
 
-label-charging =  %percentage%
-label-discharging =  %percentage%
-label-full =  %percentage%
+label-charging =  %percentage%%
+label-discharging =  %percentage%%
+label-full =  %percentage%%
 
 [module/backlight]
 type = internal/backlight
 card = intel_backlight
 
-label =  %percentage%
+label =  %percentage%%
 
 [module/wifi]
 type = internal/network
 interface = wlp2s0
 interval = 5.0
 
-label-connected = %{A1:bash -c "termite -e nmtui":} %essid% (%signal%)%{A}
+label-connected = %{A1:bash -c "termite -e nmtui":} %essid% (%signal%%)%{A}
 label-disconnected = %{A1:bash -c "termite -e nmtui":}%{F#E25852}%{F-} No Connection%{A}
