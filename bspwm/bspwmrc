@@ -69,3 +69,4 @@ fi
 nmcli con up Netherlands &
 toggle_panel start
 xsetroot -cursor_name left_ptr
+systemctl --user restart pulseaudio.service
