@@ -10,8 +10,11 @@ height = 30
 offset-x = 50
 offset-y = 25
 
-background = #2F343F
-foreground = #FFFFFF
+background = #2A303B
+foreground = #B3BDCB
+
+overline-size = 2
+underline-size = 2
 
 spacing = 1
 padding-left = 4
@@ -25,11 +28,19 @@ font-2 = NotoSans-Regular:size=10;2
 font-3 = Material Icons:size=10;2
 
 modules-left = workspace mpris
-modules-center = date 
+modules-center = date
 modules-right = mpd redshift volume openvpn
 
-tray-position = 
+tray-position =
 wm-restack = bspwm
+
+[module/dmp]
+type = custom/script
+exec = /usr/bin/python /home/cru/Code/workspace/distributed-mediaplayer-gui/src/main.py localhost:5001
+tail = true
+click-left = bash -c "/usr/bin/python /home/cru/Code/workspace/distributed-mediaplayer-gui/src/main.py localhost:5001 playpause" &
+click-middle = bash -c "/usr/bin/python /home/cru/Code/workspace/distributed-mediaplayer-gui/src/main.py localhost:5001 prev" &
+click-right = bash -c "/usr/bin/python /home/cru/Code/workspace/distributed-mediaplayer-gui/src/main.py localhost:5001 next" &
 
 [module/date]
 type = internal/date
@@ -40,7 +51,7 @@ interval = 5
 type = custom/script
 exec = /home/cru/.config/polybar/modules/vpn
 tail = true
-click-left = bash -c "termite -e nmtui"
+click-left = bash -c "termite -e nmtui" &
 
 [module/volume]
 type = custom/script
@@ -57,7 +68,7 @@ scroll-down = pamixer --decrease 5 &
 type = custom/script
 exec = /home/cru/.config/polybar/modules/redshift_panel
 tail = true
-click-left = pkill -x -USR1 "redshift"
+click-left = pkill -x -USR1 "redshift" &
 
 [module/mpd]
 type = internal/mpd
@@ -106,4 +117,4 @@ interface = wlp2s0
 interval = 5.0
 
 label-connected = %{A1:bash -c "termite -e nmtui":} %essid% (%signal%%)%{A}
-label-disconnected = %{A1:bash -c "termite -e nmtui":}%{F#E25852}%{F-} No Connection%{A}
+label-disconnected = %{A1:bash -c "termite -e nmtui":}%{F#B3BDCB}%{F-} No Connection%{A}

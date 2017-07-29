@@ -4,10 +4,10 @@ fi
 
 # Setup NPM according to https://stackoverflow.com/a/13021677
 # NPM packages in homedir
-#NPM_PACKAGES="$HOME/.npm-packages"
+NPM_PACKAGES="$HOME/.npm-packages"
 
 # Tell our environment about user-installed node tools
-#PATH="$NPM_PACKAGES/bin:$PATH"
+PATH="$NPM_PACKAGES/bin:$PATH"
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 export XDG_CONFIG_HOME="$HOME/.config"

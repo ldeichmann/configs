@@ -2,10 +2,11 @@
 
 ### volume
 VOLUME_THRESHOLD=40
+VOLUME_MAX=100
 
-ICON_VOL_LOW=""
-ICON_VOL_HIGH=""
-ICON_VOL_MUTE=""
+ICON_VOL_LOW=" "
+ICON_VOL_HIGH=""
+ICON_VOL_MUTE="  "
 COLOR_VOLUME_MUTED="#E25852"
 
 printVol() {
@@ -17,12 +18,12 @@ printVol() {
 
 
     if [ "$ISMUTE" = "true" ]; then
-        FULL="$FULL""%{F$COLOR_VOLUME_MUTED}""$ICON_VOL_MUTE%{F-} $VOL%"
+      FULL="$FULL""%{F$COLOR_VOLUME_MUTED}""$ICON_VOL_MUTE%{F-} $VOL%"
     else
         if [ "$VOL" -lt "$VOLUME_THRESHOLD" ] ; then
-            FULL="$FULL""$ICON_VOL_LOW $VOL%"
+          FULL="$FULL""$ICON_VOL_LOW $VOL%"
         else
-            FULL="$FULL""$ICON_VOL_HIGH $VOL%"
+          FULL="$FULL""$ICON_VOL_HIGH $VOL%"
         fi
     fi
 
