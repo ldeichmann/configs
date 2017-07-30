@@ -5,8 +5,10 @@
 ### redshift
 
 COLOR_RED="#E25852"
-REDSHIFT_ICON_ENABLED=" "
-REDSHIFT_ICON_DISABLED="%{F$COLOR_RED} %{F-}"
+FOREGROUND_RED='#e1e5ea'
+BACKGROUND_RED='#cc575d'
+
+REDSHIFT_ICON=""
 
 ENABLED=1
 TEMP="6500K"
@@ -27,12 +29,12 @@ pkill -x -USR1 "redshift"
 
 printRedshift() {
 
-    ICON="$REDSHIFT_ICON_ENABLED"
+    FULL="  $REDSHIFT_ICON  $TEMP  "
 
     if [ $ENABLED -eq 0 ]; then
-        ICON="$REDSHIFT_ICON_DISABLED"
+      FULL="%{F$FOREGROUND_RED}""%{B$BACKGROUND_RED}""%{u$FOREGROUND_RED}""$FULL""%{F-}""%{B-}""%{u-}"
     fi
-    printf "%s%s%s%s\n" "$ICON" "$TEMP"
+    printf "%s\n" "$FULL"
 }
 
 printRedshift

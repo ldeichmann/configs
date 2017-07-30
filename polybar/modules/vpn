@@ -4,8 +4,13 @@ VPN_FG_DISCONNECTED="#E1E5EA"
 VPN_BG_DISCONNECTED="#CC575D"
 PANEL_BG="#2A303B"
 
+FOREGROUND_RED='#e1e5ea'
+BACKGROUND_RED='#cc575d'
+
+COLOR_DISCONNECTED="%{F$FOREGROUND_RED}""%{B$BACKGROUND_RED}""%{u$FOREGROUND_RED}"
+
 VPN_ICON_CONNECTED="  "
-VPN_ICON_DISCONNECTED="%{F$VPN_FG_DISCONNECTED}""%{B$VPN_BG_DISCONNECTED}""%{o$PANEL_BG}""%{u$PANEL_BG}""    ""%{F-}""%{B-}"
+VPN_ICON_DISCONNECTED="    "
 
 
 printVPN() {
@@ -15,13 +20,13 @@ printVPN() {
     ps -aux | grep openvpn | grep -v 'grep' | grep -v 'sed' > /dev/null
     if [ $? -eq 1 ]; then
         VPN="No Connection"
-        FULL="$FULL""$VPN_ICON_DISCONNECTED""  $VPN"
+        FULL="$COLOR_DISCONNECTED""$VPN_ICON_DISCONNECTED"" $VPN"
     else
         VPN=$(nmcli c show --active | grep vpn | awk '{ printf "%s\n", $1 }')
-        FULL="$FULL""$VPN_ICON_CONNECTED""  $VPN"
+        FULL="$FULL""$VPN_ICON_CONNECTED"" $VPN"
     fi
 
-    printf "%s\n" "$FULL""%{u-}""%{o-}"
+    printf "%s\n" "$FULL  %{F-}""%{B-}""%{u-}"
 
 }
 

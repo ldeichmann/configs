@@ -2,6 +2,10 @@
 margin-top = 0
 margin-bottom = -10
 
+[colors]
+white = #e1e5ea
+blue = #5294E2
+
 [bar/top]
 bottom = false
 override-redirect = true
@@ -44,8 +48,11 @@ click-right = bash -c "/usr/bin/python /home/cru/Code/workspace/distributed-medi
 
 [module/date]
 type = internal/date
-date =  %a %d %b, %H:%M
+date = "    %a %d %b, %H:%M  "
 interval = 5
+format-background = ${colors.blue}
+format-foreground = ${colors.white}
+format-underline = ${colors.white}
 
 [module/openvpn]
 type = custom/script
@@ -73,8 +80,8 @@ click-left = pkill -x -USR1 "redshift" &
 [module/mpd]
 type = internal/mpd
 format-online = <toggle> <label-song>
-icon-play = ⏵
-icon-pause = ⏸
+icon-play = 
+icon-pause = 
 host = 127.0.0.1
 port = 6600
 
@@ -101,15 +108,15 @@ type = internal/battery
 battery = BAT0
 adapter = ADP0
 
-label-charging =  %percentage%%
-label-discharging =  %percentage%%
-label-full =  %percentage%%
+label-charging =  %percentage%%
+label-discharging =  %percentage%%
+label-full =  %percentage%%
 
 [module/backlight]
 type = internal/backlight
 card = intel_backlight
 
-label =  %percentage%%
+label =  %percentage%%
 
 [module/wifi]
 type = internal/network
