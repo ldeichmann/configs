@@ -3,8 +3,9 @@ margin-top = 0
 margin-bottom = -10
 
 [colors]
-white = #e1e5ea
+white = #E1E5EA
 blue = #5294E2
+red = #CC575D
 
 [bar/top]
 bottom = false
@@ -123,5 +124,8 @@ type = internal/network
 interface = wlp2s0
 interval = 5.0
 
-label-connected = %{A1:bash -c "termite -e nmtui":} %essid% (%signal%%)%{A}
-label-disconnected = %{A1:bash -c "termite -e nmtui":}%{F#B3BDCB}%{F-} No Connection%{A}
+label-connected = %{A1:bash -c "termite -e nmtui":}  %essid% (%signal%%)%{A}
+label-disconnected = %{A1:bash -c "termite -e nmtui":}  No Connection%{A}
+
+format-connected = "%{F"${colors.white}"}""%{B"${colors.red}"}""%{u"${colors.white}"}""<label-connected>""%{F-}""%{B-}""%{u-}"
+format-disconnected = <label-disconnected>
