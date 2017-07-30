@@ -124,8 +124,5 @@ type = internal/network
 interface = wlp2s0
 interval = 5.0
 
-label-connected = %{A1:bash -c "termite -e nmtui":}  %essid% (%signal%%)%{A}
+label-connected = %{F${colors.white}}%{B${colors.red}}%{u${colors.white}}%{A1:bash -c "termite -e nmtui":}    %essid% (%signal%%)  %{A}"%{F-}""%{B-}""%{u-}"
 label-disconnected = %{A1:bash -c "termite -e nmtui":}  No Connection%{A}
-
-format-connected = "%{F"${colors.white}"}""%{B"${colors.red}"}""%{u"${colors.white}"}""<label-connected>""%{F-}""%{B-}""%{u-}"
-format-disconnected = <label-disconnected>
