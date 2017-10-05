@@ -1,12 +1,13 @@
 [options]
 font = Roboto Mono Light 10
+geometry = 1280x720
 
 [colors]
 # special
 foreground      = #d0d0d0
 foreground_bold = #d0d0d0
 cursor          = #d0d0d0
-background      = rgba(28, 32, 35, 0.8)
+background      = rgba(28, 32, 35, 1)
 
 # black
 color0  = #151515
